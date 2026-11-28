@@ -127,7 +127,7 @@ async function openFriend(sb, me, f, redraw) {
   };
   w.addEventListener('click', async e => {
     if (e.target === w || e.target.closest('[data-x]')) return close();
-    if (e.target.closest('[data-call]')) { (await import('../call.js')).startCall(f); return; }
+    { const cb = e.target.closest('[data-call]'); if (cb) { if (cb.dataset.why) return toast('📵 ' + cb.dataset.why, 6000); (await import('../call.js')).startCall(f); return; } }
     if (e.target.closest('[data-clear]')) {
       const v = await dialog({ title: `Chat mit ${f.display_name} löschen?`, html: '<p class="muted"><b>Nur für mich:</b> Der Verlauf verschwindet bei dir, dein Freund behält seine Kopie.<br><b>Meine Nachrichten für beide:</b> Was du geschrieben hast, wird auch bei deinem Freund entfernt; seine Nachrichten werden bei dir ausgeblendet.</p>', buttons: [{ label: 'Abbrechen', value: 0 }, { label: 'Nur für mich', value: 1 }, { label: 'Meine Nachrichten für beide', value: 2, cls: 'danger' }] });
       if (!v) return; const { error } = await sb.rpc('chat_clear', { p_other: f.id, p_for_both: v === 2 }); if (error) return toast(miss(error));
@@ -139,12 +139,14 @@ async function openFriend(sb, me, f, redraw) {
     if (e.target.closest('[data-block]')) { if (await dialog({ title: `${f.display_name} blockieren?`, html: '<p class="muted">Die Freundschaft endet, und ihr könnt euch keine Anfragen oder Nachrichten mehr schicken. Unter „Blockiert“ kannst du das rückgängig machen.</p>', buttons: [{ label: 'Abbrechen', value: 0 }, { label: 'Blockieren', value: 1, cls: 'danger' }] })) { await sb.rpc('friend_block', { p_other: f.id }); toast('Blockiert'); close(); } return; }
   });
   // Eigenes zweites Konto in dieser App: Anrufen geht nicht (würde nur hier selbst klingeln)
-  import('../call.js').then(C => { const cb = w.querySelector('[data-call]'); if (C.sameApp(f.id) && cb) { cb.disabled = true; cb.title = 'Dieses Konto ist auch in dieser App angemeldet – Anrufen nicht möglich'; } });
-  if (O.online.profile?.allow_calls === false) { const cb = w.querySelector('[data-call]'); if (cb) { cb.disabled = true; cb.title = 'Anrufe sind in deinen Einstellungen ausgeschaltet (Freunde › Privatsphäre)'; } }
+  // Anrufen nicht möglich? Knopf abgeschwächt, beim Tippen steht der Grund da (ein ausgegrauter Knopf allein erklärt nichts)
+  const noCall = why => { const cb = w.querySelector('[data-call]'); if (!cb || cb.dataset.why) return; cb.dataset.why = why; cb.classList.add('calloff'); cb.title = why; };
+  import('../call.js').then(C => { if (C.sameApp(f.id)) noCall(`${f.display_name} ist auch in dieser App als Konto angemeldet – Anrufe zwischen Konten in derselben App gehen nicht. Entfernen: Konto-Menü oben rechts, beim Konto auf ✕ tippen.`); });
+  if (O.online.profile?.allow_calls === false) noCall('Anrufe sind in deinen Einstellungen ausgeschaltet – einschalten unter Freunde › Privatsphäre');
   // Darf ich diesen Freund anrufen bzw. anschreiben? (Einstellung des Freundes, vom Server geprüft)
   sb.rpc('friend_privacy', { p_other: f.id }).then(({ data }) => {
     if (!data || !w.isConnected) return;
-    const cb = w.querySelector('[data-call]'); if (data.calls === false && cb) { cb.disabled = true; cb.title = `${f.display_name} nimmt keine Anrufe an`; }
+    if (data.calls === false) noCall(`${f.display_name} hat Anrufe ausgeschaltet`);
     if (data.msgs === false) { const fm = w.querySelector('#chForm'); fm.classList.add('chatoff'); fm.innerHTML = `<p class="small muted">🔕 ${esc(f.display_name)} empfängt gerade keine Nachrichten.</p>`; }
   }, () => { });
   loadChat(); clearInterval(chatT); chatT = setInterval(() => w.isConnected ? loadChat() : clearInterval(chatT), 5000);

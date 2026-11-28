@@ -1474,3 +1474,4 @@ body.watchtv .tvprof { height: 15vh; }
 .rsdlg .rsbody .pagehead { display: none; }
 .rsdlg .rsbody .grid2 { grid-template-columns: 1fr; }
 .tbtn b.gear { font-size: 17px; line-height: 1; }
+.btn.calloff { opacity: .5; filter: grayscale(1); }

@@ -86,7 +86,7 @@ export function pickMode(title, peer) {
 // Ist dieses Konto auch in dieser App (auf diesem Gerät) angemeldet? Dann klingelt es nur bei sich selbst – kein Anruf
 // Anrufe in den eigenen Einstellungen ausgeschaltet (Freunde › Privatsphäre): weder anrufen noch annehmen
 export const callsOff = () => { if (O.online.profile?.allow_calls !== false) return false; toast('📵 Anrufe sind ausgeschaltet – einschalten unter Freunde › Privatsphäre', 5000); return true; };
-export const sameApp = id => !!id && id !== O.online.user?.id && O.accounts().some(a => a.uid === id);
+export const sameApp = id => !!id && id !== O.online.user?.id && O.accounts().some(a => a.uid === id && a.session?.refresh_token); // nur noch angemeldete Konten zählen
 export async function startCall(friend) {
   if (callsOff()) return;
   if (sameApp(friend.id)) return toast('📵 Dieses Konto ist auch in dieser App angemeldet – Anrufe an eigene Konten auf demselben Gerät sind nicht möglich. Nachrichten gehen.', 5000);
