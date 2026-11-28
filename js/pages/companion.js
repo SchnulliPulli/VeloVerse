@@ -75,6 +75,8 @@ export async function render(el) {
   };
   const lvTab = t => { try { sessionStorage.setItem('vvLvTab', t); } catch (er) { } $('#cLive', el).hidden = t !== 'live'; const r = $('#cRemote', el); if (r) { r.hidden = t !== 'remote'; rmFull(el, t === 'remote'); /* Fernbedienung immer im Vollbild mit Display an */ } el.querySelectorAll('#lvTabs [data-lt]').forEach(b => b.setAttribute('aria-pressed', b.dataset.lt === t)); };
   if ($('#lvTabs', el)) lvTab(sessionStorage.getItem('vvLvTab') || 'live');
+  // Langes Halten auf der Fernbedienung: kein Kontextmenü (Kopieren/Teilen) auf dem Handy
+  el.addEventListener('contextmenu', e => { if (e.target.closest('.remote')) e.preventDefault(); });
   el.onclick = async e => {
     const lt = e.target.closest('[data-lt]'); if (lt) { lvTab(lt.dataset.lt); return; }
     if (e.target.closest('#rmFull')) { rmFull(el, !$('#cRemote', el).classList.contains('rmfull')); return; } // ✕ im Vollbild: normale Ansicht, sonst Vollbild öffnen
