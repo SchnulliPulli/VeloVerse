@@ -1557,3 +1557,4 @@ html.pwa .fsbtn, html.pwa #tFull { display: none !important; }
 .tbpop .tbtn svg { flex: none; }
 .tbpop .tbtn span { display: block !important; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; }
 @media (max-width: 560px) { .tbpop .tbtn { height: 54px; } .tbpop .tbtn .dots { font-size: 17px; height: 20px; } }
+.dmb.brake.on { background: rgba(239,68,88,.75); transform: scale(.97); } .dpb svg { display: block; margin: auto; pointer-events: none; }

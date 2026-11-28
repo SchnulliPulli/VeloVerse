@@ -75,12 +75,17 @@ export async function render(el) {
   };
   const lvTab = t => { try { sessionStorage.setItem('vvLvTab', t); } catch (er) { } $('#cLive', el).hidden = t !== 'live'; const r = $('#cRemote', el); if (r) { r.hidden = t !== 'remote'; rmFull(el, t === 'remote'); /* Fernbedienung immer im Vollbild mit Display an */ } el.querySelectorAll('#lvTabs [data-lt]').forEach(b => b.setAttribute('aria-pressed', b.dataset.lt === t)); };
   if ($('#lvTabs', el)) lvTab(sessionStorage.getItem('vvLvTab') || 'live');
+  // Bremse am Handy: gedrückt halten = bremsen (Befehl wird wiederholt, solange der Finger draufbleibt)
+  if (!el.__brkWired) { el.__brkWired = true; let bT = null; const stop = () => { clearInterval(bT); bT = null; el.querySelectorAll('[data-rm="demo:brake"]').forEach(x => x.classList.remove('on')); };
+    el.addEventListener('pointerdown', async e => { const b = e.target.closest('[data-rm="demo:brake"]'); if (!b) return; e.preventDefault(); stop(); b.classList.add('on'); try { b.setPointerCapture(e.pointerId); } catch (er) { }
+      const T = await import('../tv.js'); navigator.vibrate?.(25); T.sendRemote('demo:brake'); bT = setInterval(() => T.sendRemote('demo:brake'), 900); });
+    for (const ev of ['pointerup', 'pointercancel', 'lostpointercapture']) el.addEventListener(ev, e => { if (bT && e.target.closest?.('[data-rm="demo:brake"]')) stop(); }); }
   // Langes Halten auf der Fernbedienung: kein Kontextmenü (Kopieren/Teilen) auf dem Handy
   el.addEventListener('contextmenu', e => { if (e.target.closest('.remote')) e.preventDefault(); });
   el.onclick = async e => {
     const lt = e.target.closest('[data-lt]'); if (lt) { lvTab(lt.dataset.lt); return; }
     if (e.target.closest('#rmFull')) { rmFull(el, !$('#cRemote', el).classList.contains('rmfull')); return; } // ✕ im Vollbild: normale Ansicht, sonst Vollbild öffnen
-    const rm = e.target.closest('[data-rm]');
+    const rm = e.target.closest('[data-rm]'); if (rm?.dataset.rm === 'demo:brake') return; // läuft über Gedrückthalten (siehe oben)
     if (rm) {
       let c = rm.dataset.rm;
       if (c === 'end') { const v = await dialog({ title: 'Fahrt beenden?', html: '<p class="muted">Die Fahrt auf dem anderen Gerät wird beendet.</p>', buttons: [{ label: 'Abbrechen', value: null }, { label: 'Dort nachfragen', value: 'end' }, { label: '💾 Speichern und beenden', value: 'endsave', cls: 'pri' }] }); if (!v) return; c = v; }

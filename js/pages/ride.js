@@ -97,7 +97,7 @@ export async function render(el) {
       <div class="dphead">🧪 Demo</div>
       <div class="dpline"><span>Tritt</span><button class="dpb" data-dp="cad-" aria-label="langsamer treten">−</button><b class="num" id="dpCad">88</b><button class="dpb" data-dp="cad+" aria-label="schneller treten">+</button></div>
       <div class="dpline"><span>Watt</span><button class="dpb" data-dp="w-" aria-label="weniger Watt">−</button><b class="num" id="dpW">180</b><button class="dpb" data-dp="w+" aria-label="mehr Watt">+</button></div>
-      <div class="dprow"><button class="dpb brake" data-dp="brake" title="Gedrückt halten: aufhören zu treten und bremsen">🛑</button><button class="dpb" data-dp="sprint" title="8 Sekunden Vollgas">🚀</button><button class="dpb" data-dp="left" aria-label="Spur links">⬅</button><button class="dpb" data-dp="right" aria-label="Spur rechts">➡</button></div>
+      <div class="dprow"><button class="dpb brake" data-dp="brake" title="Gedrückt halten: aufhören zu treten und bremsen">🛑</button><button class="dpb" data-dp="sprint" title="8 Sekunden Vollgas">🚀</button><button class="dpb" data-dp="left" aria-label="Spur links"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="dpb" data-dp="right" aria-label="Spur rechts"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
     </div>
     <div class="toolbar">
       <button class="tbtn" id="tPause" title="Pause (Leertaste)">${ICON.pause}<span>Pause</span></button>
@@ -415,7 +415,7 @@ function bindUi() {
     pad.addEventListener('pointerdown', e => {
       if ($('#rw', el)?.classList.contains('hudedit')) return; const b = e.target.closest('[data-dp]'); if (!b) return; e.preventDefault(); e.stopPropagation();
       const k = b.dataset.dp;
-      if (k === 'brake') { braking = true; demo.cad = 0; S.brake = true; b.classList.add('on'); try { b.setPointerCapture(e.pointerId); } catch (er) { } val(); return; }
+      if (k === 'brake') { braking = true; demo.cad = 0; demo.wSet = 0; S.brake = true; b.classList.add('on'); try { b.setPointerCapture(e.pointerId); } catch (er) { } val(); return; }
       if (/[+-]$/.test(k)) { step(k); stopRep(); rep = setTimeout(() => { rep = setInterval(() => step(k), 90); }, 380); try { b.setPointerCapture(e.pointerId); } catch (er) { } return; } // gedrückt halten = schnell weiterzählen
       if (k === 'left' || k === 'right') { S.latT = clamp((S.latT ?? 1.5) + (k === 'left' ? -.6 : .6), .3, 3.2); return; }
       if (k === 'sprint') { clearTimeout(sprintT); demo.cad = 112; demo.wSet = Math.max(600, set.w * 2); flash('🚀 Sprint!', 1000); sprintT = setTimeout(() => { sprintT = null; apply(); }, 8000); val(); }
@@ -426,7 +426,8 @@ function bindUi() {
     S.demoRemote = k => {
       if (!demo.on) return;
       if (/[+-]$/.test(k)) { step(k); step(k); return; }
-      if (k === 'brake') { braking = true; demo.cad = 0; S.brake = true; pad.querySelector('.dpb.brake')?.classList.add('on'); val(); setTimeout(release, 2500); return; }
+      // Bremse: hält, solange am Handy gedrückt wird (das Handy wiederholt den Befehl), sonst kurz; feste Watt ruhen dabei
+      if (k === 'brake') { if (!braking) flash('🛑 Bremse', 900); braking = true; demo.cad = 0; demo.wSet = 0; S.brake = true; pad.querySelector('.dpb.brake')?.classList.add('on'); val(); clearTimeout(S.brkT); S.brkT = setTimeout(release, 1300); return; }
       if (k === 'sprint') { clearTimeout(sprintT); demo.cad = 112; demo.wSet = Math.max(600, set.w * 2); flash('🚀 Sprint!', 1000); sprintT = setTimeout(() => { sprintT = null; apply(); }, 8000); val(); }
     };
     S.demoKey = e => { if (!demo.on) return false; const m = { PageUp: 'w+', PageDown: 'w-', Home: 'cad+', End: 'cad-' }[e.key]; if (!m) return false; step(m); return true; };
