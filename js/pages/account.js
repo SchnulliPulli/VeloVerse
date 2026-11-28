@@ -406,7 +406,8 @@ async function renderAccount(el) {
   });
   $('#mOn', el).onclick = async () => {
     try {
-      for (const f of stale) await O.mfaRemove(f.id).catch(() => { }); // halb eingerichtete Versuche aufräumen
+      // nur nicht abgeschlossene Einrichtungsversuche aufräumen; bestätigte Authenticator-Apps bleiben immer erhalten
+      for (const f of stale) if (f.status !== 'verified') await O.mfaRemove(f.id).catch(() => { });
       const d = await O.mfaEnroll();
       $('#mBox', el).innerHTML = `<div class="mfabox"><img id="mQr" alt="QR-Code für die Authenticator-App" width="180" height="180"><div class="form"><p class="small">1. QR-Code mit der Authenticator-App scannen.<br>Oder Schlüssel eintippen: <code>${esc(d.totp.secret)}</code></p><p class="small">2. Angezeigten 6-stelligen Code eingeben:</p><input class="inp otp" id="mCode" inputmode="numeric" maxlength="7" placeholder="123 456"><div class="row"><button class="btn pri" id="mVer">Aktivieren</button></div></div></div>`;
       $('#mQr', el).src = O.qrSrc(d.totp.qr_code); // per DOM setzen, nicht über HTML-Text

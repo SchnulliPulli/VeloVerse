@@ -1606,3 +1606,7 @@ html.pwa .fsbtn, html.pwa #tFull { display: none !important; }
 .ridewrap, .ridewrap * { -webkit-tap-highlight-color: transparent; }
 .ridewrap button:focus:not(:focus-visible) { outline: none; }
 @media (hover: none) { .ridewrap .tbtn:hover, .ridewrap .gbtn:hover, .ridewrap .dpb:hover { background: var(--hudbg); } .tbpop .tbexp:hover { background: rgba(255,255,255,.08); } }
+/* Konto-Kopf: Kennzeichen gleich hoch, Text senkrecht mittig */
+.accchips .accchip, .accchips .prtag { display: inline-flex; align-items: center; justify-content: center; gap: 4px; height: 26px; padding: 0 10px; line-height: 1; font-size: 12px; border-radius: 999px; box-sizing: border-box; vertical-align: middle; white-space: nowrap; margin: 0; }
+.accchips .prtag { font-weight: 700; }
+.accwho { justify-content: center; } .accwho b { line-height: 1.2; } .accwho small { line-height: 1.3; margin-top: 2px; }
