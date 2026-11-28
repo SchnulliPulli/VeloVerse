@@ -85,7 +85,16 @@ export function switchAccount(uid) {
 }
 // Weiteres Konto: aktuelles merken, ohne es abzumelden (Abmelden würde die Sitzung beim Server beenden), dann zur Anmeldung
 export function addAccount() { rememberAccount(); authStore.removeItem('vv-auth'); online.switching = true; location.hash = '#/account'; location.reload(); }
-export function forgetAccount(uid) { setAccounts(accounts().filter(x => x.uid !== uid)); }
+// Konto von diesem Gerät entfernen: Push-Anmeldung dieses Geräts für das Konto löschen und die gespeicherte Sitzung beim Server
+// abmelden (sonst kämen weiter Meldungen „für …“), dann aus der Liste nehmen
+export async function forgetAccount(uid) {
+  if (uid !== online.user?.id) try {
+    let ep = null; try { ep = (await (await navigator.serviceWorker?.getRegistration())?.pushManager.getSubscription())?.endpoint || null; } catch (e) { }
+    await Promise.race([withAccount(uid, async sb => { if (ep) await sb.rpc('push_unsubscribe', { p_endpoint: ep }); await sb.auth.signOut({ scope: 'local' }); }), new Promise(r => setTimeout(r, 6000))]);
+  } catch (e) { }
+  setAccounts(accounts().filter(x => x.uid !== uid)); try { localStorage.removeItem('vvPushAcc:' + uid); } catch (e) { }
+  acctCache();
+}
 // Mit einem anderen gespeicherten Konto kurz etwas erledigen (z. B. Push für alle Konten anmelden), ohne zu wechseln.
 // Abgelaufene Sitzung: erneuern und die neue Sitzung gleich wieder speichern (sonst wäre der alte Schlüssel verbraucht).
 export async function withAccount(uid, fn) {

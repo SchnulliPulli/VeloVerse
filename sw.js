@@ -2,7 +2,7 @@
 // Schnellstart: Dateien kommen sofort aus dem Cache und werden im Hintergrund aktualisiert (stale-while-revalidate).
 // Eine neue App-Version bekommt einen neuen Cache-Namen; beim Wechsel lädt die Seite einmal neu (siehe app.js),
 // damit nie Dateien aus zwei Versionen gemischt werden.
-const CACHE = 'indoorado-v154';
+const CACHE = 'indoorado-v155';
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE && k !== 'indoorado-acct').map(k => caches.delete(k)))).then(() => self.clients.claim())));
 self.addEventListener('fetch', e => {
@@ -48,6 +48,8 @@ self.addEventListener('push', e => {
   };
   e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(async list => {
     let A = null; try { A = await (await (await caches.open('indoorado-acct')).match('/__acct.json'))?.json(); } catch (x) { }
+    // Meldung für ein Konto, das auf diesem Gerät nicht (mehr) angemeldet ist: nicht anzeigen
+    if (d.acct && A?.cur && d.acct !== A.cur && !(A.list || []).some(x => x.uid === d.acct)) return;
     const other = d.acct && A?.cur && d.acct !== A.cur, who = other ? (A.list || []).find(x => x.uid === d.acct)?.name || 'anderes Konto' : '';
     // Für ein anderes angemeldetes Konto bei offener App: Hinweis in der App (mit Aktionen, die ins richtige Konto wechseln) statt Gerätemeldung
     const fgO = other && k !== 'test' && await appActive(list);

@@ -117,7 +117,7 @@ function nav() {
   });
   um.addEventListener('click', async e => {
     const fg = e.target.closest('[data-forget]');
-    if (fg) { e.stopPropagation(); const O = await import('./online/client.js'); O.forgetAccount(fg.dataset.forget); fg.closest('.umsw').remove(); toast('Konto von diesem Gerät entfernt (die lokalen Daten bleiben erhalten)'); return; }
+    if (fg) { e.stopPropagation(); const O = await import('./online/client.js'); fg.closest('.umsw').remove(); await O.forgetAccount(fg.dataset.forget); toast('Konto von diesem Gerät entfernt (die lokalen Daten bleiben erhalten)'); return; }
     const sw = e.target.closest('[data-sw]');
     if (sw) { if ((document.querySelector('#rw') && currentKey === 'ride') || document.querySelector('.resumebar:not([hidden])')) { toast('Bitte erst die Fahrt beenden, dann das Konto wechseln', 3500); um.hidden = true; return; } const O = await import('./online/client.js'); sw.innerHTML = '<span class="spinner sm"></span> Wechsle …'; O.switchAccount(sw.dataset.sw); return; }
     if (e.target.closest('[data-um-add]')) { const O = await import('./online/client.js'); O.addAccount(); return; }
