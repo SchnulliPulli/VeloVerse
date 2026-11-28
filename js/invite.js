@@ -27,6 +27,8 @@ export async function applyRef() {
   try {
     const sb = await O.client(), mine = (await sb.rpc('my_friend_code', { p_new: false })).data;
     if (mine && String(mine).toUpperCase() === c) { localStorage.removeItem(REF); return; } // eigener Link
+    // Neues Konto über eine Einladung: verlängert die Testphase des Einladenden (prüft der Server, nur einmal)
+    try { await sb.rpc('referral_claim', { p_code: c }); } catch (e) { }
     const { data, error } = await sb.rpc('friend_request_code', { p_code: c });
     localStorage.setItem(done, c); localStorage.removeItem(REF);
     if (error) return;
@@ -58,7 +60,7 @@ export function inviteCardHtml() {
 }
 export async function wireInviteCard(box) {
   const O = await import('./online/client.js'), sb = await O.client();
-  const code = (await sb.rpc('my_friend_code', { p_new: false }).catch(() => ({}))).data || '', name = O.online.profile?.display_name || '';
+  let code = ''; try { code = (await sb.rpc('my_friend_code', { p_new: false })).data || ''; } catch (e) { }; const name = O.online.profile?.display_name || '';
   const link = inviteLink(code), text = msg(name); box.querySelector('#invLink').value = link;
   const nat = box.querySelector('[data-sh="native"]'); if (navigator.share) nat.hidden = false;
   const enc = encodeURIComponent, full = text + ' ' + link;

@@ -1,7 +1,7 @@
 // Rechtliches: Impressum, Datenschutzerklärung, Nutzungshinweise und Lizenzen.
 // Die persönlichen Angaben kommen aus js/legal-config.js. Kein Ersatz für eine Rechtsberatung.
 import { $, esc } from '../util.js';
-import { LEGAL as L, legalIncomplete } from '../legal-config.js';
+import { LEGAL as L } from '../legal-config.js';
 
 const TABS = [['impressum', 'Impressum'], ['datenschutz', 'Datenschutz'], ['nutzung', 'Nutzung und Haftung'], ['lizenzen', 'Lizenzen']];
 const addr = () => `${esc(L.name)}<br>${esc(L.street)}<br>${esc(L.city)}${L.country ? '<br>' + esc(L.country) : ''}`;
@@ -11,7 +11,6 @@ export async function render(el, [tab]) {
   const t = TABS.some(x => x[0] === tab) ? tab : 'impressum';
   el.innerHTML = `
   <section class="pagehead"><h1>Rechtliches</h1><span class="small muted">Stand: ${esc(L.updated)}</span></section>
-  ${legalIncomplete() ? '<section class="card accbox bad"><b>⚠️ Angaben fehlen noch</b><p class="small muted">Name, Anschrift und Kontakt in <code>js/legal-config.js</code> eintragen. Ohne vollständiges Impressum sollte die Seite nicht öffentlich beworben werden.</p></section>' : ''}
   <div class="seg legaltabs">${TABS.map(([k, l]) => `<a href="#/legal/${k}" class="${k === t ? 'on' : ''}" aria-current="${k === t}">${l}</a>`).join('')}</div>
   ${document.documentElement.lang !== 'de' ? '<p class="small muted">ℹ️ Rechtliche Texte gelten in der deutschen Fassung.</p>' : ''}
   <article class="card legal" data-noi18n>${({ impressum, datenschutz, nutzung, lizenzen })[t]()}</article>`;

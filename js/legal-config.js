@@ -1,11 +1,10 @@
 // Angaben für Impressum und Datenschutzerklärung. BITTE AUSFÜLLEN, bevor die Seite öffentlich beworben wird.
 // Pflicht für ein Impressum nach § 5 DDG: vollständiger Name und eine ladungsfähige Anschrift (kein Postfach),
 // dazu eine Möglichkeit zur schnellen elektronischen Kontaktaufnahme (E-Mail).
-// Solange hier Platzhalter in eckigen Klammern stehen, zeigt die App auf der Seite „Rechtliches“ einen Hinweis.
 export const LEGAL = {
-  name: '[Vor- und Nachname]',
-  street: '[Straße und Hausnummer]',
-  city: '[PLZ und Ort]',
+  name: 'Max Mustermann',      // Platzhalter, später durch die echten Angaben ersetzen
+  street: 'Musterstraße 1',
+  city: '99999 Musterhausen',
   country: 'Deutschland',
   email: 'info@indoorado.de',
   phone: '',                                   // optional

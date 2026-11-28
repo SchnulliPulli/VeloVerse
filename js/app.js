@@ -47,10 +47,11 @@ Object.assign(PAGES, {
 });
 // Alte Adressen führen zum passenden Abschnitt der zusammengelegten Seite
 const ALIAS = { sound: ['ridesettings', 1], connect: ['appsettings', 1], players: ['lobby', 1], events: ['community', 0], clubs: ['community', 1], season: ['progress', 1] };
-// Hauptmenü: am Computer sechs Bereiche links, am Handy fünf unten (Geräte und Einstellungen stecken dort unter „Mehr“)
+// Hauptmenü: am Computer sieben Bereiche links, am Handy sechs unten (Geräte und Einstellungen stecken dort unter „Mehr“)
 const NAV = [
   { k: '', l: 'Start', i: 'home', also: ['companion', 'live'] },
-  { k: 'workouts', l: 'Training', i: 'workout', tabs: [['workouts', 'Workouts'], ['plans', 'Trainingspläne'], ['routes', 'Strecken']], also: ['editor', 'planner', 'builder'] },
+  { k: 'workouts', l: 'Training', i: 'workout', tabs: [['workouts', 'Workouts'], ['plans', 'Trainingspläne']], also: ['editor', 'planner'] },
+  { k: 'routes', l: 'Strecken', i: 'route', also: ['builder'] },
   { k: 'history', l: 'Fahrten', i: 'history', tabs: [['history', 'Verlauf'], ['progress', 'Fortschritt & Saison']], also: ['summary', 'season', 'report'] },
   { k: 'lobby', l: 'Online', i: 'online', tabs: [['lobby', 'Lobby'], ['friends', 'Freunde'], ['community', 'Events & Teams'], ['admin', 'Admin']], also: ['players', 'events', 'clubs'] },
   { k: 'devices', l: 'Geräte', i: 'devices', desk: true },

@@ -1602,3 +1602,7 @@ html.pwa .fsbtn, html.pwa #tFull { display: none !important; }
 /* Freunde einladen */
 .invitecard .invmail, .invitecard .invlink { gap: 8px; flex-wrap: nowrap; } .invitecard .invmail .inp, .invitecard .invlink .inp { flex: 1; min-width: 0; }
 .invitecard .invshare { gap: 6px; flex-wrap: wrap; }
+/* Fahrt-Knöpfe auf Touch-Geräten: kein blauer Tipp-Schimmer, kein „hängender“ Hover-Zustand nach dem Antippen */
+.ridewrap, .ridewrap * { -webkit-tap-highlight-color: transparent; }
+.ridewrap button:focus:not(:focus-visible) { outline: none; }
+@media (hover: none) { .ridewrap .tbtn:hover, .ridewrap .gbtn:hover, .ridewrap .dpb:hover { background: var(--hudbg); } .tbpop .tbexp:hover { background: rgba(255,255,255,.08); } }

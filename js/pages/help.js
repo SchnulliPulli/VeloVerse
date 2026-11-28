@@ -3,7 +3,8 @@ import { RIDE } from '../shortcuts.js';
 const T = [
   ['nav', '🧭', 'Wo finde ich was?', `<ul class="tips">
     <li><b>Start</b>: Begrüßung, Empfehlung für heute, Strecke, Trainingsplan, Missionen, Geräte, Fahrt einrichten, Woche und letzte Fahrten. Mit <b>✏️ Startseite anpassen</b> (ganz unten) blendest du Felder aus und änderst die Reihenfolge.</li>
-    <li><b>Training</b>: Workouts, Trainingspläne und <b>Strecken</b> (inkl. Baukasten, GPX- und Videofahrten).</li>
+    <li><b>Training</b>: Workouts und Trainingspläne.</li>
+    <li><b>Strecken</b>: alle Strecken, Baukasten, GPX- und Videofahrten.</li>
     <li><b>Fahrten</b>: Verlauf aller Fahrten, Fortschritt &amp; Saison, Wochen- und Monatsberichte.</li>
     <li><b>Online</b>: Lobby, Freunde und Chat, Events &amp; Teams (mit Konto).</li>
     <li><b>Geräte</b> und <b>Einstellungen</b>: am Computer links im Menü, am Handy unter <b>⋯ Mehr</b>. Einstellungen: Profil · Fahrt &amp; Ton · Benachrichtigungen &amp; Privatsphäre · App &amp; Daten · Konto · Hilfe. Oben auf jeder Einstellungsseite gibt es eine <b>Suche</b>.</li>
@@ -53,7 +54,7 @@ const T = [
 </ul>`],
   ['strecken', '🗺️', 'Strecken und Baukasten', `<ul class="tips">
     <li>Fast 30 eingebaute Welten von Hügelland bis Weltall, Tiefsee, Lava-Insel, Wolken und Zuckerland. Jede Strecke zeigt ein Vorschaubild.</li>
-    <li><b>🧱 Strecken-Baukasten</b> (Training › Strecken › Baukasten): Bausteine antippen – Geraden, Kurven, Spitzkehren, Serpentinen, Anstiege, Steilwände, Abfahrten, Achterbahn, Korkenzieher und mehr. Jeden Baustein in Länge, Steilheit und Richtung anpassen, Landschaft und Belag wählen, als Rundkurs schließen, speichern und fahren. Vorlagen und 🎲 Zufall helfen beim Start.</li>
+    <li><b>🧱 Strecken-Baukasten</b> (Strecken › Baukasten): Bausteine antippen – Geraden, Kurven, Spitzkehren, Serpentinen, Anstiege, Steilwände, Abfahrten, Achterbahn, Korkenzieher und mehr. Jeden Baustein in Länge, Steilheit und Richtung anpassen, Landschaft und Belag wählen, als Rundkurs schließen, speichern und fahren. Vorlagen und 🎲 Zufall helfen beim Start.</li>
     <li><b>🏙️ Echte Gebäude</b> (bei importierten echten Strecken, mit Anmeldung): Häuser, Kirchen und Hallen entlang der Strecke aus OpenStreetMap, in echter Form und Höhe. Laden auf der Seite der Strecke.</li>
     <li><b>GPX und Strava-Routen</b> importieren; auf Wunsch mit <b>echtem Gelände</b> aus einem frei verfügbaren Höhenmodell.</li>
     <li>Einmal die ganze Strecke fahren bringt das <b>Routen-Abzeichen</b> 🏅 (+100 XP).</li>    <li><b>🎬 Videofahrt</b>: Eigene Aufnahme (GoPro, Handy) plus GPX der Ausfahrt laden. Das Video läuft so schnell, wie du trittst, der Widerstand folgt dem Anstieg. Das Video bleibt auf deinem Gerät. Taste V wechselt zwischen Video und 3D-Welt.</li>
