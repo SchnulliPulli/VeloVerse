@@ -109,10 +109,26 @@ export async function toggleVoice(onCmd, flash) {
   if (!voiceSupported()) { toast('Dieser Browser kann keine Sprachsteuerung (Chrome, Edge oder Safari nehmen)', 5000); return false; }
   const { consent } = await import('./consent.js');
   if (!(await consent('voice', 1, { title: '🎙️ Sprachsteuerung', html: '<p>Sag während der Fahrt z. B. <b>„Pause“</b>, <b>„schwerer“</b>, <b>„leichter“</b>, <b>„nächstes Intervall“</b>, <b>„Foto“</b>, <b>„Kamera“</b>, <b>„Ride On“</b>, <b>„Musik“</b>.</p><p class="small muted">Die Erkennung macht dein Browser. <b>Chrome und Edge schicken den Ton dafür an Google bzw. Microsoft</b>, Safari je nach Gerät an Apple. IndooRado speichert nichts. Abschalten mit demselben Knopf.</p>' }))) return false;
-  const R = window.SpeechRecognition || window.webkitSpeechRecognition; rec = new R(); rec.lang = document.documentElement.lang; rec.continuous = true; rec.interimResults = false;
-  rec.onresult = e => { const t = e.results[e.results.length - 1][0].transcript.toLowerCase().trim(); const c = cmds.find(([re]) => re.test(t)); if (c) { onCmd(c[1]); flash('🎙️ „' + t + '“', 1000); } };
-  rec.onend = () => { if (listening && !document.hidden) { try { rec.start(); } catch (e) { } } };
-  rec.onerror = e => { if (e.error === 'not-allowed' || e.error === 'service-not-allowed') { listening = false; toast('Mikrofon nicht erlaubt', 4000); } };
+  // Befehle in der App-Sprache (Deutsch immer zusätzlich), Erkennung mit Ländercode
+  const lg = (document.documentElement.lang || 'de').slice(0, 2), cmds = [...(CMDS_L[lg] || []), ...CMDS];
+  const LOC = { de: 'de-DE', en: 'en-US', es: 'es-ES', fr: 'fr-FR', it: 'it-IT', nl: 'nl-NL' };
+  const R = window.SpeechRecognition || window.webkitSpeechRecognition; rec = new R(); rec.lang = LOC[lg] || 'de-DE'; rec.continuous = true; rec.interimResults = false; rec.maxAlternatives = 3;
+  let netErr = 0;
+  rec.onresult = e => {
+    const r = e.results[e.results.length - 1]; if (!r?.isFinal && r?.isFinal !== undefined) return;
+    // alle Varianten der Erkennung prüfen (z. B. „schwerer“ wird manchmal als „schwere“ oder „Schweden“ verstanden)
+    const alts = [...r].map(a => a.transcript.toLowerCase().trim()).filter(Boolean);
+    for (const t of alts) { const c = cmds.find(([re]) => re.test(t)); if (c) { onCmd(c[1]); flash('🎙️ „' + t + '“', 1100); return; } }
+    if (alts[0]) flash('🎙️ nicht verstanden: „' + alts[0] + '“', 1300);
+  };
+  rec.onend = () => { if (listening && !document.hidden) setTimeout(() => { if (listening) try { rec.start(); } catch (e) { } }, 250); }; // Chrome beendet die Erkennung immer wieder von selbst
+  rec.onerror = e => {
+    if (e.error === 'not-allowed' || e.error === 'service-not-allowed') { listening = false; toast('Mikrofon nicht erlaubt – in den Website-Einstellungen des Browsers freigeben', 5000); bus.emit('voiceState', false); }
+    else if (e.error === 'network' && ++netErr === 2) toast('Sprachsteuerung braucht Internet (der Browser erkennt die Sprache über seinen Online-Dienst)', 5000);
+    else if (e.error === 'audio-capture') { listening = false; toast('Kein Mikrofon gefunden', 4000); bus.emit('voiceState', false); }
+  };
+  // Nach dem Zurückkehren in die App wieder zuhören
+  document.addEventListener('visibilitychange', () => { if (listening && !document.hidden) try { rec.start(); } catch (e) { } });
   try { rec.start(); listening = true; flash('🎙️ Sprachsteuerung an – sag z. B. „schwerer“', 2200); } catch (e) { toast(e.message, 4000); }
   return listening;
 }

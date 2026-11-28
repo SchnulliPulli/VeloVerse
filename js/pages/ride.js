@@ -362,6 +362,7 @@ function bindUi() {
   $('#tMode', el).onclick = cycleMode;
   $('#tNpc', el).onclick = toggleNpcs;
   $('#tPace', el).onclick = choosePace;
+  S.offs.push(bus.on('voiceState', on => { if (on) return; const b = $('#tVoice', el); if (!b) return; $('#tVoiceL', el).textContent = 'Sprache'; b.classList.remove('on'); })); // Mikrofon verweigert o. Ä.
   $('#tVoice', el).onclick = async () => { const C = await import('../comfort.js'); const on = await C.toggleVoice(c => bus.emit('remoteCmd', c), flash); $('#tVoiceL', el).textContent = on ? 'Sprache an' : 'Sprache'; $('#tVoice', el).classList.toggle('on', on); };
   $('#tEmo', el).onclick = () => {
     if (!S.mp || !S.field.some(n => n.remote)) { flash('Gesten gehen an echte Mitfahrer – gerade ist niemand online auf dieser Strecke', 2200); return; }

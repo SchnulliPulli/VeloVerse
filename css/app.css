@@ -1551,3 +1551,9 @@ html.pwa .fsbtn, html.pwa #tFull { display: none !important; }
 
 /* Konto-Menü: auf niedrigen Bildschirmen nie aus dem Bild ragen, sondern scrollen */
 .usermenu { max-height: calc(100dvh - var(--umtop, 64px) - 12px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+/* „Mehr“-Menü: Emoji-Symbole so groß wie die Strichsymbole, nie über den Knopfrand; Beschriftung bleibt auch auf kleinen Bildschirmen */
+.tbpop .tbtn { overflow: hidden; padding: 4px 3px; }
+.tbpop .tbtn .dots { font-size: 19px; line-height: 1; height: 22px; display: grid; place-items: center; max-width: 100%; }
+.tbpop .tbtn svg { flex: none; }
+.tbpop .tbtn span { display: block !important; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; }
+@media (max-width: 560px) { .tbpop .tbtn { height: 54px; } .tbpop .tbtn .dots { font-size: 17px; height: 20px; } }
