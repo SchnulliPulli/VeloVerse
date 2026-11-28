@@ -34,9 +34,9 @@ export async function render(el) {
       ${OC.loggedIn() ? `<div class="seg lvtabs" id="lvTabs" role="tablist"><button data-lt="live" aria-pressed="${!sessionStorage.getItem('vvLvTab') || sessionStorage.getItem('vvLvTab') === 'live'}">📊 Live</button><button data-lt="remote" aria-pressed="${sessionStorage.getItem('vvLvTab') === 'remote'}">🎮 Fernbedienung</button></div>` : ''}
       <div id="cLive"></div>
       ${OC.loggedIn() ? `<div id="cRemote" class="remote" hidden>
-        <div class="rmhead"><span class="small muted" id="rmSt">Steuert die Fahrt auf deinem anderen Gerät</span></div>
+        <div class="rmhead"><span class="small muted" id="rmSt">Steuert die Fahrt auf deinem anderen Gerät</span><span class="row rmopts"><label class="chk rmwake" title="Das Display dieses Geräts geht nicht aus, solange die Fernbedienung offen ist"><input type="checkbox" id="rmWake" ${localStorage.getItem('vvRmWake') === '1' ? 'checked' : ''}> <span>☀️ Bildschirm an</span></label><button class="btn sm" id="rmFull" title="Fernbedienung bildschirmfüllend">⛶ Vollbild</button></span></div>
         <button class="btn rmpause" data-rm="pause" id="rmPause"><b>⏯️</b> Pause / Weiter</button>
-        <div class="rmgrid">${[['down', '➖', 'Leichter'], ['up', '➕', 'Schwerer'], ['left', '⬅️', 'Spur links'], ['right', '➡️', 'Spur rechts'], ['cam', '🎥', 'Kamera'], ['rideon', '👍', 'Ride On'], ['photo', '📷', 'Foto'], ['music', '🎵', 'Musik']].map(([c, i, l]) => `<button class="btn rmb" data-rm="${c}"><b>${i}</b><span>${l}</span></button>`).join('')}</div>
+        <div class="rmgrid">${[['down', '➖', 'Leichter'], ['up', '➕', 'Schwerer'], ['rideon', '👍', 'Ride On'], ['cam', '🎥', 'Kamera'], ['left', '⬅️', 'Spur links'], ['right', '➡️', 'Spur rechts'], ['photo', '📷', 'Foto'], ['music', '🎵', 'Musik']].map(([c, i, l]) => `<button class="btn rmb" data-rm="${c}"><b>${i}</b><span>${l}</span></button>`).join('')}</div>
         <div id="rmWo"><div class="rmsub">🏋️ Workout</div><div class="rmgrid three">${[['prev', '⏮️', 'Zurück'], ['restart', '↺', 'Neu'], ['next', '⏭️', 'Weiter']].map(([c, i, l]) => `<button class="btn rmb" data-rm="${c}"><b>${i}</b><span>${l}</span></button>`).join('')}</div></div>
         <div id="rmDemo" hidden><div class="rmsub">🧪 Demo-Steuerung</div>
           <div class="demorm">
@@ -70,13 +70,16 @@ export async function render(el) {
 
   { const off = bus.on('remoteAck', a => { const st = $('#rmSt', el); if (!st || !el.isConnected) return off?.(); st.textContent = a?.ok ? '✓ angekommen' : '⚠ keine laufende Fahrt gefunden – ist dort dasselbe Konto angemeldet und die Fahrt geöffnet?'; }); }
   el.onchange = e => {
+    if (e.target.id === 'rmWake') { try { localStorage.setItem('vvRmWake', e.target.checked ? '1' : '0'); } catch (er) { } rmWake(e.target.checked); return; }
     if (e.target.id === 'cWo') { sel.workoutId = e.target.value || null; saveSel(); toast(nas ? 'Vorgemerkt, wird zum PC übertragen' : 'Vorgemerkt'); render(el); }
     if (e.target.id === 'cRoute') { sel.routeId = e.target.value; saveSel(); toast('Strecke vorgemerkt'); }
   };
   const lvTab = t => { try { sessionStorage.setItem('vvLvTab', t); } catch (er) { } $('#cLive', el).hidden = t !== 'live'; const r = $('#cRemote', el); if (r) r.hidden = t !== 'remote'; el.querySelectorAll('#lvTabs [data-lt]').forEach(b => b.setAttribute('aria-pressed', b.dataset.lt === t)); };
   if ($('#lvTabs', el)) lvTab(sessionStorage.getItem('vvLvTab') || 'live');
+  if (localStorage.getItem('vvRmWake') === '1' && $('#cRemote', el)) rmWake(true);
   el.onclick = async e => {
     const lt = e.target.closest('[data-lt]'); if (lt) { lvTab(lt.dataset.lt); return; }
+    if (e.target.closest('#rmFull')) { rmFull(el, !$('#cRemote', el).classList.contains('rmfull')); return; }
     const rm = e.target.closest('[data-rm]');
     if (rm) {
       let c = rm.dataset.rm;
@@ -116,4 +119,23 @@ async function liveTick(el) {
     ${map}
     ${!L.loop ? `<div class="small muted">Strecke ${pct.toFixed(0)} % · noch ${fmtKm(Math.max(0, L.total - L.pos))} km</div><div class="bar thin"><i style="width:${pct.toFixed(1)}%"></i></div>` : ''}`;
 }
-export function leave() { clearInterval(timer); timer = null; offSync?.(); offSync = null; }
+export function leave() { clearInterval(timer); timer = null; offSync?.(); offSync = null; rmWake(false); if (document.fullscreenElement) document.exitFullscreen?.().catch(() => { }); document.body.classList.remove('rmfullon'); }
+
+// Fernbedienung: Bildschirm anlassen (Wake Lock, nach dem Zurückkehren in die App erneut anfordern) und Vollbild
+let wake = null, wakeOn = false;
+async function rmWake(on) {
+  wakeOn = on;
+  if (!on) { try { await wake?.release(); } catch (e) { } wake = null; return; }
+  if (!('wakeLock' in navigator)) { toast('Dieser Browser kann das Display nicht anlassen – bitte in den Geräte-Einstellungen die Bildschirmzeit verlängern', 5000); return; }
+  try { if (!wake || wake.released) wake = await navigator.wakeLock.request('screen'); } catch (e) { }
+}
+document.addEventListener('visibilitychange', () => { if (wakeOn && document.visibilityState === 'visible') rmWake(true); });
+async function rmFull(el, on) {
+  const r = $('#cRemote', el); if (!r) return;
+  r.classList.toggle('rmfull', on); document.body.classList.toggle('rmfullon', on);
+  const b = $('#rmFull', el); if (b) b.textContent = on ? '✕ Vollbild beenden' : '⛶ Vollbild';
+  try { if (on && !document.fullscreenElement) await document.documentElement.requestFullscreen?.({ navigationUI: 'hide' }); else if (!on && document.fullscreenElement) await document.exitFullscreen(); } catch (e) { } // iPhone: kein echtes Vollbild, die Ansicht füllt trotzdem das Fenster
+  if (on) rmWake(true); else rmWake($('#rmWake', el)?.checked || false);
+  const off = () => { if (!document.fullscreenElement && r.classList.contains('rmfull')) rmFull(el, false); document.removeEventListener('fullscreenchange', off); };
+  if (on) setTimeout(() => document.addEventListener('fullscreenchange', off), 300);
+}

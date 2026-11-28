@@ -1295,7 +1295,7 @@ body.watchtv .tvprof { height: 15vh; }
 .dmb.wide { font-size: 17px; }
 .dmb.brake { background: rgba(239,68,88,.3); }
 .dmb.sprint { background: rgba(255,138,61,.32); }
-@media (max-width: 380px) { .remote .rmgrid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 380px) { .remote .rmb span { font-size: 10px; } .remote .rmgrid { gap: 6px; } }
 
 /* Live-Ansicht: Strecke mit Position */
 .livemap { width: 100%; height: 120px; display: block; margin: 2px auto; }
@@ -1478,3 +1478,12 @@ body.watchtv .tvprof { height: 15vh; }
 /* „Mehr“-Menü in der Fahrt: auf niedrigen Bildschirmen (Handy quer) nie aus der Seite ragen, sondern scrollen */
 .tbpop { max-height: calc(100dvh - 66px - 2 * max(12px, env(safe-area-inset-bottom)) - 12px); overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
 @media (max-width: 820px) { .tbpop { max-height: calc(100dvh - 70px - env(safe-area-inset-bottom) - 12px); } }
+/* Fernbedienung: Optionen und Vollbild */
+.remote .rmhead { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.remote .rmopts { gap: 8px; align-items: center; }
+.remote .rmwake { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; margin: 0; }
+.remote.rmfull { position: fixed; inset: 0; z-index: 9000; background: var(--bg); padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 10px; }
+.remote.rmfull .rmgrid .rmb { height: clamp(72px, 13dvh, 120px); }
+.remote.rmfull .rmb b { font-size: clamp(26px, 4.5dvh, 40px); }
+.remote.rmfull .rmpause { min-height: clamp(56px, 10dvh, 96px); font-size: 18px; }
+body.rmfullon { overflow: hidden; }
