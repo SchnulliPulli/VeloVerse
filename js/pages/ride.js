@@ -701,7 +701,7 @@ function updEnvPanel() {
 
 /* ---------- Große Karte und Beamen ---------- */
 function openMap() { const m = $('#bigMap', S.el); m.hidden = false; S.mapPick = null; $('#bmGo', S.el).disabled = true; $('#bmTitle', S.el).textContent = S.route.name + (S.route.loop ? ' · Rundkurs' : '');
-  const R = S.route, q = [['Start', 0], ...R.climbs.map(c => ['⛰ ' + c.name, c.from - 50]), ...R.sprints.map(c => ['🏁 ' + c.name, c.from - 50]), ...R.towns.map(t => ['🏘 ' + t.name, t.from]), ...R.tunnels.map((t, i) => ['Tunnel ' + (i + 1), t.from - 80])].filter(x => x[1] >= 0 && x[1] < R.total - 20);
+  const R = S.route, q = [['Startpunkt', 0], ...R.climbs.map(c => ['⛰ ' + c.name, c.from - 50]), ...R.sprints.map(c => ['🏁 ' + c.name, c.from - 50]), ...R.towns.map(t => ['🏘 ' + t.name, t.from]), ...R.tunnels.map((t, i) => ['Tunnel ' + (i + 1), t.from - 80])].filter(x => x[1] >= 0 && x[1] < R.total - 20);
   // Echte Mitspieler zuerst: zu ihnen beamen (8 m dahinter, direkt im Windschatten)
   const mp = S.field.filter(n => n.remote).map(n => [n.name.replace(/^🌐 /, ''), R.loop ? ((n.d - 8) % R.total + R.total) % R.total : clamp(n.d - 8, 0, R.total - 20)]);
   $('#bmQuick', S.el).innerHTML = mp.map(([l, d]) => `<button class="chipb mp" data-d="${Math.round(d)}">🌐 zu ${esc(l)}</button>`).join('') + q.map(([l, d]) => `<button class="chipb" data-d="${Math.round(d)}">${esc(l)}</button>`).join('');

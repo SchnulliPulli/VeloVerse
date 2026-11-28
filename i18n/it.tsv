@@ -29,7 +29,7 @@ Heute fahren startet eine Serie	Pedala oggi per iniziare una serie
 Details und Tasten anlernen	Dettagli e apprendimento tasti
 Bluetooth ist hier nicht verfügbar.	Bluetooth non è disponibile qui.
 Smart-Trainer	Rullo smart
-Verbinden	Connetti
+Verbinden	Collega
 Trennen	Disconnetti
 Herzfrequenz	Frequenza cardiaca
 Trittfrequenz	Cadenza
@@ -84,7 +84,7 @@ Fahrzeit	Tempo in sella
 Tage am Stück	Giorni di fila
 Abzeichen	Badge
 Letzte Fahrten	Ultime uscite
-Alle	Tutte
+Alle	Tutti
 Online-Infos werden geladen …	Caricamento info online …
 Willkommen bei IndooRado	Benvenuto in IndooRado
 Trainieren	Allenarsi
@@ -462,7 +462,7 @@ Treten	Pedala
 Fahrzeug und Figur	Bici e personaggio
 Rennrad	Bici da corsa
 Hollandrad	Bici olandese
-Gravelbike	Gravel
+Gravelbike	Bici gravel
 Mountainbike	Mountain bike
 Lastenrad mit Hund	Cargo bike con cane
 Zeitfahrrad	Bici da cronometro
@@ -693,7 +693,7 @@ Tablet oder Computer	tablet o computer
 erkannt.	.
 Barrierefreiheit	Accessibilità
 Schriftgröße	Dimensione testo
-Klein (# %)	Piccola (# %)
+Klein (# %)	Piccolo (# %)
 Groß (# %)	Grande (# %)
 Sehr groß (# %)	Molto grande (# %)
 Hoher Kontrast	Contrasto elevato
@@ -723,7 +723,7 @@ Auch ohne Verbindung geht es	Funziona anche senza connessione
 Auf	Su
 Als	Come
 eintragen	inserire
-Client-ID	ID client
+Client-ID	Client ID
 Client-Secret	Secret client
 Mit Strava verbinden	Connetti a Strava
 Cloud-Speicher	Archivio cloud
@@ -873,7 +873,7 @@ Hier offline fahren	Pedala qui offline
 Hierhin beamen	Teletrasportati qui
 Hineinzoomen	Aumenta zoom
 Hintergrund	Sfondo
-Hm	Disl.
+Hm	Alt.
 IndooRado als App	IndooRado come app
 Installieren	Installa
 Jetzt hier fahren	Pedala qui ora
@@ -1253,7 +1253,7 @@ Vier Wochen mit wenig Zeit, aber hoher Intensität. Jede Einheit dauert höchste
 Vorschau wird gerendert …	Creazione anteprima …
 Was möchtest du verbinden? Die Auswahl zeigt dann nur passende Geräte. Standards werden automatisch gelesen; bei unbekannten Geräten ordnest du die Rohdaten selbst zu.	Cosa vuoi collegare? La selezione mostra poi solo i dispositivi adatti. Gli standard vengono letti automaticamente; per dispositivi sconosciuti assegni tu i dati grezzi.
 Wechsel zwischen # und # % FTP. Lehrt, Laktat abzubauen.	Alternanza tra # e # % FTP. Insegna a smaltire il lattato.
-Weitere	Altro
+Weitere	Altri
 Weitere Räder und Tiere gibt es mit höherem Level, ein paar nur für Entdecker.	Altre bici e animali si sbloccano a livelli alti, alcuni solo per gli esploratori.
 Weiterleiten muss der Proxy dabei mindestens den Pfad	Il proxy deve inoltrare almeno il percorso
 Welliger Rundkurs durch Wiesen, Wälder und Dörfer.	Anello ondulato tra prati, boschi e paesi.
@@ -1385,3 +1385,98 @@ zur eingestellten Uhrzeit, wenn du heute noch nicht gefahren bist	all'ora impost
 🚀 Sprint	🚀 Sprint
 🚴 Fahrt einrichten	🚴 Prepara l'uscita
 🤝 Buddy	🤝 Compagno
+# Fahrten · # km · # min	# uscite · # km · # min
+# Wochen · # Einheiten · # min · TSS # gesamt · Ziele aus deiner FTP (# W)	# settimane · # sessioni · # min · TSS # in totale · obiettivi dal tuo FTP (# W)
+# h # min · TSS #	# h # min · TSS #
+# min · TSS #	# min · TSS #
+#/# Intervalle · # min	#/# intervalli · # min
+Abfahrt: # km, -# %, #	Discesa: # km, -# %, #
+Achterbahn: # km, # %, #	Montagne russe: # km, # %, #
+Alpen: Drei-Pässe-Runde · # km	Alpi: giro dei tre passi · # km
+Alpen: Gletscherstraße · # km	Alpi: strada del ghiacciaio · # km
+Anstieg: # km, # %, #	Salita: # km, # %, #
+Belegt: # MB · Dauerhafter Speicher: nicht bestätigt	Usato: # MB · Archiviazione persistente: non confermata
+Canyon-Wüste · # km	Deserto del canyon · # km
+Deine letzte Fahrt ist # Tage her. Die Beine sind ausgeruht.	La tua ultima uscita risale a # giorni fa. Le gambe sono riposate.
+FTP-Test # Minuten · # h # min	Test FTP # minuti · # h # min
+Falsche Ebene: # km, #	Falsopiano: # km, #
+Farbe ##b#fd#	Colore ##b#fd#
+Farbe ##fa#f#	Colore ##fa#f#
+Farbe ##fd#b	Colore ##fd#b
+Farbe #b#cf#	Colore #b#cf#
+Farbe #e#eef#	Colore #e#eef#
+Farbe #ef#	Colore #ef#
+Farbe #ff#a#d	Colore #ff#a#d
+Farbe #ff#fa#	Colore #ff#fa#
+Feldweg mit Kuhweide · # km	Strada di campagna con pascolo · # km
+Fjordrunde · # km	Giro del fiordo · # km
+Freie Fahrt mit Aufwärmen · # h # min	Uscita libera con riscaldamento · # h # min
+Gerade: # km	Rettilineo: # km
+Gipfelgrat · # km	Cresta di vetta · # km
+Gravel: Schotter im Hochwald · # km	Gravel: foresta delle Highlands · # km
+Große Acht: # km, #	Grande otto: # km, #
+Grundlage lang · # h # min	Resistenza lunga · # h # min
+Herbstwald-Runde · # km	Giro del bosco d'autunno · # km
+Herzschleife: # km, #	Anello a cuore: # km, #
+Himalaya: Pass der Gebetsfahnen · # km	Himalaya: passo delle bandiere di preghiera · # km
+Hochschalten: #:#, #:#, #:#, #:# · Runterschalten: #:#, #:#, #:#, #:#	Più duro: #:#, #:#, #:#, #:# · Più leggero: #:#, #:#, #:#, #:#
+Hügelland-Runde · # km	Giro delle colline · # km
+Import: .zwo-Workouts, .erg und .mrc, IndooRado-Dateien (.json) und ZIP-Archive mit solchen Dateien. Ziele werden aus deiner FTP von # W berechnet. Dateien auch per Drag & Drop auf diese Seite ziehen. Alles bleibt im Browser gespeichert.	Importa: allenamenti .zwo, .erg e .mrc, file IndooRado (.json) e archivi ZIP che li contengono. Gli obiettivi sono calcolati dal tuo FTP di # W. Puoi anche trascinare i file su questa pagina. Tutto resta nel browser.
+Jeder Plan ist eine Folge von Workouts, Woche für Woche. Alle Ziele hängen an deiner FTP (# W) und passen sich automatisch an, wenn sie sich ändert. Eine Einheit zählt als erledigt, wenn du mindestens # % davon fährst.	Ogni piano è una sequenza di allenamenti, settimana dopo settimana. Tutti gli obiettivi dipendono dal tuo FTP (# W) e si adattano automaticamente quando cambia. Una sessione conta come fatta se ne completi almeno il # %.
+Kirschblüten-Runde · # km	Giro dei ciliegi in fiore · # km
+Korkenzieher: # km, # %, #	Cavatappi: # km, # %, #
+Kreisverkehr (#°): # km, #	Rotonda (#°): # km, #
+Kuppe: # km, #	Dosso: # km, #
+Kurzer Anstieg: # km, #	Salita breve: # km, #
+Königsetappe · # km	Tappa regina · # km
+Küstenstraße · # km	Strada costiera · # km
+Lange Gerade: # km	Rettilineo lungo: # km
+Langer Pass: # km, # %, #	Passo lungo: # km, # %, #
+Lava-Insel · # km	Isola di lava · # km
+Leichte Linkskurve: # km, #	Leggera curva a sinistra: # km, #
+Leichte Rechtskurve: # km, #	Leggera curva a destra: # km, #
+Leistungszonen: Z# #–# W · Z# #–# W · Z# #–# W · Z# #–# W	Zone di potenza: Z# #–# W · Z# #–# W · Z# #–# W · Z# #–# W
+Linkskurve #°: # km, #	Curva a sinistra #°: # km, #
+Lockere Grundlage · # min	Resistenza facile · # min
+MTB: Wurzel-Singletrail · # km	MTB: single track con radici · # km
+Marianengraben: Tiefsee-Runde · # km	Fossa delle Marianne: giro degli abissi · # km
+Mond: Krater-Runde · # km	Luna: giro dei crateri · # km
+Provence-Achter (flach) · # km	Otto in Provenza (pianeggiante) · # km
+Pyramide · # min	Piramide · # min
+Rampe: # km, #	Rampa: # km, #
+Rampentest · # min	Test a rampa · # min
+Rechtskurve #°: # km, #	Curva a destra #°: # km, #
+Riesenpilz-Wald · # km	Foresta di funghi giganti · # km
+Rio: Strände und Felsen · # km	Rio: spiagge e scogli · # km
+S-Kurve: # km, #	Curva a S: # km, #
+Savanne: Safari-Runde · # km	Savana: giro safari · # km
+Schikane: # km, #	Chicane: # km, #
+Schlangenlinie: # km, #	Linea a serpentina: # km, #
+Schwelle #×# · # h # min	Soglia #×# · # h # min
+Seenrunde · # km	Giro dei laghi · # km
+Senke: # km, #	Avvallamento: # km, #
+Serie	Serie
+Serpentinen bergab: # km, -# %, #	Tornanti in discesa: # km, -# %, #
+Serpentinen bergauf: # km, # %, #	Tornanti in salita: # km, # %, #
+Spirale bergauf: # km, # %, #	Spirale in salita: # km, # %, #
+Spitzkehre links: # km, #	Tornante a sinistra: # km, #
+Spitzkehre rechts: # km, #	Tornante a destra: # km, #
+Sprint-Gerade: # km	Rettilineo sprint: # km
+Standard	Predefinito
+Steilwand: # km, #	Muro: # km, #
+Sturzflug: # km, -#	Picchiata: # km, -#
+Toskana-Hügel · # km	Colline toscane · # km
+Treppe: # km, #	Gradini: # km, #
+Urzeit-Tal: Dinosaurier-Runde · # km	Valle preistorica: giro dei dinosauri · # km
+Watt	Watt
+Weiter Bogen links: # km, #	Ampio arco a sinistra: # km, #
+Weiter Bogen rechts: # km, #	Ampio arco a destra: # km, #
+Wellen: # km, #	Onde: # km, #
+Weltall: Ringplanet-Orbit · # km	Spazio: orbita del pianeta con anelli · # km
+Winterwald im Schnee · # km	Bosco invernale innevato · # km
+Wolkenstraße mit Regenbogen · # km	Strada tra le nuvole con arcobaleno · # km
+Zickzack: # km, #	Zigzag: # km, #
+Zuckerland-Runde · # km	Giro del paese dei dolci · # km
+Start	Home
+Startpunkt	Punto di partenza
+Beginn	Inizio

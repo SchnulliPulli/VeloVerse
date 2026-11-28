@@ -76,7 +76,7 @@ Puls-Ziel	Cible de fréquence cardiaque
 Zielpuls (bpm)	FC cible (bpm)
 Schrittmacher	Lièvre
 Aus	Désactivé
-Buddy	Partenaire
+Buddy	Coéquipier
 Fahrt starten	Démarrer la sortie
 Diese Woche	Cette semaine
 Fortschritt	Progression
@@ -84,7 +84,7 @@ Fahrzeit	Temps de selle
 Tage am Stück	Jours d'affilée
 Abzeichen	Badges
 Letzte Fahrten	Dernières sorties
-Alle	Toutes
+Alle	Tous
 Online-Infos werden geladen …	Chargement des infos en ligne …
 Willkommen bei IndooRado	Bienvenue sur IndooRado
 Trainieren	S'entraîner
@@ -396,7 +396,7 @@ Titel	Titres
 Titel gibt es auf den Stufen #, #, # und #.	Les titres sont aux paliers #, #, # et #.
 anlernen	apprendre
 Zurücksetzen	Réinitialiser
-Trainer testen	Tester le home trainer
+Trainer testen	Tester le home-trainer
 Steigung #	Pente #
 So klappt die Verbindung	Pour bien se connecter
 Den Kadenzsensor kurz drehen, damit er aufwacht.	Fais tourner un peu le capteur de cadence pour le réveiller.
@@ -459,7 +459,7 @@ Treten	Pédaler
 Fahrzeug und Figur	Vélo et personnage
 Rennrad	Vélo de route
 Hollandrad	Vélo hollandais
-Gravelbike	Gravel
+Gravelbike	Vélo gravel
 Mountainbike	VTT
 Lastenrad mit Hund	Vélo cargo avec chien
 Zeitfahrrad	Vélo de contre-la-montre
@@ -543,7 +543,7 @@ Kamera	Caméra
 Standardansicht	Vue par défaut
 Verfolger	Poursuite
 Weit	Large
-Vogel	Oiseau
+Vogel	Vue d'oiseau
 Fahrer (Ich-Perspektive)	Cycliste (première personne)
 Rückblick (nach hinten aufs Feld)	Regard arrière (sur le peloton)
 Kameraschwenk am Zieltor	Travelling à l'arche d'arrivée
@@ -687,7 +687,7 @@ Tablet oder Computer	tablette ou ordinateur
 erkannt.	.
 Barrierefreiheit	Accessibilité
 Schriftgröße	Taille du texte
-Klein (# %)	Petite (# %)
+Klein (# %)	Petit (# %)
 Groß (# %)	Grande (# %)
 Sehr groß (# %)	Très grande (# %)
 Hoher Kontrast	Contraste élevé
@@ -715,9 +715,9 @@ Einrichtung erneut starten	Relancer la configuration
 App aktualisieren	Mettre à jour l'app
 Auch ohne Verbindung geht es	Ça marche aussi sans connexion
 Auf	Sur
-Als	Comme
+Als	En tant que
 eintragen	saisir
-Client-ID	ID client
+Client-ID	Client ID
 Client-Secret	Secret client
 Mit Strava verbinden	Se connecter à Strava
 Cloud-Speicher	Stockage cloud
@@ -864,7 +864,7 @@ Hier offline fahren	Rouler ici hors ligne
 Hierhin beamen	Se téléporter ici
 Hineinzoomen	Zoomer
 Hintergrund	Arrière-plan
-Hm	D+
+Hm	Alt.
 IndooRado als App	IndooRado comme app
 Installieren	Installer
 Jetzt hier fahren	Rouler ici maintenant
@@ -1241,7 +1241,7 @@ Vier Wochen mit wenig Zeit, aber hoher Intensität. Jede Einheit dauert höchste
 Vorschau wird gerendert …	Création de l'aperçu …
 Was möchtest du verbinden? Die Auswahl zeigt dann nur passende Geräte. Standards werden automatisch gelesen; bei unbekannten Geräten ordnest du die Rohdaten selbst zu.	Que veux-tu connecter ? La sélection n'affiche alors que les appareils adaptés. Les standards sont lus automatiquement ; pour les appareils inconnus, tu attribues toi-même les données brutes.
 Wechsel zwischen # und # % FTP. Lehrt, Laktat abzubauen.	Alternance entre # et # % FTP. Apprend à éliminer le lactate.
-Weitere	Plus
+Weitere	Autres
 Weitere Räder und Tiere gibt es mit höherem Level, ein paar nur für Entdecker.	D'autres vélos et animaux se débloquent à des niveaux élevés, quelques-uns seulement pour les explorateurs.
 Weiterleiten muss der Proxy dabei mindestens den Pfad	Le proxy doit au moins transmettre le chemin
 Welliger Rundkurs durch Wiesen, Wälder und Dörfer.	Boucle vallonnée à travers prés, forêts et villages.
@@ -1372,4 +1372,102 @@ zur eingestellten Uhrzeit, wenn du heute noch nicht gefahren bist	à l'heure cho
 🗺️ Gewählte Strecke	🗺️ Parcours choisi
 🚀 Sprint	🚀 Sprint
 🚴 Fahrt einrichten	🚴 Préparer la sortie
-🤝 Buddy	🤝 Partenaire
+🤝 Buddy	🤝 Coéquipier
+# Fahrten · # km · # min	# sorties · # km · # min
+# Wochen · # Einheiten · # min · TSS # gesamt · Ziele aus deiner FTP (# W)	# semaines · # séances · # min · TSS # au total · objectifs selon ta FTP (# W)
+# h # min · TSS #	# h # min · TSS #
+# min · TSS #	# min · TSS #
+#/# Intervalle · # min	#/# intervalles · # min
+Abfahrt: # km, -# %, #	Descente : # km, -# %, #
+Achterbahn: # km, # %, #	Montagnes russes : # km, # %, #
+Alpen: Drei-Pässe-Runde · # km	Alpes : boucle des trois cols · # km
+Alpen: Gletscherstraße · # km	Alpes : route du glacier · # km
+Anstieg: # km, # %, #	Montée : # km, # %, #
+Belegt: # MB · Dauerhafter Speicher: nicht bestätigt	Utilisé : # Mo · Stockage persistant : non confirmé
+Canyon-Wüste · # km	Désert du canyon · # km
+Deine letzte Fahrt ist # Tage her. Die Beine sind ausgeruht.	Ta dernière sortie date de # jours. Tes jambes sont reposées.
+FTP-Test # Minuten · # h # min	Test FTP # minutes · # h # min
+Falsche Ebene: # km, #	Faux plat : # km, #
+Farbe ##b#fd#	Couleur ##b#fd#
+Farbe ##fa#f#	Couleur ##fa#f#
+Farbe ##fd#b	Couleur ##fd#b
+Farbe #b#cf#	Couleur #b#cf#
+Farbe #e#eef#	Couleur #e#eef#
+Farbe #ef#	Couleur #ef#
+Farbe #ff#a#d	Couleur #ff#a#d
+Farbe #ff#fa#	Couleur #ff#fa#
+Feldweg mit Kuhweide · # km	Chemin agricole et pâturage · # km
+Fjordrunde · # km	Boucle du fjord · # km
+Freie Fahrt mit Aufwärmen · # h # min	Sortie libre avec échauffement · # h # min
+Gerade: # km	Ligne droite : # km
+Geste	Geste
+Gipfelgrat · # km	Crête sommitale · # km
+Gravel: Schotter im Hochwald · # km	Gravel : forêt des Highlands · # km
+Große Acht: # km, #	Grand huit : # km, #
+Grundlage lang · # h # min	Endurance longue · # h # min
+Herbstwald-Runde · # km	Boucle de la forêt d'automne · # km
+Herzschleife: # km, #	Boucle en cœur : # km, #
+Himalaya: Pass der Gebetsfahnen · # km	Himalaya : col des drapeaux de prière · # km
+Hochschalten: #:#, #:#, #:#, #:# · Runterschalten: #:#, #:#, #:#, #:#	Monter : #:#, #:#, #:#, #:# · Descendre : #:#, #:#, #:#, #:#
+Hügelland-Runde · # km	Boucle des collines · # km
+Import: .zwo-Workouts, .erg und .mrc, IndooRado-Dateien (.json) und ZIP-Archive mit solchen Dateien. Ziele werden aus deiner FTP von # W berechnet. Dateien auch per Drag & Drop auf diese Seite ziehen. Alles bleibt im Browser gespeichert.	Import : entraînements .zwo, .erg et .mrc, fichiers IndooRado (.json) et archives ZIP qui en contiennent. Les objectifs sont calculés à partir de ta FTP de # W. Tu peux aussi glisser-déposer des fichiers sur cette page. Tout reste dans ton navigateur.
+Jeder Plan ist eine Folge von Workouts, Woche für Woche. Alle Ziele hängen an deiner FTP (# W) und passen sich automatisch an, wenn sie sich ändert. Eine Einheit zählt als erledigt, wenn du mindestens # % davon fährst.	Chaque plan est une suite d'entraînements, semaine après semaine. Tous les objectifs dépendent de ta FTP (# W) et s'adaptent automatiquement quand elle change. Une séance compte comme faite quand tu en roules au moins # %.
+Kirschblüten-Runde · # km	Boucle des cerisiers en fleurs · # km
+Korkenzieher: # km, # %, #	Tire-bouchon : # km, # %, #
+Kreisverkehr (#°): # km, #	Rond-point (#°) : # km, #
+Kuppe: # km, #	Bosse : # km, #
+Kurzer Anstieg: # km, #	Montée courte : # km, #
+Königsetappe · # km	Étape reine · # km
+Küstenstraße · # km	Route côtière · # km
+Lange Gerade: # km	Longue ligne droite : # km
+Langer Pass: # km, # %, #	Long col : # km, # %, #
+Lava-Insel · # km	Île de lave · # km
+Leichte Linkskurve: # km, #	Légère courbe à gauche : # km, #
+Leichte Rechtskurve: # km, #	Légère courbe à droite : # km, #
+Leistungszonen: Z# #–# W · Z# #–# W · Z# #–# W · Z# #–# W	Zones de puissance : Z# #–# W · Z# #–# W · Z# #–# W · Z# #–# W
+Linkskurve #°: # km, #	Virage à gauche #° : # km, #
+Lockere Grundlage · # min	Endurance facile · # min
+MTB: Wurzel-Singletrail · # km	VTT : single track à racines · # km
+Marianengraben: Tiefsee-Runde · # km	Fosse des Mariannes : boucle des grands fonds · # km
+Mond: Krater-Runde · # km	Lune : boucle des cratères · # km
+Pause	Pause
+Profil	Profil
+Provence-Achter (flach) · # km	Huit de Provence (plat) · # km
+Pyramide	Pyramide
+Pyramide · # min	Pyramide · # min
+Rampe	Rampe
+Rampe: # km, #	Rampe : # km, #
+Rampentest · # min	Test rampe · # min
+Rechtskurve #°: # km, #	Virage à droite #° : # km, #
+Riesenpilz-Wald · # km	Forêt de champignons géants · # km
+Rio: Strände und Felsen · # km	Rio : plages et rochers · # km
+S-Kurve: # km, #	Virage en S : # km, #
+Savanne: Safari-Runde · # km	Savane : boucle safari · # km
+Schikane: # km, #	Chicane : # km, #
+Schlangenlinie: # km, #	Ligne en serpentin : # km, #
+Schwelle #×# · # h # min	Seuil #×# · # h # min
+Seenrunde · # km	Boucle des lacs · # km
+Senke: # km, #	Creux : # km, #
+Serpentinen bergab: # km, -# %, #	Lacets en descente : # km, -# %, #
+Serpentinen bergauf: # km, # %, #	Lacets en montée : # km, # %, #
+Spirale bergauf: # km, # %, #	Spirale montante : # km, # %, #
+Spitzkehre links: # km, #	Épingle à gauche : # km, #
+Spitzkehre rechts: # km, #	Épingle à droite : # km, #
+Sprint-Gerade: # km	Ligne droite de sprint : # km
+Standard	Par défaut
+Steilwand: # km, #	Mur : # km, #
+Sturzflug: # km, -#	Plongeon : # km, -#
+Toskana-Hügel · # km	Collines de Toscane · # km
+Treppe: # km, #	Marches : # km, #
+Urzeit-Tal: Dinosaurier-Runde · # km	Vallée préhistorique : boucle des dinosaures · # km
+Weiter Bogen links: # km, #	Large courbe à gauche : # km, #
+Weiter Bogen rechts: # km, #	Large courbe à droite : # km, #
+Wellen: # km, #	Vagues : # km, #
+Weltall: Ringplanet-Orbit · # km	Espace : orbite de la planète à anneaux · # km
+Winterwald im Schnee · # km	Forêt d'hiver enneigée · # km
+Wolkenstraße mit Regenbogen · # km	Route des nuages et arc-en-ciel · # km
+Zickzack: # km, #	Zigzag : # km, #
+Zuckerland-Runde · # km	Boucle du pays des bonbons · # km
+Start	Accueil
+Startpunkt	Point de départ
+Beginn	Début

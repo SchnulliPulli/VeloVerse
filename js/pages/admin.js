@@ -45,7 +45,7 @@ export async function render(el) {
       <label class="f">Titel<input class="inp" id="evT" maxlength="80" placeholder="z. B. Sonntagsrunde"></label>
       <div class="grid2 tight"><label class="f">Art<select class="inp" id="evK"><option value="group">👥 Gruppenfahrt</option><option value="race">🏁 Rennen</option><option value="workout">🏋️ Gemeinsames Workout</option><option value="fun">🎉 Spaßfahrt</option></select></label>
         <label class="f">Strecke<select class="inp" id="evR"></select></label></div>
-      <div class="grid2 tight"><label class="f">Start<input class="inp" id="evS" type="datetime-local"></label><label class="f">Dauer (min)<input class="inp" id="evD" type="number" min="10" max="480" value="60"></label></div>
+      <div class="grid2 tight"><label class="f">Beginn<input class="inp" id="evS" type="datetime-local"></label><label class="f">Dauer (min)<input class="inp" id="evD" type="number" min="10" max="480" value="60"></label></div>
       <label class="f">Workout (optional)<select class="inp" id="evW"><option value="">– freie Fahrt –</option></select></label>
       <label class="f">Beschreibung<textarea class="inp" id="evB" rows="2" maxlength="600"></textarea></label>
       <div class="row"><button class="btn pri" id="evGo">Event anlegen</button></div></div>

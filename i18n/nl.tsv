@@ -155,7 +155,7 @@ Beschreibung	Beschrijving
 Aufwärmen	Warming-up
 Konstant	Constant
 Intervalle	Intervallen
-Rampe	Oplopend
+Rampe	Helling
 Frei fahren	Vrij
 Ausrollen	Cooling-down
 Dauer (m:ss)	Duur (m:ss)
@@ -1218,7 +1218,7 @@ Vier Wochen mit wenig Zeit, aber hoher Intensität. Jede Einheit dauert höchste
 Vorschau wird gerendert …	Voorbeeld wordt gemaakt …
 Was möchtest du verbinden? Die Auswahl zeigt dann nur passende Geräte. Standards werden automatisch gelesen; bei unbekannten Geräten ordnest du die Rohdaten selbst zu.	Wat wil je verbinden? De keuze toont dan alleen passende apparaten. Standaarden worden automatisch gelezen; bij onbekende apparaten wijs je de ruwe gegevens zelf toe.
 Wechsel zwischen # und # % FTP. Lehrt, Laktat abzubauen.	Afwisselend tussen # en # % FTP. Leert je lactaat af te breken.
-Weitere	Meer
+Weitere	Overige
 Weitere Räder und Tiere gibt es mit höherem Level, ein paar nur für Entdecker.	Meer fietsen en dieren ontgrendel je op hogere niveaus, een paar alleen als ontdekkingsreiziger.
 Weiterleiten muss der Proxy dabei mindestens den Pfad	De proxy moet minstens het pad doorsturen
 Welliger Rundkurs durch Wiesen, Wälder und Dörfer.	Golvend rondje door weiden, bossen en dorpen.
@@ -1350,3 +1350,120 @@ zur eingestellten Uhrzeit, wenn du heute noch nicht gefahren bist	op het ingeste
 🚀 Sprint	🚀 Sprint
 🚴 Fahrt einrichten	🚴 Rit voorbereiden
 🤝 Buddy	🤝 Maatje
+# Fahrten · # km · # min	# ritten · # km · # min
+# Wochen · # Einheiten · # min · TSS # gesamt · Ziele aus deiner FTP (# W)	# weken · # sessies · # min · TSS # totaal · doelen op basis van je FTP (# W)
+# min · TSS #	# min · TSS #
+#/# Intervalle · # min	#/# intervallen · # min
+Abfahrt: # km, -# %, #	Afdaling: # km, -# %, #
+Achterbahn: # km, # %, #	Achtbaan: # km, # %, #
+Aerohelm	Aerohelm
+Alle	Alle
+Alpen: Drei-Pässe-Runde · # km	Alpen: drie-passenronde · # km
+Alpen: Gletscherstraße · # km	Alpen: gletsjerweg · # km
+Als	Als
+Anstieg: # km, # %, #	Klim: # km, # %, #
+Belegt: # MB · Dauerhafter Speicher: nicht bestätigt	Gebruikt: # MB · Blijvende opslag: niet bevestigd
+Canyon-Wüste · # km	Canyonwoestijn · # km
+Client-ID	Client ID
+Deine letzte Fahrt ist # Tage her. Die Beine sind ausgeruht.	Je laatste rit is # dagen geleden. Je benen zijn uitgerust.
+FTP-Test # Minuten · # h # min	FTP-test # minuten · # u # min
+Falsche Ebene: # km, #	Vals plat: # km, #
+Farbe ##b#fd#	Kleur ##b#fd#
+Farbe ##fa#f#	Kleur ##fa#f#
+Farbe ##fd#b	Kleur ##fd#b
+Farbe #b#cf#	Kleur #b#cf#
+Farbe #e#eef#	Kleur #e#eef#
+Farbe #ef#	Kleur #ef#
+Farbe #ff#a#d	Kleur #ff#a#d
+Farbe #ff#fa#	Kleur #ff#fa#
+Feldweg mit Kuhweide · # km	Landweg met koeienweide · # km
+Fjordrunde · # km	Fjordronde · # km
+Fotomodus	Fotomodus
+Freie Fahrt mit Aufwärmen · # h # min	Vrije rit met opwarming · # u # min
+Gerade: # km	Rechte weg: # km
+Gewicht (kg)	Gewicht (kg)
+Gewicht −# kg	Gewicht −# kg
+Gipfelgrat · # km	Bergkam · # km
+Glas	Glas
+Gravel: Schotter im Hochwald · # km	Gravel: Highlands-bos · # km
+Gravelbike	Gravelbike
+Große Acht: # km, #	Grote acht: # km, #
+Grundlage lang · # h # min	Lange duurtraining · # u # min
+Herbstwald-Runde · # km	Herfstbosronde · # km
+Herzschleife: # km, #	Hartvormige lus: # km, #
+Himalaya: Pass der Gebetsfahnen · # km	Himalaya: pas van de gebedsvlaggen · # km
+Hm	Hgt.
+Hochschalten: #:#, #:#, #:#, #:# · Runterschalten: #:#, #:#, #:#, #:#	Opschakelen: #:#, #:#, #:#, #:# · Terugschakelen: #:#, #:#, #:#, #:#
+Hügelland-Runde · # km	Heuvelronde · # km
+Import: .zwo-Workouts, .erg und .mrc, IndooRado-Dateien (.json) und ZIP-Archive mit solchen Dateien. Ziele werden aus deiner FTP von # W berechnet. Dateien auch per Drag & Drop auf diese Seite ziehen. Alles bleibt im Browser gespeichert.	Import: .zwo-workouts, .erg en .mrc, IndooRado-bestanden (.json) en ZIP-archieven met zulke bestanden. Doelen worden berekend op basis van je FTP van # W. Je kunt bestanden ook naar deze pagina slepen. Alles blijft in je browser.
+Jeder Plan ist eine Folge von Workouts, Woche für Woche. Alle Ziele hängen an deiner FTP (# W) und passen sich automatisch an, wenn sie sich ändert. Eine Einheit zählt als erledigt, wenn du mindestens # % davon fährst.	Elk plan is een reeks workouts, week na week. Alle doelen hangen af van je FTP (# W) en passen zich automatisch aan als die verandert. Een sessie telt als gedaan als je er minstens # % van rijdt.
+Kind	Kind
+Kirschblüten-Runde · # km	Kersenbloesemronde · # km
+Klein (# %)	Klein (# %)
+Korkenzieher: # km, # %, #	Kurkentrekker: # km, # %, #
+Kosmisch	Kosmisch
+Kreisverkehr (#°): # km, #	Rotonde (#°): # km, #
+Kuppe: # km, #	Kuitje: # km, #
+Kurzer Anstieg: # km, #	Korte klim: # km, #
+Königsetappe · # km	Koninginnenrit · # km
+Küstenstraße · # km	Kustweg · # km
+Lange Gerade: # km	Lange rechte weg: # km
+Langer Pass: # km, # %, #	Lange pas: # km, # %, #
+Lava-Insel · # km	Lava-eiland · # km
+Leichte Linkskurve: # km, #	Lichte bocht links: # km, #
+Leichte Rechtskurve: # km, #	Lichte bocht rechts: # km, #
+Leistungszonen: Z# #–# W · Z# #–# W · Z# #–# W · Z# #–# W	Vermogenszones: Z# #–# W · Z# #–# W · Z# #–# W · Z# #–# W
+Linkskurve #°: # km, #	Bocht links #°: # km, #
+Lockere Grundlage · # min	Rustige duurtraining · # min
+MTB: Wurzel-Singletrail · # km	MTB: singletrack met wortels · # km
+Marianengraben: Tiefsee-Runde · # km	Marianentrog: diepzeeronde · # km
+Mond: Krater-Runde · # km	Maan: kraterronde · # km
+Mountainbike	Mountainbike
+Nacht	Nacht
+Provence-Achter (flach) · # km	Acht door de Provence (vlak) · # km
+Pyramide · # min	Piramide · # min
+Rampe: # km, #	Helling: # km, #
+Rampentest	Rampentest
+Rampentest · # min	Rampentest · # min
+Rechtskurve #°: # km, #	Bocht rechts #°: # km, #
+Regen	Regen
+Riesenpilz-Wald · # km	Reuzenpaddenstoelenbos · # km
+Rio: Strände und Felsen · # km	Rio: stranden en rotsen · # km
+S-Kurve: # km, #	S-bocht: # km, #
+Savanne	Savanne
+Savanne: Safari-Runde · # km	Savanne: safariroute · # km
+Schikane: # km, #	Chicane: # km, #
+Schlangenlinie: # km, #	Slingerlijn: # km, #
+Schwelle #×# · # h # min	Drempel #×# · # u # min
+Seenrunde · # km	Merenronde · # km
+Senke: # km, #	Dip: # km, #
+Serpentinen bergab: # km, -# %, #	Haarspeldbochten omlaag: # km, -# %, #
+Serpentinen bergauf: # km, # %, #	Haarspeldbochten omhoog: # km, # %, #
+Spirale bergauf: # km, # %, #	Spiraal omhoog: # km, # %, #
+Spitzkehre links: # km, #	Haarspeld links: # km, #
+Spitzkehre rechts: # km, #	Haarspeld rechts: # km, #
+Sprint-Gerade: # km	Sprintstrook: # km
+Steilwand: # km, #	Muur: # km, #
+Sturzflug: # km, -#	Duikvlucht: # km, -#
+Thema	Thema
+Toskana-Hügel · # km	Toscaanse heuvels · # km
+Trainer testen	Trainer testen
+Treppe: # km, #	Treden: # km, #
+Tropen	Tropen
+Urzeit-Tal: Dinosaurier-Runde · # km	Oertijdvallei: dinosaurusronde · # km
+Verbinden	Verbinden
+Vogel	Vogelvlucht
+Watt	Watt
+Weiter Bogen links: # km, #	Wijde boog links: # km, #
+Weiter Bogen rechts: # km, #	Wijde boog rechts: # km, #
+Wellen: # km, #	Golven: # km, #
+Weltall: Ringplanet-Orbit · # km	Ruimte: baan om de ringplaneet · # km
+Winterwald im Schnee · # km	Besneeuwd winterbos · # km
+Wolken	Wolken
+Wolkenstraße mit Regenbogen · # km	Wolkenweg met regenboog · # km
+Zickzack: # km, #	Zigzag: # km, #
+Zuckerland-Runde · # km	Snoepland-ronde · # km
+geheim	geheim
+Start	Start
+Startpunkt	Startpunt
+Beginn	Begin
