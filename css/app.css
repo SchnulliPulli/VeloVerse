@@ -1475,3 +1475,6 @@ body.watchtv .tvprof { height: 15vh; }
 .rsdlg .rsbody .grid2 { grid-template-columns: 1fr; }
 .tbtn b.gear { font-size: 17px; line-height: 1; }
 .btn.calloff { opacity: .5; filter: grayscale(1); }
+/* „Mehr“-Menü in der Fahrt: auf niedrigen Bildschirmen (Handy quer) nie aus der Seite ragen, sondern scrollen */
+.tbpop { max-height: calc(100dvh - 66px - 2 * max(12px, env(safe-area-inset-bottom)) - 12px); overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+@media (max-width: 820px) { .tbpop { max-height: calc(100dvh - 70px - env(safe-area-inset-bottom) - 12px); } }
