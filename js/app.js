@@ -190,7 +190,8 @@ async function route() {
     el.innerHTML = '';
     await mod.render(el, params.map(decodeURIComponent), query);
     if (jump) requestAnimationFrame(() => el.children[jump]?.scrollIntoView({ block: 'start' }));
-    if ((grp?.k === 'profile' && k !== 'help' && k !== 'legal') || k === 'devices') import('./setsearch.js').then(m => m.attach(el, k, PAGES, mod)).catch(e => console.warn(e)); // Suche in den Einstellungen
+    if ((grp?.k === 'profile' && k !== 'help' && k !== 'legal')) import('./setsearch.js').then(m => m.attach(el, k, PAGES, mod)).catch(e => console.warn(e)); // Suche in den Einstellungen (nicht unter Geräte; Treffer dort findet sie trotzdem)
+    else if (k === 'devices' && sessionStorage.getItem('setFind')) import('./setsearch.js').then(m => { let f = null; try { f = JSON.parse(sessionStorage.getItem('setFind')); sessionStorage.removeItem('setFind'); } catch (e) { } if (f) setTimeout(() => m.highlight(el, f.t, f.nth), 250); }); // Suchtreffer auf der Geräteseite hervorheben
     msgUpd();
     sessionStorage.removeItem('vvReloaded');
     if (k === 'lobby') announce(el);
