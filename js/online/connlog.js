@@ -6,7 +6,13 @@ const load = () => { if (buf) return buf; try { buf = JSON.parse(localStorage.ge
 const save = () => { clearTimeout(saveT); saveT = setTimeout(() => { try { localStorage.setItem(KEY, JSON.stringify(buf.slice(-MAX))); } catch (e) { } }, 500); };
 const listeners = new Set();
 // Eintrag: lvl = ok | info | warn | bad
+// Im Hintergrund trennt das Handy die Verbindung meist nach wenigen Sekunden (Code 1006), und die Wiederholversuche der
+// Bibliothek scheitern, bis die App wieder sichtbar ist. Das ist erwartet: als Info vermerken, gleiche Meldungen nur einmal.
+let hiddenAt = 0, lastKey = '', lastT = 0;
 export function log(lvl, src, msg) {
+  const bg = typeof document !== 'undefined' && document.hidden && hiddenAt && Date.now() - hiddenAt > 1500;
+  if (bg && (lvl === 'bad' || lvl === 'warn') && src !== 'Internet' && src !== 'Test') { lvl = 'info'; msg = String(msg) + ' · App im Hintergrund (normal)'; }
+  const k = lvl + src + msg; if (k === lastKey && Date.now() - lastT < 3000) return; lastKey = k; lastT = Date.now();
   load(); buf.push({ t: Date.now(), lvl, src, msg: String(msg).replace(/\?[^ ]*/g, '').slice(0, 160) }); if (buf.length > MAX) buf.splice(0, buf.length - MAX);
   save(); listeners.forEach(f => { try { f(); } catch (e) { } });
 }
@@ -41,7 +47,7 @@ export function rtHeartbeat(status) {
 if (typeof window !== 'undefined') {
   addEventListener('offline', () => log('bad', 'Internet', 'Gerät ist offline'));
   addEventListener('online', () => log('ok', 'Internet', 'Gerät wieder online'));
-  document.addEventListener('visibilitychange', () => log('info', 'Tab', document.hidden ? 'im Hintergrund' : 'wieder sichtbar'));
+  document.addEventListener('visibilitychange', () => { hiddenAt = document.hidden ? Date.now() : 0; log('info', 'Tab', document.hidden ? 'im Hintergrund' : 'wieder sichtbar'); });
 }
 
 /* ---------- Langzeittest: alle 10 s eine kleine Datenbank-Anfrage, Antwortzeit messen ---------- */
