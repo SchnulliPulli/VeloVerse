@@ -1,0 +1,14 @@
+{
+  "_info": "Welche Fremd-Bibliotheken in welcher Version eingebaut sind. Wird wöchentlich von .github/workflows/depcheck.yml gegen bekannte Sicherheitslücken geprüft. Beim Aktualisieren einer Datei in vendor/ (oder der Edge Function) hier die Version mitändern.",
+  "packages": [
+    { "name": "three", "version": "0.170.0", "where": "vendor/three.module.min.js (3D-Welt)" },
+    { "name": "@supabase/supabase-js", "version": "2.79.0", "where": "vendor/supabase.esm.js (Login, Datenbank, Live-Kanäle)" },
+    { "name": "@supabase/auth-js", "version": "2.79.0", "where": "in vendor/supabase.esm.js enthalten" },
+    { "name": "@supabase/realtime-js", "version": "2.79.0", "where": "in vendor/supabase.esm.js enthalten" },
+    { "name": "@supabase/postgrest-js", "version": "2.79.0", "where": "in vendor/supabase.esm.js enthalten" },
+    { "name": "@supabase/storage-js", "version": "2.79.0", "where": "in vendor/supabase.esm.js enthalten" },
+    { "name": "@supabase/functions-js", "version": "2.79.0", "where": "in vendor/supabase.esm.js enthalten" },
+    { "name": "web-push", "version": "3.6.7", "where": "Edge Function push (Backend, npm:web-push@3.6.7)" },
+    { "name": "@supabase/supabase-js", "version": "2.49.4", "where": "Edge Function push (Backend, npm:@supabase/supabase-js@2.49.4)" }
+  ]
+}

@@ -138,6 +138,8 @@ async function openFriend(sb, me, f, redraw) {
     if (e.target.closest('[data-rm]')) { if (await dialog({ title: `Freundschaft mit ${f.display_name} beenden?`, html: '<p class="muted">Ihr seht dann keine Profile mehr und könnt nicht mehr chatten. Bisherige Nachrichten bleiben bei euch beiden gespeichert, bis ihr sie löscht oder sie nach 12 Monaten entfernt werden.</p>', buttons: [{ label: 'Abbrechen', value: 0 }, { label: 'Beenden', value: 1, cls: 'danger' }] })) { await sb.rpc('friend_remove', { p_other: f.id }); close(); } return; }
     if (e.target.closest('[data-block]')) { if (await dialog({ title: `${f.display_name} blockieren?`, html: '<p class="muted">Die Freundschaft endet, und ihr könnt euch keine Anfragen oder Nachrichten mehr schicken. Unter „Blockiert“ kannst du das rückgängig machen.</p>', buttons: [{ label: 'Abbrechen', value: 0 }, { label: 'Blockieren', value: 1, cls: 'danger' }] })) { await sb.rpc('friend_block', { p_other: f.id }); toast('Blockiert'); close(); } return; }
   });
+  // Eigenes zweites Konto in dieser App: Anrufen geht nicht (würde nur hier selbst klingeln)
+  import('../call.js').then(C => { const cb = w.querySelector('[data-call]'); if (C.sameApp(f.id) && cb) { cb.disabled = true; cb.title = 'Dieses Konto ist auch in dieser App angemeldet – Anrufen nicht möglich'; } });
   // Darf ich diesen Freund anrufen bzw. anschreiben? (Einstellung des Freundes, vom Server geprüft)
   sb.rpc('friend_privacy', { p_other: f.id }).then(({ data }) => {
     if (!data || !w.isConnected) return;

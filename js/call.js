@@ -83,7 +83,10 @@ export function pickMode(title, peer) {
   });
 }
 // Anrufen: Raum anlegen, Einladung als private Nachricht, Klingeln an alle Geräte des Freundes
+// Ist dieses Konto auch in dieser App (auf diesem Gerät) angemeldet? Dann klingelt es nur bei sich selbst – kein Anruf
+export const sameApp = id => !!id && id !== O.online.user?.id && O.accounts().some(a => a.uid === id);
 export async function startCall(friend) {
+  if (sameApp(friend.id)) return toast('📵 Dieses Konto ist auch in dieser App angemeldet – Anrufe an eigene Konten auf demselben Gerät sind nicht möglich. Nachrichten gehen.', 5000);
   if (!(await allowed())) return;
   const mode = await pickMode(`${friend.display_name || friend.name} anrufen`, friend); if (!mode) return;
   const sb = await O.client();
@@ -253,7 +256,7 @@ async function addToCall() {
   if (call.peers.size >= 3) return toast('Höchstens 4 Personen pro Anruf');
   const sb = await O.client(), { data, error } = await sb.rpc('friend_list');
   if (error) return toast(error.message, 4000);
-  const inCall = new Set([...call.peers.keys(), call.peer?.id]), list = (data || []).filter(f => f.status === 'accepted' && !inCall.has(f.id));
+  const inCall = new Set([...call.peers.keys(), call.peer?.id]), list = (data || []).filter(f => f.status === 'accepted' && !inCall.has(f.id) && !sameApp(f.id)); // eigene Konten in dieser App nicht
   if (!list.length) return toast('Keine weiteren Freunde zum Dazuholen');
   const PR = await import('./online/presence.js');
   const v = await dialog({ title: '➕ Freund dazuholen', html: `<p class="small muted">Bis zu 4 Personen. Bei mehreren Teilnehmern geht jede Verbindung direkt von Gerät zu Gerät, das braucht etwas mehr Upload.</p><div class="addlist">${list.map(f => `<label class="switch"><input type="radio" name="addf" value="${esc(f.id)}"><span></span> <div class="swt">${esc(f.display_name)}${PR.sidsOf(f.id).length ? ' <small class="muted">● online</small>' : ''}</div></label>`).join('')}</div>`, buttons: [{ label: 'Abbrechen', value: null }, { label: 'Anrufen', value: 'ok', cls: 'pri' }] });

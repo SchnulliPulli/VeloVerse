@@ -1,0 +1,40 @@
+# Wöchentliche Prüfung der eingebauten Fremd-Bibliotheken (vendor/versions.json) auf kritische/hohe Sicherheitslücken.
+# Findet sie etwas, öffnet sie ein Issue „Sicherheitsupdate nötig“ (GitHub schickt dazu eine E-Mail) bzw. ergänzt ein offenes.
+# Ohne Fund passiert nichts. Hält sich selbst aktiv (60-Tage-Regel für zeitgesteuerte Workflows).
+name: Abhängigkeiten prüfen
+on:
+  schedule:
+    - cron: '41 6 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+  actions: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Gegen osv.dev prüfen
+        id: chk
+        run: |
+          set +e; node tools/depcheck.mjs; code=$?; set -e
+          echo "code=$code" >> "$GITHUB_OUTPUT"; cat report.md >> "$GITHUB_STEP_SUMMARY"
+          [ "$code" = 0 ] || [ "$code" = 2 ] || exit "$code"
+      - name: Issue melden
+        if: steps.chk.outputs.code == '2'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          T="⚠️ Sicherheitsupdate nötig (Abhängigkeiten)"
+          N=$(gh issue list --state open --search "in:title \"Sicherheitsupdate nötig\"" --json number -q '.[0].number')
+          if [ -n "$N" ]; then gh issue comment "$N" --body-file report.md; else gh issue create --title "$T" --body-file report.md; fi
+      - name: Workflow aktiv halten (60-Tage-Regel)
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/$GITHUB_REPOSITORY/actions/workflows/depcheck.yml/enable"
