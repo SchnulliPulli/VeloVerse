@@ -2,7 +2,7 @@
 // Schnellstart: Dateien kommen sofort aus dem Cache und werden im Hintergrund aktualisiert (stale-while-revalidate).
 // Eine neue App-Version bekommt einen neuen Cache-Namen; beim Wechsel lädt die Seite einmal neu (siehe app.js),
 // damit nie Dateien aus zwei Versionen gemischt werden.
-const CACHE = 'indoorado-v149';
+const CACHE = 'indoorado-v150';
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE && k !== 'indoorado-acct').map(k => caches.delete(k)))).then(() => self.clients.claim())));
 self.addEventListener('fetch', e => {
@@ -52,11 +52,11 @@ self.addEventListener('push', e => {
     // Für ein anderes angemeldetes Konto bei offener App: Hinweis in der App (mit Aktionen, die ins richtige Konto wechseln) statt Gerätemeldung
     const fgO = other && k !== 'test' && await appActive(list);
     if (fgO) { fgO.postMessage({ type: 'pushOther', d: { kind: safe(k), title: safe(d.title), body: safe(d.body), who: safe(who), acct: safe(d.acct), from: safe(d.from), room: safe(d.room), ring: !!d.ring, url, acts } }); if (k !== 'callstop') return; }
-    // Anruf wurde auf einem anderen Gerät dieses Kontos angenommen: Klingel-Meldung hier still durch einen kurzen Hinweis ersetzen
+    // Anruf ist vorbei (auf einem anderen Gerät angenommen oder abgelehnt, Anrufer hat aufgelegt): Klingel-Meldung still durch einen kurzen Hinweis ersetzen, der nach 5 s verschwindet
     if (k === 'callstop') {
-      let had = false; for (const n of await self.registration.getNotifications()) if (String(n.tag).startsWith('call-' + safe(d.room))) { n.close(); had = true; }
+      let had = false; for (const n of await self.registration.getNotifications()) if (String(n.tag).startsWith('call-' + safe(d.room)) && n.data?.call) { n.close(); had = true; } // nur das Klingeln, nicht „Verpasster Anruf“
       if (!had || await appActive(list)) return;
-      await self.registration.showNotification('📱 Anruf angenommen', { body: safe(d.body) || 'auf einem anderen Gerät', tag: 'callstop-' + safe(d.room), silent: true, renotify: false, icon: 'icons/icon-192.png', badge: 'icons/badge-96.png' });
+      await self.registration.showNotification(safe(d.title) || '📵 Anruf beendet', { body: safe(d.body), tag: 'callstop-' + safe(d.room), silent: true, renotify: false, icon: 'icons/icon-192.png', badge: 'icons/badge-96.png' });
       await new Promise(r => setTimeout(r, 5000));
       for (const n of await self.registration.getNotifications({ tag: 'callstop-' + safe(d.room) })) n.close();
       return;

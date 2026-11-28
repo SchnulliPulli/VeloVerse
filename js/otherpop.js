@@ -7,7 +7,7 @@ export function restack() { let y = innerWidth <= 520 ? 76 : 90; for (const e of
 const ICON = { msg: '💬', call: '📹', missed: '📵', friendreq: '👋', invite: '🚴' };
 export function showOther(d, open) {
   const key = (d.kind === 'call' || d.kind === 'missed' ? 'call-' + d.room : d.kind + '-' + d.from) + '@' + d.acct;
-  if (d.kind === 'callstop') { document.querySelectorAll(`.otherpop[data-k^="${CSS.escape('call-' + d.room)}"]`).forEach(x => x.remove()); return; }
+  if (d.kind === 'callstop') { document.querySelectorAll(`.otherpop.callring[data-k^="${CSS.escape('call-' + d.room)}"]`).forEach(x => x.remove()); return; }
   if (d.ring && document.querySelector(`.otherpop[data-k="${CSS.escape(key)}"]`)) return; // Anruf klingelt schon
   document.querySelector(`.otherpop[data-k="${CSS.escape(key)}"]`)?.remove();
   const call = d.kind === 'call', A = d.acts || {};
