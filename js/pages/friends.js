@@ -22,11 +22,7 @@ export async function render(el, params = [], query = '') {
       <p class="small muted">Am einfachsten: Code weitergeben (Messenger, persönlich). Oder in der Lobby bei „Wer ist online“ auf „➕ Freund“ tippen.</p>
       <h3 class="sub">Nach Namen suchen</h3><input class="inp" id="frQ" type="search" placeholder="Name (mind. 3 Buchstaben)" maxlength="40" autocomplete="off"><div id="frRes" class="frlist"></div>
       <p class="small muted">Die Suche findet nur Spieler, die „In der Suche auffindbar“ eingeschaltet haben.</p>
-      <h3 class="sub">Privatsphäre</h3>
-      <label class="switch"><input type="checkbox" id="frShare" ${O.online.profile?.share_rides ? 'checked' : ''}><span></span> <div class="swt">Freunde dürfen meine einzelnen Fahrten sehen<small class="muted">Datum, Strecke, Distanz, Dauer, Höhenmeter, Ø Watt. Ohne diese Erlaubnis sehen Freunde nur Level und Summen. Puls, Gewicht und Alter sieht nie jemand.</small></div></label>
-      <label class="switch"><input type="checkbox" id="frFind" ${O.online.profile?.discoverable !== false ? 'checked' : ''}><span></span> <div class="swt">In der Suche auffindbar<small class="muted">Andere angemeldete Spieler finden dich über deinen Namen und sehen dabei Name, Avatar und Level. Standardmäßig an. Ausgeschaltet können dich Freunde trotzdem per Freundescode oder über die Online-Liste anfragen.</small></div></label>
-      <label class="switch"><input type="checkbox" id="frCalls" ${O.online.profile?.allow_calls !== false ? 'checked' : ''}><span></span> <div class="swt">Anrufe (Video und Sprache)<small class="muted">Ausgeschaltet kann dich niemand anrufen, und du rufst auch selbst niemanden an. Nachrichten gehen weiter. Standardmäßig an.</small></div></label>
-      <label class="switch"><input type="checkbox" id="frMsgs" ${O.online.profile?.allow_msgs !== false ? 'checked' : ''}><span></span> <div class="swt">Freunde dürfen mir Nachrichten schreiben<small class="muted">Ausgeschaltet kommen keine neuen Chat-Nachrichten mehr an; der bisherige Verlauf bleibt. Standardmäßig an.</small></div></label>
+      <h3 class="sub">Privatsphäre</h3><p class="small muted">Wer dich finden, anrufen und anschreiben darf und ob Freunde deine Fahrten sehen: <a href="#/notify">Einstellungen › Benachrichtigungen & Privatsphäre</a>.</p>
     </div>
   </section>`;
   let list = [];
@@ -142,7 +138,7 @@ async function openFriend(sb, me, f, redraw) {
   // Anrufen nicht möglich? Knopf abgeschwächt, beim Tippen steht der Grund da (ein ausgegrauter Knopf allein erklärt nichts)
   const noCall = why => { const cb = w.querySelector('[data-call]'); if (!cb || cb.dataset.why) return; cb.dataset.why = why; cb.classList.add('calloff'); cb.title = why; };
   import('../call.js').then(C => { if (C.sameApp(f.id)) noCall(`${f.display_name} ist auch in dieser App als Konto angemeldet – Anrufe zwischen Konten in derselben App gehen nicht. Entfernen: Konto-Menü oben rechts, beim Konto auf ✕ tippen.`); });
-  if (O.online.profile?.allow_calls === false) noCall('Anrufe sind in deinen Einstellungen ausgeschaltet – einschalten unter Freunde › Privatsphäre');
+  if (O.online.profile?.allow_calls === false) noCall('Anrufe sind in deinen Einstellungen ausgeschaltet – einschalten unter Einstellungen › Benachrichtigungen');
   // Darf ich diesen Freund anrufen bzw. anschreiben? (Einstellung des Freundes, vom Server geprüft)
   sb.rpc('friend_privacy', { p_other: f.id }).then(({ data }) => {
     if (!data || !w.isConnected) return;

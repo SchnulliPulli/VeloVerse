@@ -2,7 +2,7 @@
 // Einstellungsseiten unsichtbar aufgebaut und alle Schalter, Felder und Überschriften eingesammelt (in der
 // gewählten Sprache). Ein Treffer springt zur Seite, scrollt zur Option und hebt sie kurz hervor.
 import { tr } from './i18n.js';
-const PAGES = [['profile', 'Profil'], ['ridesettings', 'Fahrt & Ton'], ['appsettings', 'App & Daten'], ['devices', 'Geräte']];
+const PAGES = [['profile', 'Profil'], ['ridesettings', 'Fahrt & Ton'], ['notify', 'Benachrichtigungen'], ['appsettings', 'App & Daten'], ['devices', 'Geräte']];
 const norm = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ß/g, 'ss').replace(/\s+/g, ' ').trim();
 const clean = s => String(s || '').replace(/\s+/g, ' ').trim().replace(/\s*[:·]\s*[-+]?[\d.,]+\s*(%|W|bpm|min|km|s|°C)?$/, ''); // aktuelle Zahlenwerte (Regler) nicht mitsuchen
 let IDX = null, building = null;

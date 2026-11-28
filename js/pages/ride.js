@@ -385,6 +385,18 @@ function bindUi() {
   if (!profile.tourDone && !profile.tourAuto) { profile.tourAuto = 1; setTimeout(() => S?.alive && !S.quick && import('../tour.js').then(m => m.startTour(el)), 2500); }
   $('#tKeys', el).onclick = () => import('../shortcuts.js').then(m => m.showShortcuts());
   // Mehr-Menü: klappt über der Knopfleiste auf, schließt nach Auswahl oder Tippen daneben
+  // „Mehr“-Menü in zwei Gruppen: oben das Häufige, darunter (aufklappbar) alles Weitere
+  { const P = $('#tbPop', el), lbl = t => { const h = document.createElement('div'); h.className = 'tbhd'; h.textContent = t; return h; };
+    const first = ['tMap', 'tEnv', 'tSnd', 'tShot', 'tMode', 'tNpc', 'tPace', 'tBuddy', 'tMenu'], rest = ['tPhoto', 'tLayout', 'tFull', 'tCast', 'tWatch', 'tVoice', 'tEmo', 'tMusic', 'tTour', 'tKeys', 'tDemo'];
+    const tg = document.createElement('button'); tg.className = 'tbexp'; tg.type = 'button'; tg.setAttribute('aria-expanded', 'false'); tg.innerHTML = '<span>Weitere</span> <b>▾</b>';
+    P.prepend(lbl('Häufig')); for (const id of first) { const b = $('#' + id, el); if (b) P.append(b); }
+    P.append(tg); for (const id of rest) { const b = $('#' + id, el); if (b) { b.classList.add('tbext'); P.append(b); } }
+    for (const b of P.querySelectorAll('.tbtn:not(.tbext)')) if (!first.includes(b.id)) { b.classList.add('tbext'); P.append(b); } // neue Knöpfe landen sicher unter „Weitere“
+    let open = false; try { open = localStorage.getItem('vvTbMore') === '1'; } catch (e) { }
+    // über das Dokument verdrahtet: die Anzeige wird beim Anordnen umgebaut, direkte Klick-Handler gingen dabei verloren
+    const setOpen = o => { open = o; for (const pp of document.querySelectorAll('.tbpop')) { pp.classList.toggle('xopen', o); const t = pp.querySelector('.tbexp'); if (t) { t.setAttribute('aria-expanded', String(o)); t.querySelector('b').textContent = o ? '▴' : '▾'; } } try { localStorage.setItem('vvTbMore', o ? '1' : '0'); } catch (e) { } };
+    if (!window.__tbMoreWired) { window.__tbMoreWired = true; document.addEventListener('click', e => { if (e.target.closest('.tbexp')) { e.stopPropagation(); window.__tbMoreSet?.(); } }, true); }
+    window.__tbMoreSet = () => setOpen(!document.querySelector('.tbpop')?.classList.contains('xopen')); setOpen(open); }
   const pop = $('#tbPop', el), more = $('#tMore', el), popSet = o => { pop.hidden = !o; more.setAttribute('aria-expanded', String(o)); more.classList.toggle('on', o); };
   more.onclick = e => { e.stopPropagation(); popSet(pop.hidden); };
   pop.addEventListener('click', e => { if (e.target.closest('.tbtn')) setTimeout(() => popSet(false), 120); });

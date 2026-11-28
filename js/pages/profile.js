@@ -200,7 +200,7 @@ export function applyAppTheme() {
   de.classList.toggle('hc', !!profile.highContrast); de.classList.toggle('calm', profile.reduceMotion === true || (profile.reduceMotion !== false && matchMedia('(prefers-reduced-motion: reduce)').matches));
   try { localStorage.setItem('vvTheme', JSON.stringify({ theme: eff, acc, fs: profile.fontScale || 1, hc: !!profile.highContrast })); } catch (e) { }
 }
-// sec: 'profile' (Fahrer, Trainer, Avatar), 'app' (Darstellung, Grafik, Daten), 'connect' (Strava, Cloud)
+// sec: 'profile' (Fahrer, Trainer, Avatar), 'notify' (Benachrichtigungen, Privatsphäre), 'app' (Darstellung, Grafik, Daten), 'connect' (Strava, Cloud)
 export async function render(el, params = []) {
   const sec = params[0] || 'profile';
   const u = await usage(), pers = await persist(), lv = levelOf(progress.xp).lv;
@@ -226,6 +226,19 @@ export async function render(el, params = []) {
   </section>
   <section class="card avteaser"><div class="row between"><div><h2>Avatar</h2><p class="small muted">Trikotmuster, Helm, Brille, Bart, Socken, Schuhe und Extras im 3D-Designer.</p></div><a class="btn pri" href="#/avatar">Avatar gestalten</a></div>
   </section>`,
+  notify: `
+  <section class="pagehead"><h1>Benachrichtigungen & Privatsphäre</h1></section>
+  <section class="grid2">
+    <div class="card form"><h2>Benachrichtigungen</h2>
+      <label class="switch"><input type="checkbox" id="remOn" ${profile.reminders === true ? 'checked' : ''}><span></span> <div class="swt"><i style="font-style:normal">🔔 Benachrichtigungen</i><small class="muted">Erinnerungen und Hinweise des Geräts, solange IndooRado geöffnet ist (auch im Hintergrund). Was genau, wählst du darunter.</small></div></label>
+      <div class="notifkinds" id="notifKinds" ${profile.reminders === true ? '' : 'hidden'}>
+        ${C_NOTIF.map(([k, l, d]) => `<label class="chk"><input type="checkbox" data-notif="${k}" ${profile.notif?.[k] !== false ? 'checked' : ''}><span><b>${l}</b><small class="muted">${d}</small></span></label>${k === 'plan' ? `<label class="f notifat">Uhrzeit für das Training des Tages<input class="inp" id="remAt" type="time" value="${esc(profile.remindAt || '18:00')}"></label>` : ''}`).join('')}
+        <label class="switch pushsw"><input type="checkbox" id="pushOn" ${localStorage.getItem('vvPush') !== '0' ? 'checked' : ''}><span></span> <div class="swt"><i style="font-style:normal">📲 Auch bei geschlossener App (Push) <b class="muted small" style="font-weight:400">(dieses Gerät)</b></i><small class="muted">Nachrichten und Anrufe kommen auch an, wenn IndooRado nicht läuft; tippen öffnet Chat bzw. Anruf. Braucht ein Konto. Die kurze Meldung (ohne Nachrichteninhalt) läuft verschlüsselt über den Push-Dienst deines Geräts (Google, Apple, Mozilla). iPhone/iPad: nur als App vom Home-Bildschirm.</small></div></label>
+        <div class="row"><button class="btn sm" id="notifTest">🔔 Test-Benachrichtigung</button><button class="btn sm" id="pushTest">📲 Test-Push</button></div>
+      </div>
+    </div>
+    <div class="card form" id="privCard"><h2>Privatsphäre</h2><p class="small muted">Wird geladen …</p></div>
+  </section>`,
   app: `
   <section class="pagehead"><h1>App</h1></section>
   <section class="grid2">
@@ -234,12 +247,7 @@ export async function render(el, params = []) {
       <label class="f">Thema<select class="inp" id="appTheme">${[['dark', 'Dunkel'], ['light', 'Hell'], ['system', 'Wie das Gerät']].map(([v, l]) => `<option value="${v}" ${theme === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
       <div class="f">Akzentfarbe<div class="swatches" id="appAcc">${['#ff6a3d', '#3fa7f5', '#4fd18b', '#f5c542', '#b06cf0', '#ef4458', '#00c2c7'].map(c => `<button style="background:${c}" data-c="${c}" aria-pressed="${acc === c}" aria-label="Farbe ${c}"></button>`).join('')}</div></div>
       <p class="small muted">Gilt für Menüs und Seiten. Die Anzeige während der Fahrt hat einen eigenen Stil unter <a href="#/ridesettings">Fahransicht</a>.</p>
-      <label class="switch"><input type="checkbox" id="remOn" ${profile.reminders === true ? 'checked' : ''}><span></span> <div class="swt"><i style="font-style:normal">🔔 Benachrichtigungen</i><small class="muted">Erinnerungen und Hinweise des Geräts, solange IndooRado geöffnet ist (auch im Hintergrund). Was genau, wählst du darunter.</small></div></label>
-      <div class="notifkinds" id="notifKinds" ${profile.reminders === true ? '' : 'hidden'}>
-        ${C_NOTIF.map(([k, l, d]) => `<label class="chk"><input type="checkbox" data-notif="${k}" ${profile.notif?.[k] !== false ? 'checked' : ''}><span><b>${l}</b><small class="muted">${d}</small></span></label>${k === 'plan' ? `<label class="f notifat">Uhrzeit für das Training des Tages<input class="inp" id="remAt" type="time" value="${esc(profile.remindAt || '18:00')}"></label>` : ''}`).join('')}
-        <label class="switch pushsw"><input type="checkbox" id="pushOn" ${localStorage.getItem('vvPush') !== '0' ? 'checked' : ''}><span></span> <div class="swt"><i style="font-style:normal">📲 Auch bei geschlossener App (Push) <b class="muted small" style="font-weight:400">(dieses Gerät)</b></i><small class="muted">Nachrichten und Anrufe kommen auch an, wenn IndooRado nicht läuft; tippen öffnet Chat bzw. Anruf. Braucht ein Konto. Die kurze Meldung (ohne Nachrichteninhalt) läuft verschlüsselt über den Push-Dienst deines Geräts (Google, Apple, Mozilla). iPhone/iPad: nur als App vom Home-Bildschirm.</small></div></label>
-        <div class="row"><button class="btn sm" id="notifTest">🔔 Test-Benachrichtigung</button><button class="btn sm" id="pushTest">📲 Test-Push</button></div>
-      </div>
+      <p class="small muted">🔔 Benachrichtigungen und Push stellst du unter <a href="#/notify">Einstellungen › Benachrichtigungen</a> ein.</p>
       <div class="row" id="instRow" hidden><button class="btn" id="instBtn">📲 IndooRado als App installieren</button></div>
       <label class="f">Mapillary-Schlüssel für Straßenbilder <span class="muted small">(optional)</span><input class="inp" id="mlyTok" autocomplete="off" spellcheck="false" placeholder="MLY|…" value="${esc(profile.mlyToken || '')}"><small class="muted">Öffentlicher Client-Schlüssel von mapillary.com › Developers (kostenlos). Ohne Eintrag gilt der Schlüssel des Betreibers, falls vorhanden.</small></label>
       <label class="switch"><input type="checkbox" id="tvMode" ${localStorage.getItem('vvTv') === '1' ? 'checked' : ''}><span></span> <div class="swt"><i style="font-style:normal">📺 Fernseher-Modus <b class="muted small" style="font-weight:400">(nur dieses Gerät)</b></i><small class="muted">Große Schrift, Bedienung mit den Pfeiltasten der Fernbedienung (Enter = auswählen, Zurück = zurück). Gamepads gehen immer: Steuerkreuz, A, B, Start = Pause, LB/RB = Gang, X = Kamera, Y = Ride On. Handy als Fernbedienung: in der Handy-Ansicht mit demselben Konto.</small></div></label>
@@ -264,8 +272,8 @@ export async function render(el, params = []) {
     </div>
   </section>
   <section class="card form"><h2>Einwilligungen</h2>
-    <p class="small muted">Funktionen, die Daten an einen fremden Dienst schicken, fragen vor der ersten Nutzung. Hier kannst du die Zustimmung widerrufen; beim nächsten Mal wird wieder gefragt.</p>
-    <div id="cnsList">${(() => { const N = { osm: 'Echte Gebäude (OpenStreetMap / Overpass)', call: 'Videoanrufe (WebRTC, TURN)', mly: 'Echte Straßenbilder (Mapillary)', voice: 'Sprachsteuerung (Spracherkennung des Browsers)' }, c = profile.consents || {}; const ks = Object.keys(N).filter(k => c[k]); return ks.length ? ks.map(k => `<div class="row between"><span>✅ ${N[k]}</span><button class="btn xs ghost" data-revoke="${k}">Widerrufen</button></div>`).join('') : '<p class="small muted">Keine Einwilligungen erteilt.</p>'; })()}</div>
+    <p class="small muted">Funktionen, die Daten an einen fremden Dienst schicken, fragen vor der ersten Nutzung. Hier siehst du den Stand, kannst Zustimmungen widerrufen oder abgelehnte nachträglich erteilen.</p>
+    <div id="cnsList">${(() => { const N = { osm: 'Echte Gebäude (OpenStreetMap / Overpass)', call: 'Videoanrufe (WebRTC, TURN)', mly: 'Echte Straßenbilder (Mapillary)', voice: 'Sprachsteuerung (Spracherkennung des Browsers)' }, c = profile.consents || {}; const no = profile.consentsNo || {}; return Object.keys(N).map(k => c[k] ? `<div class="row between cnsrow"><span>✅ ${N[k]}</span><button class="btn xs ghost" data-revoke="${k}">Widerrufen</button></div>` : `<div class="row between cnsrow"><span>${no[k] ? '🚫' : '⚪'} ${N[k]}${no[k] ? ' <small class="muted">(abgelehnt)</small>' : ''}</span>${k === 'mly' ? `<button class="btn xs" data-grant="${k}">Zustimmen</button>` : '<small class="muted">wird bei der Nutzung gefragt</small>'}</div>`).join(''); })()}</div>
   </section>
   <section class="card form"><h2>Technik</h2>
     <label class="switch"><input type="checkbox" id="saveDemo" ${profile.saveDemo ? 'checked' : ''}><span></span> <div class="swt">Fahrten mit Demo-Geräten speichern<small class="muted">Zum Testen, z. B. des Strava-Uploads. Solche Fahrten zählen dann wie echte Fahrten (XP, Rekorde, Trainingsplan) und sind in der Zusammenfassung als Demo markiert. Danach am besten wieder ausschalten.</small></div></label>
@@ -281,6 +289,17 @@ export async function render(el, params = []) {
   el.innerHTML = html[sec] || html.profile;
   { const fb = el.querySelector('#famCard'); if (fb) { const F = await import('../family.js'); fb.innerHTML = F.familyCardHtml(esc); F.wireFamilyCard(fb, esc, dialog, toast); } }
   const on = (sel, ev, fn) => { const x = $(sel, el); if (x) x[ev] = fn; };
+  // Privatsphäre unter Freunden (gespeichert im Online-Profil, vom Server durchgesetzt)
+  if ($('#privCard', el)) { const O = await import('../online/client.js'), pc = $('#privCard', el);
+    if (!O.loggedIn()) pc.innerHTML = '<h2>Privatsphäre</h2><p class="small muted">Gilt für Freunde, Anrufe und Nachrichten und braucht ein IndooRado-Konto.</p><a class="btn sm" href="#/account">Anmelden</a>';
+    else { pc.innerHTML = `<h2>Privatsphäre</h2>
+      <label class="switch"><input type="checkbox" id="frShare" ${O.online.profile?.share_rides ? 'checked' : ''}><span></span> <div class="swt">Freunde dürfen meine einzelnen Fahrten sehen<small class="muted">Datum, Strecke, Distanz, Dauer, Höhenmeter, Ø Watt. Ohne diese Erlaubnis sehen Freunde nur Level und Summen. Puls, Gewicht und Alter sieht nie jemand.</small></div></label>
+      <label class="switch"><input type="checkbox" id="frFind" ${O.online.profile?.discoverable !== false ? 'checked' : ''}><span></span> <div class="swt">In der Suche auffindbar<small class="muted">Andere angemeldete Spieler finden dich über deinen Namen und sehen dabei Name, Avatar und Level. Standardmäßig an. Ausgeschaltet können dich Freunde trotzdem per Freundescode oder über die Online-Liste anfragen.</small></div></label>
+      <label class="switch"><input type="checkbox" id="frCalls" ${O.online.profile?.allow_calls !== false ? 'checked' : ''}><span></span> <div class="swt">Anrufe (Video und Sprache)<small class="muted">Ausgeschaltet kann dich niemand anrufen, und du rufst auch selbst niemanden an. Nachrichten gehen weiter. Standardmäßig an.</small></div></label>
+      <label class="switch"><input type="checkbox" id="frMsgs" ${O.online.profile?.allow_msgs !== false ? 'checked' : ''}><span></span> <div class="swt">Freunde dürfen mir Nachrichten schreiben<small class="muted">Ausgeschaltet kommen keine neuen Chat-Nachrichten mehr an; der bisherige Verlauf bleibt. Standardmäßig an.</small></div></label>
+`;
+      pc.onchange = async e => { const k = { frShare: 'share_rides', frFind: 'discoverable', frCalls: 'allow_calls', frMsgs: 'allow_msgs' }[e.target.id]; if (!k) return;
+        try { await O.updateProfile({ [k]: e.target.checked }); toast('Gespeichert', 900); } catch (er) { e.target.checked = !e.target.checked; toast(er.message, 4000); } }; } }
   if ($('#nasCard', el)) nasCard($('#nasCard', el));
   if ($('#stravaCard', el)) stravaCard($('#stravaCard', el));
   on('#onbAgain', 'onclick', () => import('../onboard.js').then(m => m.onboarding(true)));
@@ -294,6 +313,7 @@ export async function render(el, params = []) {
   on('#saveDemo', 'onchange', e => { profile.saveDemo = e.target.checked; saveProfile(); toast(e.target.checked ? 'Demo-Fahrten werden gespeichert' : 'Demo-Fahrten werden nicht mehr gespeichert', 2000); });
   on('#quality', 'onchange', e => { profile.quality = e.target.value; saveProfile(); toast('Gilt ab der nächsten Fahrt', 1500); });
   on('#phoneView', 'onchange', e => { profile.phoneView = e.target.value; saveProfile(); toast('Gespeichert', 900); });
+  el.querySelectorAll('[data-grant]').forEach(b => b.onclick = async () => { if (b.dataset.grant === 'mly' && (await (await import('../streetimg.js')).askConsent(true))) { toast('Zugestimmt – Straßenbilder erscheinen ab der nächsten passenden Fahrt'); render(el, ['app']); } });
   el.querySelectorAll('[data-revoke]').forEach(b => b.onclick = async () => { (await import('../consent.js')).revoke(b.dataset.revoke); toast('Einwilligung widerrufen'); b.closest('.row').remove(); });
   on('#appTheme', 'onchange', e => { profile.appTheme = e.target.value; saveProfile(); applyAppTheme(); });
   on('#mlyTok', 'onchange', e => { const v = e.target.value.trim(); if (v && !/^MLY\|[\w|]{10,200}$/.test(v)) { toast('Das sieht nicht wie ein Mapillary-Client-Schlüssel (MLY|…) aus'); return; } profile.mlyToken = v; saveProfile(); toast(v ? 'Mapillary-Schlüssel gespeichert' : 'Mapillary-Schlüssel entfernt'); });

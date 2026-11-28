@@ -12,9 +12,9 @@ export async function possible(route) {
   const O = await import('./online/client.js');
   return !route.builtin && !route.kit && O.loggedIn() && !!(await token()) && profile.streetImgs !== false;
 }
-export async function askConsent() {
+export async function askConsent(force = false) {
   const { consent } = await import('./consent.js');
-  return consent('mly', MLY_TERMS, { title: 'Echte Straßenbilder', html: `<p>Für Fotos der echten Straße fragt IndooRado den Dienst <b>Mapillary</b> (Meta Platforms Ireland Ltd.) nach Bildern entlang deiner Strecke. Dabei werden Kartenausschnitte deiner Strecke und – technisch bedingt – deine IP-Adresse an Mapillary übertragen.</p><p class="small muted">Die Bilder stammen von Freiwilligen und stehen unter CC BY-SA 4.0. Abschalten jederzeit unter Einstellungen › Fahrt &amp; Ton; Widerruf unter App &amp; Daten › Einwilligungen.</p>` });
+  return consent('mly', MLY_TERMS, { once: true, force, title: 'Echte Straßenbilder', html: `<p>Für Fotos der echten Straße fragt IndooRado den Dienst <b>Mapillary</b> (Meta Platforms Ireland Ltd.) nach Bildern entlang deiner Strecke. Dabei werden Kartenausschnitte deiner Strecke und – technisch bedingt – deine IP-Adresse an Mapillary übertragen.</p><p class="small muted">Die Bilder stammen von Freiwilligen und stehen unter CC BY-SA 4.0. Abschalten jederzeit unter Einstellungen › Fahrt &amp; Ton; Widerruf unter App &amp; Daten › Einwilligungen.</p>` });
 }
 
 /* Bilder entlang der Strecke: Abschnitte von ~600 m nacheinander vorausladen, jedem Bild die Streckenposition zuordnen */

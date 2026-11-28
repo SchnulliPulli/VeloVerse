@@ -25,6 +25,7 @@ const PAGES = {
   lobby: () => import('./pages/online.js'), players: () => import('./pages/online.js').then(m => ({ ...m, render: el => m.render(el, ['players']) })), account: () => import('./pages/account.js'), admin: () => import('./pages/admin.js'),
   sound: () => import('./pages/ridesettings.js').then(m => ({ ...m, render: el => m.render(el, ['sound']) })),
   appsettings: () => import('./pages/profile.js').then(m => ({ ...m, render: el => m.render(el, ['app']) })),
+  notify: () => import('./pages/profile.js').then(m => ({ ...m, render: el => m.render(el, ['notify']) })),
   connect: () => import('./pages/profile.js').then(m => ({ ...m, render: el => m.render(el, ['connect']) })),
 };
 // Hauptmenü: sechs Bereiche, Unterseiten als Reiter oben auf der Seite
@@ -46,21 +47,31 @@ Object.assign(PAGES, {
 });
 // Alte Adressen führen zum passenden Abschnitt der zusammengelegten Seite
 const ALIAS = { sound: ['ridesettings', 1], connect: ['appsettings', 1], players: ['lobby', 1], events: ['community', 0], clubs: ['community', 1], season: ['progress', 1] };
+// Hauptmenü: am Computer sechs Bereiche links, am Handy fünf unten (Geräte und Einstellungen stecken dort unter „Mehr“)
 const NAV = [
   { k: '', l: 'Start', i: 'home', also: ['companion', 'live'] },
-  { k: 'workouts', l: 'Training', i: 'workout', tabs: [['workouts', 'Workouts'], ['plans', 'Trainingspläne']], also: ['editor', 'planner'] },
-  { k: 'routes', l: 'Strecken', i: 'route', also: ['builder'] },
-  { k: 'history', l: 'Aktivitäten', s: 'Fahrten', i: 'history', tabs: [['history', 'Verlauf'], ['progress', 'Fortschritt & Saison']], also: ['summary', 'season', 'report'] },
-  { k: 'devices', l: 'Geräte', i: 'devices' },
-  { k: 'lobby', l: 'Online', i: 'online', tabs: [['lobby', 'Lobby'], ['friends', 'Freunde'], ['community', 'Events & Teams'], ['account', 'Konto'], ['admin', 'Admin']], also: ['players', 'events', 'clubs'] },
-  { k: 'profile', l: 'Einstellungen', s: 'Optionen', i: 'profile', tabs: [['profile', 'Profil'], ['avatar', 'Avatar'], ['ridesettings', 'Fahrt & Ton'], ['appsettings', 'App & Daten'], ['help', 'Hilfe']], also: ['sound', 'connect', 'legal'] },
+  { k: 'workouts', l: 'Training', i: 'workout', tabs: [['workouts', 'Workouts'], ['plans', 'Trainingspläne'], ['routes', 'Strecken']], also: ['editor', 'planner', 'builder'] },
+  { k: 'history', l: 'Fahrten', i: 'history', tabs: [['history', 'Verlauf'], ['progress', 'Fortschritt & Saison']], also: ['summary', 'season', 'report'] },
+  { k: 'lobby', l: 'Online', i: 'online', tabs: [['lobby', 'Lobby'], ['friends', 'Freunde'], ['community', 'Events & Teams'], ['admin', 'Admin']], also: ['players', 'events', 'clubs'] },
+  { k: 'devices', l: 'Geräte', i: 'devices', desk: true },
+  { k: 'profile', l: 'Einstellungen', i: 'profile', desk: true, tabs: [['profile', 'Profil'], ['ridesettings', 'Fahrt & Ton'], ['notify', 'Benachrichtigungen'], ['appsettings', 'App & Daten'], ['account', 'Konto'], ['help', 'Hilfe']], also: ['avatar', 'sound', 'connect', 'legal'] },
 ];
 const groupOf = k => NAV.find(g => g.k === k || g.tabs?.some(t => t[0] === k) || g.also?.includes(k)) || null;
 let current = null, currentKey = null;
 
 function nav() {
-  $('#nav').innerHTML = NAV.map(g => `<a href="#/${g.k}" data-k="${g.k}" title="${g.l}">${ICON[g.i]}<span class="nl">${g.l}</span>${g.s ? `<span class="ns">${g.s}</span>` : ''}</a>`).join('')
+  $('#nav').innerHTML = NAV.map(g => `<a href="#/${g.k}" data-k="${g.k}" title="${g.l}"${g.desk ? ' class="desk"' : ''}>${ICON[g.i]}<span class="nl">${g.l}</span></a>`).join('')
+    + `<button class="navmore" id="navMore" aria-haspopup="true" aria-expanded="false" title="Geräte, Einstellungen, Konto, Hilfe"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><span class="nl">Mehr</span></button>`
     + `<div class="navfoot"><a href="#/legal/impressum">Impressum</a> · <a href="#/legal/datenschutz">Datenschutz</a><div class="navver" id="navVer"></div></div>`;
+  // Handy: „Mehr“ öffnet ein Blatt mit Geräte, allen Einstellungen, Konto und Hilfe
+  const sheet = document.createElement('div'); sheet.className = 'moresheet'; sheet.hidden = true; document.body.appendChild(sheet);
+  const items = [['devices', '🔌', 'Geräte'], ['profile', '👤', 'Profil'], ['ridesettings', '🚴', 'Fahrt & Ton'], ['notify', '🔔', 'Benachrichtigungen'], ['appsettings', '💾', 'App & Daten'], ['account', '🔐', 'Konto'], ['avatar', '🎨', 'Avatar'], ['help', '❓', 'Hilfe']];
+  sheet.innerHTML = `<div class="mshead"><b>Mehr</b><button class="btn sm ghost" data-close aria-label="Schließen">✕</button></div><div class="msgrid">${items.map(([k, i, l]) => `<a href="#/${k}" data-k="${k}"><span class="msi">${i}</span><span>${l}</span></a>`).join('')}</div><div class="msfoot small"><a href="#/legal/impressum">Impressum</a> · <a href="#/legal/datenschutz">Datenschutz</a></div>`;
+  const mb = $('#navMore'), setSheet = o => { sheet.hidden = !o; mb.setAttribute('aria-expanded', String(o)); mb.classList.toggle('open', o); };
+  mb.onclick = e => { e.stopPropagation(); setSheet(sheet.hidden); };
+  sheet.onclick = e => { if (e.target.closest('a,[data-close]')) setSheet(false); };
+  document.addEventListener('click', e => { if (!sheet.hidden && !e.target.closest('.moresheet,#navMore')) setSheet(false); });
+  addEventListener('hashchange', () => setSheet(false));
   import('./version.js').then(async V => { const i = await V.buildInfo(), e = document.getElementById('navVer'); if (e) { e.textContent = V.buildText(i); e.title = i.message || ''; } }).catch(() => { });
   $('#chips').innerHTML = ['trainer', 'hr', 'cad', 'click'].map(k => `<a class="chip" href="#/devices" data-d="${k}" title="${k}">${ICON[k]}</a>`).join('');
   const upd = () => { for (const c of document.querySelectorAll('#chips .chip')) c.dataset.st = status[c.dataset.d]; };
@@ -181,6 +192,8 @@ async function route() {
   document.body.dataset.page = k || 'start';
   const grp = groupOf(k);
   for (const a of document.querySelectorAll('#nav a')) a.classList.toggle('on', a.dataset.k === grp?.k);
+  $('#navMore')?.classList.toggle('on', grp?.k === 'devices' || grp?.k === 'profile');
+  document.querySelectorAll('.moresheet a').forEach(a => a.classList.toggle('on', a.dataset.k === k));
   const sub = $('#subnav');
   sub.hidden = !grp?.tabs || k === 'ride';
   sub.innerHTML = grp?.tabs ? grp.tabs.map(([t, l]) => `<a href="#/${t}" class="${t === k ? 'on' : ''}${t === 'admin' ? ' admintab' : ''}">${l}</a>`).join('') : '';

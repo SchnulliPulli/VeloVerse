@@ -26,7 +26,7 @@ const T = [
     <li><b>Rennen gegen Bots</b>, <b>Zeitfahren</b> (allein gegen die Uhr) und die <b>Tagesherausforderung</b> (für alle gleich, Serie zählt) startest du auf der Startseite oder bei der Strecke.</li>
     <li><b>Sprints und Gipfel</b> mit Bestzeiten, <b>Zieltore</b> am Ende jedes Intervalls, <b>Power-ups</b> (Taste U) und <b>Sammelglocken</b> für Extra-XP.</li>
     <li><b>Geist</b>: deine Bestfahrt auf dieser Strecke als durchsichtiger Fahrer.</li>
-    <li><b>Freunde-Geister</b>: in der Auswertung „👻 Als Geist“ teilt eine Fahrt als Datei oder Code. Freunde öffnen sie unter Aktivitäten › Importieren › Geist und fahren dann gegen dich (bis zu fünf Geister gleichzeitig, ohne Puls und Watt).</li>
+    <li><b>Freunde-Geister</b>: in der Auswertung „👻 Als Geist“ teilt eine Fahrt als Datei oder Code. Freunde öffnen sie unter Fahrten › Importieren › Geist und fahren dann gegen dich (bis zu fünf Geister gleichzeitig, ohne Puls und Watt).</li>
     <li><b>Trainingsbuddy</b> (Mehr › Buddy): fährt locker neben dir her und plaudert ein wenig.</li>    <li><b>🐇 Pace-Partner</b> (⋯ in der Fahrt): eine Gruppe mit festem W/kg zum Mitfahren. <b>🏆 Tour de IndooRado</b> (Online › Events): fünf Etappen pro Woche mit gelbem, rotem und grünem Trikot. <b>👑 Bergkönig:</b> Bestzeit je Anstieg, angezeigt am Fuß des Anstiegs.</li>
     <li><b>🙋 Gesten</b> an echte Mitfahrer, <b>Wind</b> mit Böen (Fahrt &amp; Ton), <b>🎙️ Sprachsteuerung</b>: „Pause“, „schwerer“, „nächstes Intervall“, „Foto“ …</li>
 </ul>`],
@@ -54,12 +54,12 @@ const T = [
   ['fortschritt', '🏆', 'Level, Saison und Werkstatt', `<ul class="tips">
     <li><b>XP</b> gibt es für Kilometer, Zeit, Höhenmeter, Gipfel, Sprints, Zieltore, Überholen, Bestwerte, Missionen, Plan-Einheiten und Multiplayer. Level schalten Trikotfarben, Räder, Tiere und Extras im <b>Avatar</b> frei.</li>
     <li><b>Wochenmissionen</b> und <b>Serien</b> (mehrere Tage in Folge geben Bonus-XP).</li>
-    <li><b>Saison</b> (Aktivitäten › Fortschritt & Saison): jedes Quartal ein Belohnungspfad mit 25 Stufen – Saisonfarben für den Avatar, Titel, XP und am Ende ein Pokal mit Gold-Lack.</li>
+    <li><b>Saison</b> (Fahrten › Fortschritt & Saison): jedes Quartal ein Belohnungspfad mit 25 Stufen – Saisonfarben für den Avatar, Titel, XP und am Ende ein Pokal mit Gold-Lack.</li>
     <li><b>Werkstatt</b>: jede dritte Saisonstufe bringt einen Teile-Gutschein 🔧 für bessere Laufräder, Rahmen, Reifen und Bekleidung. Sie machen dich ein wenig schneller; sobald echte Mitfahrer auf der Strecke sind, gelten für alle gleiche Bedingungen.</li>    <li><b>🏆 Wochenliga</b> (mit Konto, freiwillig): 20 Fahrer auf deiner Stufe sammeln eine Woche lang Erfahrungspunkte. Die besten 5 steigen auf (Bronze bis Diamant), wer nicht fährt, steigt ab.</li>
     <li><b>🧊 Serien-Schutz</b>: Für jede Woche mit 3 Fahrtagen gibt es einen (höchstens 2). Er überbrückt automatisch einen fehlenden Tag, damit deine Serie und der XP-Bonus bleiben.</li>
 </ul>`],
   ['online', '🌐', 'Online: Mitfahren, Events und Teams', `<ul class="tips">
-    <li><b>Konto</b> (Online › Konto): Anmeldung mit Passwort oder <b>Code per E-Mail</b>, empfohlen mit <b>Zwei-Faktor</b> (Authenticator-App) – richte am besten eine zweite App als Ersatz ein. Ist alles verloren, kann der Admin die 2FA zurücksetzen. Mehrere Konten lassen sich über das Avatar-Menü oben wechseln.</li>
+    <li><b>Konto</b> (Einstellungen › Konto): Anmeldung mit Passwort oder <b>Code per E-Mail</b>, empfohlen mit <b>Zwei-Faktor</b> (Authenticator-App) – richte am besten eine zweite App als Ersatz ein. Ist alles verloren, kann der Admin die 2FA zurücksetzen. Mehrere Konten lassen sich über das Avatar-Menü oben wechseln.</li>
     <li><b>Freunde</b> (Online › Freunde): Spieler suchen, Anfrage schicken – erst wenn beide zustimmen, seht ihr Level, Wochen- und Gesamtstatistik und könnt <b>chatten</b>. Einzelne Fahrten sieht ein Freund nur, wenn du es erlaubst. Puls, Gewicht oder Alter sieht nie jemand. Freundschaft beenden und Blockieren geht jederzeit.</li>
     <li><b>📹 Videoanruf</b> (im Chat eines Freundes „Anrufen“): Vor jedem Anruf wählst du: Bild und Ton, nur Ton oder nur Bild – der Browser fragt nur das jeweils Nötige ab. Bild und Ton gehen direkt und verschlüsselt zwischen euren Geräten. Dein Freund bekommt einen Klingel-Hinweis oder findet die Einladung im Chat und auf seiner Startseite. Das Anruffenster lässt sich verschieben (am Kopf ziehen) und in der Größe ändern (Ecke unten rechts), Mikrofon und Kamera einzeln aus, und bleibt auch während der Fahrt offen. Mit „👥“ lädst du deinen Gesprächspartner zu einer gemeinsamen Fahrt ein. Klappt die direkte Verbindung in einem sehr strengen Netzwerk nicht, öffnet „↗“ den Anruf über Jitsi in einem neuen Fenster.</li>
     <li><b>💬 Nachrichten</b>: Der Knopf oben in der Kopfleiste und auf der Startseite zeigt, wie viel Neues da ist, und öffnet ein Fenster mit der neuesten Nachricht je Freund, Freundschaftsanfragen zum direkten Annehmen und Anruf-Einladungen. Antippen öffnet den Chat.</li>
@@ -83,7 +83,7 @@ const T = [
     <li><b>Online-Abgleich</b>: Mit Konto werden Einstellungen und Fahrten zwischen deinen Geräten abgeglichen (verschlüsselt übertragen über HTTPS). Fotos der Fahrten landen nie im Konto, nur in deinem verbundenen NAS oder Cloud-Speicher; die App zeigt Fahrt und Fotos zusammen an.</li>
     <li><b>🔐 Tresor</b> (Konto › Tresor, empfohlen): verschlüsselt deine Online-Daten schon im Browser mit einem eigenen Tresor-Passwort (AES-256). Dann kann sie auch der Server-Betreiber nicht lesen. Passwort gut aufheben – ohne es sind die Online-Daten nicht wiederherstellbar.</li>
     <li>Alternativ Abgleich über <b>NAS (Synology)</b>, OneDrive, Google Drive oder Dropbox (Einstellungen › App & Daten).</li>
-    <li><b>Strava</b>: „Zu Strava“ in der Auswertung speichert FIT-Datei und Bild und öffnet die Upload-Seite. Mit eigener Strava-API-App (braucht ein Strava-Abo) geht der Upload automatisch. Bisherige Fahrten übernimmst du unter Aktivitäten › Importieren (FIT, ZIP-Export oder Strava).</li>
+    <li><b>Strava</b>: „Zu Strava“ in der Auswertung speichert FIT-Datei und Bild und öffnet die Upload-Seite. Mit eigener Strava-API-App (braucht ein Strava-Abo) geht der Upload automatisch. Bisherige Fahrten übernimmst du unter Fahrten › Importieren (FIT, ZIP-Export oder Strava).</li>
     <li><b>Teilen</b>: „📤 Teilen“ erstellt ein schickes Bild mit Karte und Kennzahlen für soziale Netzwerke.</li></ul>`],
   ['handy', '📱', 'Handy und Tablet', `<ul class="tips">
     <li>Auf dem Handy wählt die App automatisch eine kompakte Ansicht. Die Fahrtanzeige passt sich hochkant und quer an, jede Lage hat ihre eigene Anordnung.</li>
@@ -97,7 +97,7 @@ const T = [
   ['probleme', '🛠️', 'Wenn etwas nicht klappt', `<ul class="tips">
     <li><b>Ruckelt die Fahrt?</b> Die App senkt die Auflösung selbst. Zusätzlich hilft Einstellungen › App & Daten › Grafik „Mittel“ oder „Niedrig“.</li>
     <li><b>Gerät wird nicht gefunden?</b> Chrome oder Edge verwenden, Bluetooth am Gerät einschalten, andere Apps (z. B. auf dem Handy) vom Trainer trennen.</li>
-    <li><b>Online-Probleme?</b> Online › Konto › Verbindungstest prüft Schritt für Schritt Anmeldung, Datenbank und Live-Verbindung. Das <b>Verbindungsprotokoll</b> darunter hält jeden Abriss fest (auch während der Fahrt); der Langzeittest prüft bis zu 2 Stunden lang alle 10 Sekunden.</li>
+    <li><b>Online-Probleme?</b> Einstellungen › Konto › Verbindung prüft Schritt für Schritt Anmeldung, Datenbank und Live-Verbindung. Das <b>Verbindungsprotokoll</b> darunter hält jeden Abriss fest (auch während der Fahrt); der Langzeittest prüft bis zu 2 Stunden lang alle 10 Sekunden.</li>
     <li><b>Neue Version?</b> Die App aktualisiert sich beim nächsten Öffnen. Die Versionsnummer steht unten links im Menü.</li></ul>`],
 ];
 export async function render(el) {

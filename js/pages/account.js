@@ -298,7 +298,7 @@ async function renderAccount(el) {
     </div>
     <div class="card form"><h2>Freunde & Erreichbarkeit</h2>
       <p class="small muted">Wer dich finden, anrufen und dir schreiben darf und ob Freunde deine Fahrten sehen, stellst du bei den Freunden ein.</p>
-      <div class="row"><a class="btn sm" href="#/friends">👥 Freunde › Privatsphäre</a><a class="btn sm ghost" href="#/profile">🔔 Benachrichtigungen</a></div>
+      <div class="row"><a class="btn sm" href="#/notify">🔔 Benachrichtigungen & Privatsphäre</a></div>
     </div>
   </section>
   <h2 class="accsec" id="accData">☁️ Daten & Tresor</h2>
