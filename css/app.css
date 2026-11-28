@@ -1513,3 +1513,4 @@ body:has(.livewrap:not([hidden]) .remote.rmfull:not([hidden])) { overflow: hidde
 /* Fernbedienung: langes Halten markiert keinen Text und öffnet kein Kontextmenü (Kopieren, Teilen …) */
 .remote, .remote * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
 .remote button { touch-action: manipulation; }
+html.pwa .fsbtn, html.pwa #tFull { display: none !important; }

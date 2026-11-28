@@ -1,5 +1,5 @@
 // Einstieg: Zustand laden, Router, Navigation
-import { $, bus, toast, dialog, toggleFullscreen } from './util.js';
+import { $, bus, toast, dialog, toggleFullscreen, isPWA, pwaFullscreen } from './util.js';
 import { loadState, profile } from './state.js';
 import { loadClickMap, setDemo, status, support, reconnectKnown } from './ble.js';
 import { kv, persist } from './db.js';
@@ -82,6 +82,7 @@ function nav() {
   const fs = $('#fsBtn'), fsUpd = () => { const on = !!(document.fullscreenElement || document.webkitFullscreenElement); fs.innerHTML = on ? '<svg viewBox="0 0 24 24"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>' : ICON.full; fs.title = on ? 'Vollbild beenden' : 'Vollbild'; fs.dataset.st = on ? 'on' : 'off'; };
   fs.onclick = toggleFullscreen; document.addEventListener('fullscreenchange', fsUpd); document.addEventListener('webkitfullscreenchange', fsUpd); fsUpd();
   if (!document.documentElement.requestFullscreen && !document.documentElement.webkitRequestFullscreen) fs.hidden = true;
+  if (isPWA()) { fs.hidden = true; document.documentElement.classList.add('pwa'); pwaFullscreen(); } // installierte App: immer Vollbild, kein Knopf
   // Anmelden-Knopf (nur wenn IndooRado Online eingerichtet ist); angemeldet zeigt er Initiale und Namen
   const lb = document.createElement('a'); lb.className = 'btn sm loginbtn'; lb.href = '#/account'; lb.hidden = true;
   document.querySelector('.ridebtn').before(lb);

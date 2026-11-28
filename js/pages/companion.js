@@ -1,5 +1,5 @@
 // Companion: Handy-Ansicht zum Planen, Nachsehen und Mitverfolgen einer laufenden Fahrt (über den NAS-Abgleich)
-import { $, esc, fmtKm, fmtDur, fmtT, fmtDate, toast, bus, dialog } from '../util.js';
+import { $, esc, fmtKm, fmtDur, fmtT, fmtDate, toast, bus, dialog, isPWA } from '../util.js';
 import { profile, sel, saveSel, progress, levelOf, loadState } from '../state.js';
 import { db } from '../db.js';
 import { totals, fitness } from '../analysis.js';
@@ -119,7 +119,7 @@ async function liveTick(el) {
     ${map}
     ${!L.loop ? `<div class="small muted">Strecke ${pct.toFixed(0)} % · noch ${fmtKm(Math.max(0, L.total - L.pos))} km</div><div class="bar thin"><i style="width:${pct.toFixed(1)}%"></i></div>` : ''}`;
 }
-export function leave() { clearInterval(timer); timer = null; offSync?.(); offSync = null; rmWake(false); if (document.fullscreenElement) document.exitFullscreen?.().catch(() => { }); document.body.classList.remove('rmfullon'); }
+export function leave() { clearInterval(timer); timer = null; offSync?.(); offSync = null; rmWake(false); if (document.fullscreenElement && !isPWA()) document.exitFullscreen?.().catch(() => { }); document.body.classList.remove('rmfullon'); }
 
 // Fernbedienung: Bildschirm anlassen (Wake Lock, nach dem Zurückkehren in die App erneut anfordern) und Vollbild
 let wake = null, wakeOn = false;
@@ -135,9 +135,9 @@ async function rmFull(el, on) {
   if (r.classList.contains('rmfull') === on && !!document.fullscreenElement === on) return;
   r.classList.toggle('rmfull', on); document.body.classList.toggle('rmfullon', on);
   const b = $('#rmFull', el); if (b) { b.textContent = on ? '✕' : '⛶ Vollbild'; b.title = on ? 'Vollbild schließen (Bildschirm darf wieder ausgehen)' : 'Fernbedienung bildschirmfüllend, Bildschirm bleibt an'; b.setAttribute('aria-label', on ? 'Vollbild schließen' : 'Vollbild'); b.classList.toggle('ghost', on); b.classList.toggle('only', on); }
-  try { if (on && !document.fullscreenElement) await document.documentElement.requestFullscreen?.({ navigationUI: 'hide' }); else if (!on && document.fullscreenElement) await document.exitFullscreen(); } catch (e) { } // iPhone: kein echtes Vollbild, die Ansicht füllt trotzdem das Fenster
+  try { if (on && !document.fullscreenElement) await document.documentElement.requestFullscreen?.({ navigationUI: 'hide' }); else if (!on && document.fullscreenElement && !isPWA()) await document.exitFullscreen(); } catch (e) { } // installierte App bleibt im Vollbild; iPhone: kein echtes Vollbild, die Ansicht füllt trotzdem das Fenster
   rmWake(on);
   // Vollbild über die Zurück-Geste verlassen: Fernbedienung ebenfalls schließen
-  const off = () => { document.removeEventListener('fullscreenchange', off); if (!document.fullscreenElement && r.classList.contains('rmfull')) rmFull(el, false); };
+  const off = () => { document.removeEventListener('fullscreenchange', off); if (!document.fullscreenElement && r.classList.contains('rmfull') && !isPWA()) rmFull(el, false); };
   if (on) setTimeout(() => document.addEventListener('fullscreenchange', off), 300);
 }

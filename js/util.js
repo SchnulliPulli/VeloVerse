@@ -62,6 +62,16 @@ export function dialog({ title, html, buttons, cls = '' }) {
   });
 }
 
+// Als App installiert (Chrome/Edge „Installieren“, Android-Startbildschirm, iPhone „Zum Home-Bildschirm“)?
+export const isPWA = () => { try { return matchMedia('(display-mode: fullscreen), (display-mode: standalone), (display-mode: minimal-ui), (display-mode: window-controls-overlay)').matches || navigator.standalone === true; } catch (e) { return false; } };
+// Installierte App läuft immer im Vollbild: Android startet sie schon so (Manifest „fullscreen“); im PC-Fenster wird beim
+// ersten Tippen/Klicken Vollbild angefordert (ohne Nutzeraktion erlauben Browser das nicht) und nach dem Verlassen erneut
+export function pwaFullscreen() {
+  if (!isPWA() || matchMedia('(display-mode: fullscreen)').matches || navigator.standalone === true) return;
+  const e = document.documentElement; if (!e.requestFullscreen && !e.webkitRequestFullscreen) return;
+  const go = () => { if (!document.fullscreenElement && !document.webkitFullscreenElement) (e.requestFullscreen || e.webkitRequestFullscreen)?.call(e, { navigationUI: 'hide' })?.catch?.(() => { }); };
+  addEventListener('pointerdown', go, true); addEventListener('keydown', ev => { if (ev.key !== 'Escape' && ev.key !== 'F11') go(); }, true);
+}
 // Vollbild für die ganze App: bleibt beim Wechsel zwischen den Seiten erhalten
 export function toggleFullscreen() {
   const d = document;
