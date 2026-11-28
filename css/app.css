@@ -1548,3 +1548,6 @@ html.pwa .fsbtn, html.pwa #tFull { display: none !important; }
 .accnavb:hover { background: var(--panel2); border-color: var(--acc); }
 .accsec { font-size: 15px; font-weight: 800; letter-spacing: .02em; color: var(--soft); margin: 22px 2px 8px; scroll-margin-top: calc(var(--headh, 58px) + 56px); }
 .accchips .prtag { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 999px; font-size: 12px; line-height: 1.2; }
+
+/* Konto-Menü: auf niedrigen Bildschirmen nie aus dem Bild ragen, sondern scrollen */
+.usermenu { max-height: calc(100dvh - var(--umtop, 64px) - 12px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }

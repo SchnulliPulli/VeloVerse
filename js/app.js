@@ -1,5 +1,5 @@
 // Einstieg: Zustand laden, Router, Navigation
-import { $, bus, toast, dialog, toggleFullscreen, isPWA, pwaFullscreen } from './util.js';
+import { $, bus, toast, dialog, toggleFullscreen, appFullscreen } from './util.js';
 import { loadState, profile } from './state.js';
 import { loadClickMap, setDemo, status, support, reconnectKnown } from './ble.js';
 import { kv, persist } from './db.js';
@@ -82,7 +82,7 @@ function nav() {
   const fs = $('#fsBtn'), fsUpd = () => { const on = !!(document.fullscreenElement || document.webkitFullscreenElement); fs.innerHTML = on ? '<svg viewBox="0 0 24 24"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>' : ICON.full; fs.title = on ? 'Vollbild beenden' : 'Vollbild'; fs.dataset.st = on ? 'on' : 'off'; };
   fs.onclick = toggleFullscreen; document.addEventListener('fullscreenchange', fsUpd); document.addEventListener('webkitfullscreenchange', fsUpd); fsUpd();
   if (!document.documentElement.requestFullscreen && !document.documentElement.webkitRequestFullscreen) fs.hidden = true;
-  if (isPWA()) { fs.hidden = true; document.documentElement.classList.add('pwa'); pwaFullscreen(); } // installierte App: immer Vollbild, kein Knopf
+  if (appFullscreen()) { fs.hidden = true; document.documentElement.classList.add('pwa'); } // App läuft schon im Vollbild (Handy): kein Knopf. Als Fenster (PC, DeX) bleibt der Knopf
   // Anmelden-Knopf (nur wenn IndooRado Online eingerichtet ist); angemeldet zeigt er Initiale und Namen
   const lb = document.createElement('a'); lb.className = 'btn sm loginbtn'; lb.href = '#/account'; lb.hidden = true;
   document.querySelector('.ridebtn').before(lb);
@@ -117,7 +117,7 @@ function nav() {
     um.innerHTML = `<div class="umhead">${avatarSvg(profile, 48)}<div><b>${n}</b><small>${mail}</small>${adm || mfa ? `<span class="umtags">${adm ? '<span class="prtag">Admin</span>' : ''}${mfa ? '<span class="prtag warn">2FA-Code fehlt</span>' : ''}</span>` : ''}</div></div>
       <div class="umgrid"><a href="#/account">👤<span>Konto</span></a><a href="#/friends">👥<span>Freunde</span></a><a href="#/avatar">🎨<span>Avatar</span></a><a href="#/profile">⚙️<span>Einstellungen</span></a>${adm ? '<a href="#/admin" class="umwide">🛠️<span>Admin-Konsole</span></a>' : ''}</div>
       ${accHtml}<button class="umout" data-um-out>↩︎ Abmelden</button>`;
-    const r = lb.getBoundingClientRect(); um.style.top = (r.bottom + 8) + 'px'; um.style.right = Math.max(8, innerWidth - r.right) + 'px'; um.hidden = false;
+    const r = lb.getBoundingClientRect(); um.style.top = (r.bottom + 8) + 'px'; um.style.setProperty('--umtop', (r.bottom + 8) + 'px'); um.style.right = Math.max(8, innerWidth - r.right) + 'px'; um.hidden = false;
   });
   um.addEventListener('click', async e => {
     const fg = e.target.closest('[data-forget]');
