@@ -99,6 +99,8 @@ export async function loadSync() {
   sync.device = await kv.get('device', null);
   if (!sync.device) { sync.device = { id: Math.random().toString(36).slice(2, 10), name: deviceName() }; await kv.set('device', sync.device); }
   kvT = await kv.get('kvTimes', {});
+  // Einmalig: Geräte, die wegen eines Rechtefehlers nie wirklich abgemeldet wurden, wieder in die Liste holen
+  if (!(await kv.get('devRmReset1', false))) { await kv.set('removedDevices', []); await kv.set('devRmReset1', true); }
 }
 // Kurzer Gerätename aus dem Browser, z. B. „Windows · Chrome“ oder „Android · Chrome“
 function deviceName() {

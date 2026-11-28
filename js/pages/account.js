@@ -274,7 +274,8 @@ async function renderAccount(el) {
   // Einwilligung aus der Registrierung übernehmen (einmalig nach der ersten Anmeldung)
   { const c = localStorage.getItem('vvHrConsent'); if (c != null) { await OS.setPrefs({ hr: c !== '0', hrConsentAt: c !== '0' ? c : null }).catch(() => { }); localStorage.removeItem('vvHrConsent'); } }
   const P = await OS.prefs(), lv = levelOf(progress.xp).lv;
-  const devs = Object.entries(S.sync.devices || {}).sort((a, b) => (b[1].last || '').localeCompare(a[1].last || ''));
+  // dieses Gerät immer anzeigen, auch wenn der Abgleich es noch nicht eingetragen hat
+  const devs = Object.entries({ ...(S.sync.devices || {}), ...(S.sync.device ? { [S.sync.device.id]: { name: S.sync.device.name, last: S.sync.devices?.[S.sync.device.id]?.last || S.sync.last } } : {}) }).sort((a, b) => (b[1].last || '').localeCompare(a[1].last || ''));
   const aal2 = O.online.aal?.currentLevel === 'aal2';
   const opt = (k, l, hint) => `<label class="switch"><input type="checkbox" data-pref="${k}" ${P[k] ? 'checked' : ''}><span></span> <div class="swt">${l}${hint ? `<small class="muted">${hint}</small>` : ''}</div></label>`;
   el.innerHTML = `
