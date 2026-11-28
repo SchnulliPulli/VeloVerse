@@ -103,6 +103,7 @@ export async function render(el) {
       <button class="tbtn" id="tPause" title="Pause (Leertaste)">${ICON.pause}<span>Pause</span></button>
       <button class="tbtn" id="tView" title="Kamera (C)">${ICON.view}<span>Kamera</span></button>
       <button class="tbtn" id="tRideOn" title="Ride On an den nächsten Fahrer (R)"><b class="ro">👍</b><span>Ride On</span></button>
+      <button class="tbtn" id="tSet" title="Fahransicht und Ton einstellen, ohne die Fahrt zu verlassen"><b class="dots gear">⚙️</b><span>Optionen</span></button>
       <button class="tbtn" id="tMore" title="Weitere Funktionen" aria-expanded="false"><b class="dots">⋯</b><span>Mehr</span></button>
       <button class="tbtn stop" id="tEnd" title="Beenden">${ICON.stop}<span>Beenden</span></button>
     </div>
@@ -225,8 +226,7 @@ async function start(el) {
   import('../streetimg.js').then(async M => {
     if (!(await M.possible(route)) || !(await M.askConsent()) || !S?.alive) return;
     const box = document.createElement('div'); box.className = 'streetimg'; box.hidden = true; box.innerHTML = M.boxHtml(); document.body.appendChild(box);
-    box.querySelector('.sibig').onclick = () => box.classList.toggle('big');
-    S.si = new M.StreetImages(route, box); const iv = setInterval(() => { if (!S?.alive || !S.si) return clearInterval(iv); S.si.update(S.dist); }, 1000);
+    S.si = new M.StreetImages(route, box); M.mount(box, S.si); const iv = setInterval(() => { if (!S?.alive || !S.si) return clearInterval(iv); S.si.update(S.dist); }, 1000);
   }).catch(() => { });
   // Kinderfahrt: Ziel 10 Minuten, dann Lob und Bonus (weiterfahren geht)
   { const km = +sessionStorage.getItem('kidRide') || 0; sessionStorage.removeItem('kidRide'); if (km) { S.kidMin = km; $('#startCard', el).innerHTML = `<b>🧒 ${km} Minuten Abenteuer</b><span>Tritt los! Sammle Glocken und überhol die anderen.</span>`; const iv = setInterval(() => { if (!S?.alive) return clearInterval(iv); if (S.t >= km * 60) { clearInterval(iv); S.bonusXp = (S.bonusXp || 0) + 50; flash(`🎉 Super, ${km} Minuten geschafft! +50 XP`, 4000); sound.fanfare?.(); } }, 1000); } }
@@ -376,6 +376,7 @@ function bindUi() {
   $('#woP', el).onclick = () => { S.wOff = clamp(S.wOff + 2, -40, 40); };
   $('#woSkip', el).onclick = () => { const w = woAt(S.wo, S.wT); if (w && !w.done) S.wT += w.left + .01; };
   $('#tSnd', el).onclick = toggleSound;
+  $('#tSet', el).onclick = () => rideSettings();
   $('#tRideOn', el).onclick = giveRideOn;
   const nextTrack = () => { if (!music.playing) { flash('🎵 Musik ist aus (Fahrt-Einstellungen › Ton)', 2200); return; } music.skip(); setTimeout(() => flash('🎵 ' + (music.trackName || 'Nächstes Stück'), 2000), 60); };
   $('#tMusic', el).onclick = nextTrack;
@@ -599,6 +600,20 @@ function toggleNpcs() {
   if (S.npcOn && !S.field.length) spawnField();
   if (!S.npcOn) { S.world.npcs.forEach(n => n.rider.root.visible = false); S.draft = 0; }
   updNpcBtn(); flash(S.npcOn ? 'Mitfahrer an' : 'Mitfahrer aus');
+}
+// Einstellungen „Fahransicht“ und „Ton“ als Fenster über der Fahrt (die Fahrt läuft weiter, Änderungen gelten sofort)
+async function rideSettings(sec = 'view') {
+  document.querySelector('.rsdlgw')?.remove();
+  const w = document.createElement('div'); w.className = 'modal on rsdlgw';
+  w.innerHTML = `<div class="card dlg rsdlg" role="dialog" aria-modal="true" aria-label="Einstellungen"><div class="row between rshead"><div class="seg sm"><button data-sec="view">👁 Fahransicht</button><button data-sec="sound">🔊 Ton</button></div><button class="btn sm ghost" data-x aria-label="Schließen">✕</button></div><div class="rsbody"></div></div>`;
+  document.body.appendChild(w);
+  const mod = await import('./ridesettings.js'), body = w.querySelector('.rsbody');
+  const show = async k => { w.querySelectorAll('[data-sec]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sec === k))); try { mod.leave?.(); } catch (e) { } await mod.render(body, [k]); body.scrollTop = 0; };
+  const close = () => { try { mod.leave?.(); } catch (e) { } w.remove(); document.removeEventListener('keydown', escK, true); if (S?.el) updSnd(); };
+  const escK = e => { if (e.key === 'Escape') { e.stopPropagation(); close(); } };
+  document.addEventListener('keydown', escK, true);
+  w.addEventListener('click', e => { if (e.target === w || e.target.closest('[data-x]')) return close(); const b = e.target.closest('[data-sec]'); if (b) show(b.dataset.sec); if (e.target.closest('a[href="#/ride"]')) { e.preventDefault(); close(); } });
+  show(sec);
 }
 // Ride On: Daumen hoch zwischen Fahrern (gibt etwas XP)
 function gotRideOn(name) { S.rideOnsGot++; flash('👍 Ride On von ' + name, 1800); say('Ride On von ' + name, 'mp'); xpPop('+2 XP Ride On'); sound.pass(); }

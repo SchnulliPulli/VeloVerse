@@ -1206,7 +1206,12 @@ html.tv .btn { min-height: 48px; }
 .streetimg img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s; display: block; }
 .streetimg img.on { opacity: 1; }
 .streetimg .siattr { position: absolute; left: 6px; bottom: 5px; font-size: 10px; color: #fff; background: rgba(0,0,0,.5); padding: 1px 6px; border-radius: 5px; }
-.streetimg .sibig { position: absolute; right: 6px; top: 6px; border: 0; border-radius: 6px; background: rgba(0,0,0,.5); color: #fff; width: 28px; height: 28px; cursor: pointer; }
+.streetimg { cursor: grab; touch-action: none; user-select: none; } .streetimg.drag { cursor: grabbing; transition: none; opacity: .9; }
+.streetimg .sibtns { position: absolute; right: 6px; top: 6px; display: flex; gap: 4px; }
+.streetimg .sibtns button { border: 0; border-radius: 6px; background: rgba(0,0,0,.55); color: #fff; width: 30px; height: 30px; cursor: pointer; font-size: 14px; }
+.streetimg .sibtns button:hover { background: rgba(0,0,0,.8); }
+.streetimg .sinone { position: absolute; inset: 0; display: none; place-items: center; color: #fff; opacity: .7; font-size: 13px; text-align: center; padding: 12px; }
+.streetimg.none .sinone { display: grid; } .streetimg.none { aspect-ratio: auto; height: 64px; }
 @media (max-width: 700px) { .streetimg { width: 42vw; top: 70px; } }
 
 /* Workouts nach verfügbarer Zeit */
@@ -1462,3 +1467,10 @@ body.watchtv .tvprof { height: 15vh; }
 .invsub { margin: 10px 4px 4px; }
 .callwin.flash { box-shadow: 0 0 0 3px var(--acc); transition: box-shadow .2s; }
 .otherpop .opacct { color: var(--acc); margin-bottom: 2px; } .otherpop.callring { padding: 14px; }
+
+/* Einstellungen während der Fahrt */
+.rsdlgw .rsdlg { width: min(760px, calc(100vw - 24px)); max-height: calc(100dvh - 40px); display: flex; flex-direction: column; padding: 14px; }
+.rsdlg .rsbody { overflow: auto; overscroll-behavior: contain; margin-top: 10px; padding-right: 2px; }
+.rsdlg .rsbody .pagehead { display: none; }
+.rsdlg .rsbody .grid2 { grid-template-columns: 1fr; }
+.tbtn b.gear { font-size: 17px; line-height: 1; }
