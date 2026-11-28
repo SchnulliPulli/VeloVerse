@@ -1,6 +1,14 @@
 // Anleitung: durchsuchbar, nach Themen gegliedert, Abschnitte zum Auf- und Zuklappen
 import { RIDE } from '../shortcuts.js';
 const T = [
+  ['nav', '🧭', 'Wo finde ich was?', `<ul class="tips">
+    <li><b>Start</b>: Begrüßung, Empfehlung für heute, Strecke, Trainingsplan, Missionen, Geräte, Fahrt einrichten, Woche und letzte Fahrten. Mit <b>✏️ Startseite anpassen</b> (ganz unten) blendest du Felder aus und änderst die Reihenfolge.</li>
+    <li><b>Training</b>: Workouts, Trainingspläne und <b>Strecken</b> (inkl. Baukasten, GPX- und Videofahrten).</li>
+    <li><b>Fahrten</b>: Verlauf aller Fahrten, Fortschritt &amp; Saison, Wochen- und Monatsberichte.</li>
+    <li><b>Online</b>: Lobby, Freunde und Chat, Events &amp; Teams (mit Konto).</li>
+    <li><b>Geräte</b> und <b>Einstellungen</b>: am Computer links im Menü, am Handy unter <b>⋯ Mehr</b>. Einstellungen: Profil · Fahrt &amp; Ton · Benachrichtigungen &amp; Privatsphäre · App &amp; Daten · Konto · Hilfe. Oben auf jeder Einstellungsseite gibt es eine <b>Suche</b>.</li>
+    <li>Oben rechts: Geräte-Status, Nachrichten, dein <b>Konto-Menü</b> (Konten wechseln, Abmelden) und <b>⚡ Schnellstart</b>.</li>
+    <li>In der Fahrt: unten die Knopfleiste, <b>⚙️ Optionen</b> öffnet Fahransicht und Ton ohne die Fahrt zu verlassen, <b>⋯</b> zeigt „Häufig“ und aufklappbar „Weitere“.</li></ul>`],
   ['start', '🚀', 'Erste Schritte', `<ol class="tips">
     <li><b>Profil</b> (Einstellungen › Profil): Name, <b>FTP</b> und Gewicht eintragen. Alle Workout-Watt und Zonen hängen an der FTP. FTP unbekannt? Fahr ein paar Mal – die App schätzt sie und schlägt sie auf der Startseite vor.</li>
     <li><b>Geräte</b> verbinden: Smart-Trainer, Pulsgurt, Trittfrequenz-Sensor, Lenkertasten. Ohne Geräte probierst du alles mit den <b>Demo-Geräten</b> aus.</li>
@@ -28,7 +36,7 @@ const T = [
     <li><b>Geist</b>: deine Bestfahrt auf dieser Strecke als durchsichtiger Fahrer.</li>
     <li><b>Freunde-Geister</b>: in der Auswertung „👻 Als Geist“ teilt eine Fahrt als Datei oder Code. Freunde öffnen sie unter Fahrten › Importieren › Geist und fahren dann gegen dich (bis zu fünf Geister gleichzeitig, ohne Puls und Watt).</li>
     <li><b>Trainingsbuddy</b> (Mehr › Buddy): fährt locker neben dir her und plaudert ein wenig.</li>    <li><b>🐇 Pace-Partner</b> (⋯ in der Fahrt): eine Gruppe mit festem W/kg zum Mitfahren. <b>🏆 Tour de IndooRado</b> (Online › Events): fünf Etappen pro Woche mit gelbem, rotem und grünem Trikot. <b>👑 Bergkönig:</b> Bestzeit je Anstieg, angezeigt am Fuß des Anstiegs.</li>
-    <li><b>🙋 Gesten</b> an echte Mitfahrer, <b>Wind</b> mit Böen (Fahrt &amp; Ton), <b>🎙️ Sprachsteuerung</b>: „Pause“, „schwerer“, „nächstes Intervall“, „Foto“ …</li>
+    <li><b>🙋 Gesten</b> an echte Mitfahrer, <b>Wind</b> mit Böen (Fahrt &amp; Ton), <b>🎙️ Sprachsteuerung</b> (⋯ › Weitere › Sprache): Die App hört zu, solange der Knopf leuchtet. Du sprichst einfach einen Befehl, ohne Aktivierungswort: „Pause“ bzw. „weiter“, „schwerer“/„leichter“ (Gang bzw. Intensität), „nächstes Intervall“, „Intervall zurück“, „Foto“, „Kamera“, „Ride On“, „Musik“, „links“/„rechts“. Oben erscheint, was erkannt wurde, oder „nicht verstanden“. Die Erkennung macht der Browser (Chrome/Edge am besten, braucht Internet; Chrome schickt den Ton dazu an Google). In der eingestellten App-Sprache klappt es auch auf Englisch, Spanisch, Französisch, Italienisch und Niederländisch. Tipp: kurze, deutliche Befehle, laute Musik oder Lüfter direkt am Mikrofon stören.</li>
 </ul>`],
   ['training', '🏋️', 'Workouts, Pläne und FTP', `<ul class="tips">
     <li>Workout-Ziele sind Prozent deiner FTP – ändert sich die FTP, passt sich alles an. Jedes Intervall zeigt Kadenz-Ziel und Tipp, ein Countdown piept vor dem Wechsel.</li>
@@ -45,7 +53,7 @@ const T = [
 </ul>`],
   ['strecken', '🗺️', 'Strecken und Baukasten', `<ul class="tips">
     <li>Fast 30 eingebaute Welten von Hügelland bis Weltall, Tiefsee, Lava-Insel, Wolken und Zuckerland. Jede Strecke zeigt ein Vorschaubild.</li>
-    <li><b>🧱 Strecken-Baukasten</b> (Strecken › Baukasten): Bausteine antippen – Geraden, Kurven, Spitzkehren, Serpentinen, Anstiege, Steilwände, Abfahrten, Achterbahn, Korkenzieher und mehr. Jeden Baustein in Länge, Steilheit und Richtung anpassen, Landschaft und Belag wählen, als Rundkurs schließen, speichern und fahren. Vorlagen und 🎲 Zufall helfen beim Start.</li>
+    <li><b>🧱 Strecken-Baukasten</b> (Training › Strecken › Baukasten): Bausteine antippen – Geraden, Kurven, Spitzkehren, Serpentinen, Anstiege, Steilwände, Abfahrten, Achterbahn, Korkenzieher und mehr. Jeden Baustein in Länge, Steilheit und Richtung anpassen, Landschaft und Belag wählen, als Rundkurs schließen, speichern und fahren. Vorlagen und 🎲 Zufall helfen beim Start.</li>
     <li><b>🏙️ Echte Gebäude</b> (bei importierten echten Strecken, mit Anmeldung): Häuser, Kirchen und Hallen entlang der Strecke aus OpenStreetMap, in echter Form und Höhe. Laden auf der Seite der Strecke.</li>
     <li><b>GPX und Strava-Routen</b> importieren; auf Wunsch mit <b>echtem Gelände</b> aus einem frei verfügbaren Höhenmodell.</li>
     <li>Einmal die ganze Strecke fahren bringt das <b>Routen-Abzeichen</b> 🏅 (+100 XP).</li>    <li><b>🎬 Videofahrt</b>: Eigene Aufnahme (GoPro, Handy) plus GPX der Ausfahrt laden. Das Video läuft so schnell, wie du trittst, der Widerstand folgt dem Anstieg. Das Video bleibt auf deinem Gerät. Taste V wechselt zwischen Video und 3D-Welt.</li>

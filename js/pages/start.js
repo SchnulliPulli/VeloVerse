@@ -97,15 +97,16 @@ export async function render(el) {
   ${(() => { const e = estimateFtp(rides); if (!e || Math.abs(e.ftp - profile.ftp) < Math.max(8, profile.ftp * .04) || profile.ftpHintOff === e.ftp) return ''; const up = e.ftp > profile.ftp;
     return `<section class="card ftphint ${up ? 'up' : 'down'}" role="status"><div><b>${up ? '📈 Du bist stärker geworden!' : '📉 Deine FTP ist vielleicht zu hoch'}</b><div class="small muted">Geschätzte FTP <b>${e.ftp} W</b> statt ${profile.ftp} W · ${e.from} (${new Date(e.date).toLocaleDateString(document.documentElement.lang)})${e.sure ? '' : ' · ohne 20-min-Wert etwas ungenauer'}. Die FTP bestimmt deine Trainingszonen und Workout-Watt.</div></div>
       <div class="row"><button class="btn sm pri" data-ftpset="${e.ftp}">Auf ${e.ftp} W setzen</button><button class="btn sm" data-ftpno="${e.ftp}">Nein danke</button></div></section>`; })()}
-  ${todayCard(rides)}
-  ${(() => { const c = daily(), st = dailyState(), n = dailyStreak(); return `<section class="card dailycard ${st?.ok ? 'done' : ''}"><div class="row between"><div><div class="small muted">🗓️ Tagesherausforderung · für alle gleich, morgen neu${n ? ' · 🔥 ' + n + ' Tage in Folge' : ''}</div><h2 style="margin:2px 0">${esc(c.text)}</h2><p class="small muted" style="margin:0">${st?.ok ? '✅ Geschafft in ' + fmtDur(st.time) + '. Schneller geht immer!' : st ? 'Versucht: ' + fmtDur(st.time) + '. Noch ein Anlauf?' : '+150 XP beim ersten Erfolg des Tages'}</p></div><button class="btn ${st?.ok ? '' : 'pri'}" data-daily>${st?.ok ? 'Nochmal' : 'Annehmen'}</button></div></section>`; })()}
-  <div id="featR">${featuredRoute(routes.find(r => r.id === sel.routeId) || routes[0])}</div>
-  <section class="grid2">
-    <div class="card"><div class="row between"><h2>Trainingsplan</h2><a href="#/plans" class="small">Alle Pläne</a></div>${planCard()}</div>
-    <div class="card"><div class="row between"><h2>Wochenmissionen</h2><span class="small muted">${t.streak ? '🔥 ' + t.streak + ' Tage Serie' + (streakBonus(t.streak) ? ' · +' + Math.round(streakBonus(t.streak) * 100) + ' % XP' : '') : 'Heute fahren startet eine Serie'}${frz ? ` · <span title="Serien-Schutz: überbrückt automatisch einen fehlenden Tag. Neu für jede Woche mit 3 Fahrtagen, höchstens 2.">🧊 ${frz}</span>` : ''}</span></div>${missionRings(missionState(rides))}</div>
-  </section>
-  <section class="card"><div class="row between"><h2>Geräte</h2><a href="#/devices" class="small">Details und Tasten anlernen</a></div><div id="devs"></div></section>
-  <section class="card">
+  <div class="homegrid" id="homeGrid">
+  <div class="hblk" data-blk="today">${todayCard(rides)}</div>
+  <div class="hblk" data-blk="daily">${(() => { const c = daily(), st = dailyState(), n = dailyStreak(); return `<section class="card dailycard ${st?.ok ? 'done' : ''}"><div class="row between"><div><div class="small muted">🗓️ Tagesherausforderung · für alle gleich, morgen neu${n ? ' · 🔥 ' + n + ' Tage in Folge' : ''}</div><h2 style="margin:2px 0">${esc(c.text)}</h2><p class="small muted" style="margin:0">${st?.ok ? '✅ Geschafft in ' + fmtDur(st.time) + '. Schneller geht immer!' : st ? 'Versucht: ' + fmtDur(st.time) + '. Noch ein Anlauf?' : '+150 XP beim ersten Erfolg des Tages'}</p></div><button class="btn ${st?.ok ? '' : 'pri'}" data-daily>${st?.ok ? 'Nochmal' : 'Annehmen'}</button></div></section>`; })()}
+</div>
+  <div class="hblk" data-blk="route"><div id="featR">${featuredRoute(routes.find(r => r.id === sel.routeId) || routes[0])}</div></div>
+    <div class="hblk half" data-blk="plan"><div class="card"><div class="row between"><h2>Trainingsplan</h2><a href="#/plans" class="small">Alle Pläne</a></div>${planCard()}</div></div>
+    <div class="hblk half" data-blk="missions"><div class="card"><div class="row between"><h2>Wochenmissionen</h2><span class="small muted">${t.streak ? '🔥 ' + t.streak + ' Tage Serie' + (streakBonus(t.streak) ? ' · +' + Math.round(streakBonus(t.streak) * 100) + ' % XP' : '') : 'Heute fahren startet eine Serie'}${frz ? ` · <span title="Serien-Schutz: überbrückt automatisch einen fehlenden Tag. Neu für jede Woche mit 3 Fahrtagen, höchstens 2.">🧊 ${frz}</span>` : ''}</span></div>${missionRings(missionState(rides))}</div>
+  </div>
+  <div class="hblk" data-blk="devices"><section class="card"><div class="row between"><h2>Geräte</h2><a href="#/devices" class="small">Details und Tasten anlernen</a></div><div id="devs"></div></section></div>
+  <div class="hblk" data-blk="setup"><section class="card">
     <h2>Fahrt einrichten</h2>
     <h3 class="sub">Strecke</h3>
     <div class="routepick scroll" id="routePick">${routes.map(r => { const s = quickStats(r); return `
@@ -134,16 +135,17 @@ export async function render(el) {
       </div>
     </div>
     <div class="row end" style="margin-top:14px"><a class="btn pri big" href="#/ride">${ICON.ride} Fahrt starten</a></div>
-  </section>
-  <section class="grid2">
-    <div class="card"><div class="row between"><h2>Diese Woche</h2><a href="#/progress" class="small">Fortschritt</a></div>
+  </section></div>
+    <div class="hblk half" data-blk="week"><div class="card"><div class="row between"><h2>Diese Woche</h2><a href="#/progress" class="small">Fortschritt</a></div>
       ${weekCal(rides)}
       ${statTiles([[fmtKm(wkSum.d), 'km'], [fmtDur(wkSum.t), 'Fahrzeit'], [wkSum.tss, 'TSS'], [week.length, 'Fahrten'], [t.streak, 'Tage am Stück'], [Object.keys(progress.badges).length, 'Abzeichen']])}
-    </div>
-    <div class="card"><div class="row between"><h2>Letzte Fahrten</h2><a href="#/history" class="small">Alle</a></div>
+    </div></div>
+    <div class="hblk half" data-blk="recent"><div class="card"><div class="row between"><h2>Letzte Fahrten</h2><a href="#/history" class="small">Alle</a></div>
       ${rides.length ? rides.slice(0, 4).map(rideRow).join('') : '<p class="muted">Noch keine Fahrten gespeichert. Die erste Fahrt wartet.</p>'}
-    </div>
-  </section>`;
+    </div></div>
+  </div>
+  <div class="row center homeedit"><button class="btn sm ghost" id="homeEdit">✏️ Startseite anpassen</button></div>`;
+  applyHome(el);
   off.push(deviceCards($('#devs', el)));
   // Einmaliger Hinweis: als App installieren (Vollbild, eigenes Symbol)
   import('../comfort.js').then(C => {
@@ -187,3 +189,33 @@ export async function render(el) {
   const pn = planProgress()?.next, pc = $('#planNext', el); if (pn && pc) { const w = await getWorkout(pn.id); if (w) drawWorkout(pc, w); }
 }
 export function leave() { off.forEach(f => f()); off = []; }
+
+/* ---------- Startseite anpassen: Felder ein-/ausblenden und Reihenfolge (Begrüßung, Hinweise und „Fahrt einrichten“ bleiben) ---------- */
+const BLOCKS = [['today', '💡 Empfehlung für heute'], ['daily', '🗓️ Tagesherausforderung'], ['route', '🗺️ Gewählte Strecke'], ['plan', '📅 Trainingsplan'], ['missions', '🎯 Wochenmissionen'], ['devices', '🔌 Geräte'], ['setup', '🚴 Fahrt einrichten'], ['week', '📊 Diese Woche'], ['recent', '🕘 Letzte Fahrten']];
+const FIXED = ['setup']; // lässt sich verschieben, aber nicht ausblenden
+const homeCfg = () => { const c = profile.homeLayout || {}, known = BLOCKS.map(b => b[0]); const order = [...(c.order || []).filter(k => known.includes(k)), ...known.filter(k => !(c.order || []).includes(k))]; return { order, hidden: (c.hidden || []).filter(k => !FIXED.includes(k)) }; };
+function applyHome(el) {
+  const g = el.querySelector('#homeGrid'); if (!g) return; const c = homeCfg();
+  for (const k of c.order) { const b = g.querySelector(`[data-blk="${k}"]`); if (b) { g.append(b); b.hidden = c.hidden.includes(k); } }
+  // halbe Kacheln ohne Partner über die volle Breite ziehen
+  const vis = [...g.children].filter(b => !b.hidden); vis.forEach(b => b.classList.remove('solo'));
+  for (let i = 0; i < vis.length; i++) if (vis[i].classList.contains('half')) { if (vis[i + 1]?.classList.contains('half')) i++; else vis[i].classList.add('solo'); }
+  const eb = el.querySelector('#homeEdit'); if (eb) eb.onclick = () => editHome(el);
+}
+async function editHome(el) {
+  const c = homeCfg(); let order = [...c.order]; const hidden = new Set(c.hidden);
+  const w = document.createElement('div'); w.className = 'modal on';
+  const draw = () => { w.innerHTML = `<div class="card dlg homedlg" role="dialog" aria-modal="true" aria-label="Startseite anpassen"><h2>✏️ Startseite anpassen</h2><p class="small muted">Häkchen: anzeigen. Pfeile: Reihenfolge. Begrüßung und wichtige Hinweise bleiben immer oben.</p>
+    <div class="hlist">${order.map((k, i) => { const l = BLOCKS.find(b => b[0] === k)[1], fx = FIXED.includes(k); return `<div class="hrow"><label class="chk"><input type="checkbox" data-k="${k}" ${hidden.has(k) ? '' : 'checked'} ${fx ? 'disabled' : ''}><span>${l}${fx ? ' <small class="muted">(immer sichtbar)</small>' : ''}</span></label><span class="row"><button class="btn xs ghost" data-up="${i}" ${i ? '' : 'disabled'} aria-label="nach oben">▲</button><button class="btn xs ghost" data-dn="${i}" ${i < order.length - 1 ? '' : 'disabled'} aria-label="nach unten">▼</button></span></div>`; }).join('')}</div>
+    <div class="row between"><button class="btn ghost sm" data-reset>Standard</button><span class="row"><button class="btn ghost" data-x>Abbrechen</button><button class="btn pri" data-save>Speichern</button></span></div></div>`; };
+  draw(); document.body.appendChild(w);
+  w.addEventListener('change', e => { const k = e.target.dataset.k; if (k) e.target.checked ? hidden.delete(k) : hidden.add(k); });
+  w.addEventListener('click', e => {
+    const u = e.target.closest('[data-up]'), d = e.target.closest('[data-dn]');
+    if (u) { const i = +u.dataset.up; [order[i - 1], order[i]] = [order[i], order[i - 1]]; draw(); return; }
+    if (d) { const i = +d.dataset.dn; [order[i + 1], order[i]] = [order[i], order[i + 1]]; draw(); return; }
+    if (e.target.closest('[data-reset]')) { order = BLOCKS.map(b => b[0]); hidden.clear(); draw(); return; }
+    if (e.target === w || e.target.closest('[data-x]')) { w.remove(); return; }
+    if (e.target.closest('[data-save]')) { profile.homeLayout = { order, hidden: [...hidden] }; saveProfile(); w.remove(); applyHome(el); }
+  });
+}

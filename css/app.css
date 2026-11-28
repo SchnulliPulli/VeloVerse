@@ -1586,3 +1586,16 @@ html.pwa .fsbtn, html.pwa #tFull { display: none !important; }
 .tbpop .tbexp:hover { background: rgba(255,255,255,.14); }
 .tbpop .tbtn.tbext { display: none; }
 .tbpop.xopen .tbtn.tbext { display: flex; }
+/* Startseite: anpassbare Felder */
+.homegrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; margin-top: 16px; }
+.homegrid > .hblk { grid-column: 1 / -1; min-width: 0; }
+.homegrid > .hblk.half { grid-column: auto; }
+.homegrid > .hblk.half.solo { grid-column: 1 / -1; }
+.homegrid > .hblk[hidden] { display: none; }
+.homegrid > .hblk > .card, .homegrid > .hblk > section, .homegrid > .hblk > div > .card, .homegrid > .hblk > div > section { margin: 0; }
+.homegrid > .hblk:empty { display: none; }
+@media (max-width: 760px) { .homegrid { grid-template-columns: 1fr; } .homegrid > .hblk.half { grid-column: 1 / -1; } }
+.homeedit { justify-content: center; margin: 18px 0 6px; }
+.homedlg .hlist { display: flex; flex-direction: column; gap: 4px; margin: 10px 0 14px; }
+.homedlg .hrow { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 10px; background: var(--panel2); }
+.homedlg .hrow .chk { margin: 0; }
