@@ -25,7 +25,7 @@ export async function render(el, params = [], query = '') {
       <h3 class="sub">Privatsphäre</h3>
       <label class="switch"><input type="checkbox" id="frShare" ${O.online.profile?.share_rides ? 'checked' : ''}><span></span> <div class="swt">Freunde dürfen meine einzelnen Fahrten sehen<small class="muted">Datum, Strecke, Distanz, Dauer, Höhenmeter, Ø Watt. Ohne diese Erlaubnis sehen Freunde nur Level und Summen. Puls, Gewicht und Alter sieht nie jemand.</small></div></label>
       <label class="switch"><input type="checkbox" id="frFind" ${O.online.profile?.discoverable !== false ? 'checked' : ''}><span></span> <div class="swt">In der Suche auffindbar<small class="muted">Andere angemeldete Spieler finden dich über deinen Namen und sehen dabei Name, Avatar und Level. Standardmäßig an. Ausgeschaltet können dich Freunde trotzdem per Freundescode oder über die Online-Liste anfragen.</small></div></label>
-      <label class="switch"><input type="checkbox" id="frCalls" ${O.online.profile?.allow_calls !== false ? 'checked' : ''}><span></span> <div class="swt">Freunde dürfen mich anrufen<small class="muted">Ausgeschaltet kann dich niemand per Video- oder Sprachanruf erreichen. Du selbst kannst weiter anrufen. Standardmäßig an.</small></div></label>
+      <label class="switch"><input type="checkbox" id="frCalls" ${O.online.profile?.allow_calls !== false ? 'checked' : ''}><span></span> <div class="swt">Anrufe (Video und Sprache)<small class="muted">Ausgeschaltet kann dich niemand anrufen, und du rufst auch selbst niemanden an. Nachrichten gehen weiter. Standardmäßig an.</small></div></label>
       <label class="switch"><input type="checkbox" id="frMsgs" ${O.online.profile?.allow_msgs !== false ? 'checked' : ''}><span></span> <div class="swt">Freunde dürfen mir Nachrichten schreiben<small class="muted">Ausgeschaltet kommen keine neuen Chat-Nachrichten mehr an; der bisherige Verlauf bleibt. Standardmäßig an.</small></div></label>
     </div>
   </section>`;
@@ -140,6 +140,7 @@ async function openFriend(sb, me, f, redraw) {
   });
   // Eigenes zweites Konto in dieser App: Anrufen geht nicht (würde nur hier selbst klingeln)
   import('../call.js').then(C => { const cb = w.querySelector('[data-call]'); if (C.sameApp(f.id) && cb) { cb.disabled = true; cb.title = 'Dieses Konto ist auch in dieser App angemeldet – Anrufen nicht möglich'; } });
+  if (O.online.profile?.allow_calls === false) { const cb = w.querySelector('[data-call]'); if (cb) { cb.disabled = true; cb.title = 'Anrufe sind in deinen Einstellungen ausgeschaltet (Freunde › Privatsphäre)'; } }
   // Darf ich diesen Freund anrufen bzw. anschreiben? (Einstellung des Freundes, vom Server geprüft)
   sb.rpc('friend_privacy', { p_other: f.id }).then(({ data }) => {
     if (!data || !w.isConnected) return;

@@ -84,14 +84,17 @@ export function pickMode(title, peer) {
 }
 // Anrufen: Raum anlegen, Einladung als private Nachricht, Klingeln an alle Geräte des Freundes
 // Ist dieses Konto auch in dieser App (auf diesem Gerät) angemeldet? Dann klingelt es nur bei sich selbst – kein Anruf
+// Anrufe in den eigenen Einstellungen ausgeschaltet (Freunde › Privatsphäre): weder anrufen noch annehmen
+export const callsOff = () => { if (O.online.profile?.allow_calls !== false) return false; toast('📵 Anrufe sind ausgeschaltet – einschalten unter Freunde › Privatsphäre', 5000); return true; };
 export const sameApp = id => !!id && id !== O.online.user?.id && O.accounts().some(a => a.uid === id);
 export async function startCall(friend) {
+  if (callsOff()) return;
   if (sameApp(friend.id)) return toast('📵 Dieses Konto ist auch in dieser App angemeldet – Anrufe an eigene Konten auf demselben Gerät sind nicht möglich. Nachrichten gehen.', 5000);
   if (!(await allowed())) return;
   const mode = await pickMode(`${friend.display_name || friend.name} anrufen`, friend); if (!mode) return;
   const sb = await O.client();
   // Raum vom Server: nur unter Freunden, kryptografisch zufällig, Kanal danach nur für euch beide
-  const cr = await sb.rpc('call_create', { p_friend: friend.id }); if (cr.error) return toast(/Anrufe nicht erlaubt/.test(cr.error.message) ? `📵 ${friend.name || friend.display_name || 'Dein Freund'} nimmt gerade keine Anrufe an` : 'Anruf nicht möglich: ' + (/function|schema cache/i.test(cr.error.message) ? 'Datenbankschema erneut ausführen' : cr.error.message));
+  const cr = await sb.rpc('call_create', { p_friend: friend.id }); if (cr.error) return toast(/ausgeschaltet/.test(cr.error.message) ? '📵 Anrufe sind ausgeschaltet – einschalten unter Freunde › Privatsphäre' : /Anrufe nicht erlaubt/.test(cr.error.message) ? `📵 ${friend.name || friend.display_name || 'Dein Freund'} nimmt gerade keine Anrufe an` : 'Anruf nicht möglich: ' + (/function|schema cache/i.test(cr.error.message) ? 'Datenbankschema erneut ausführen' : cr.error.message));
   const room = cr.data;
   const { error } = await sb.from('chat_messages').insert({ recipient: friend.id, body: `[[call:${room}]]` });
   if (!error) import('./push.js').then(P => P.pushTo(friend.id, 'call', room)).catch(() => { });
@@ -106,7 +109,7 @@ export async function startCall(friend) {
 }
 // Beitreten (aus dem Chat oder beim Klingeln)
 export async function joinCall(room, peer) {
-  if (!/^IndooRado-[A-Za-z0-9]{24}$/.test(room) || !(await allowed())) return;
+  if (!/^IndooRado-[A-Za-z0-9]{24}$/.test(room) || callsOff() || !(await allowed())) return;
   if (call.room === room) { call.win?.classList.add('flash'); setTimeout(() => call.win?.classList.remove('flash'), 800); return; } // läuft schon auf diesem Gerät
   // Schon auf einem anderen Gerät dieses Kontos angenommen? Dann fragen, ob der Anruf hierher geholt werden soll
   const st = (await callStates([room])).get(room), me = O.online.user?.id;
