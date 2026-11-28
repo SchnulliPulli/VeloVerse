@@ -59,6 +59,7 @@ export async function render(el, params = [], query = '') {
   const loadCode = async (fresh = false) => { const { data, error } = await sb.rpc('my_friend_code', { p_new: fresh }); $('#frMy', el).textContent = error ? '–' : String(data).replace(/^(.{4})/, '$1-'); if (error) toast(miss(error)); };
   $('#frCode', el).onkeydown = e => { if (e.key === 'Enter') $('#frCodeGo', el).click(); };
   const openId = new URLSearchParams(query || '').get('open');
+  { const I = await import('../invite.js'), box = document.createElement('div'); box.innerHTML = I.inviteCardHtml(); const card = box.firstElementChild; el.querySelector('section.grid2')?.after(card); I.wireInviteCard(card).catch(() => { }); }
   loadCode(); draw().then(() => { const f = openId && list.find(x => x.id === openId && x.status === 'accepted'); if (f) openFriend(sb, me, f, draw); }); timers.push(setInterval(() => el.isConnected ? draw() : leave(), 30e3));
 }
 

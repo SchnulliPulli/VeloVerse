@@ -144,8 +144,13 @@ const loginReturn = () => expectingReturn() && new URLSearchParams(location.sear
 export const hasStoredSession = () => [localStorage, sessionStorage].some(s => { try { return !!s.getItem('vv-auth'); } catch (e) { return false; } });
 export async function initOnline() {
   await loadSiteConfig();
-  if (!configured() || (!hasStoredSession() && !loginReturn())) { online.ready = true; online.user = null; online.session = null; return null; }
+  // Rückkehr aus einer Einladungs- oder Bestätigungs-Mail: Anmeldedaten stehen (einmalig) im Adress-Anker, siehe app.js
+  let tok = null; try { tok = new URLSearchParams(sessionStorage.getItem('vvHashTok') || ''); sessionStorage.removeItem('vvHashTok'); } catch (e) { }
+  const viaMail = tok?.get('access_token') && tok.get('refresh_token');
+  if (!configured() || (!hasStoredSession() && !loginReturn() && !viaMail)) { online.ready = true; online.user = null; online.session = null; return null; }
   const sb = await client();
+  if (viaMail) { const { error } = await sb.auth.setSession({ access_token: tok.get('access_token'), refresh_token: tok.get('refresh_token') }); if (!error && ['invite', 'recovery'].includes(tok.get('type'))) try { sessionStorage.setItem('vvSetPw', tok.get('type')); } catch (e) { } }
+  { let t = null; try { t = sessionStorage.getItem('vvSetPw'); } catch (e) { } if (t) { online.recovery = true; online.invited = t === 'invite'; } } // überlebt ein Neuladen (Datenbank-Wechsel)
   const { data } = await withTimeout(sb.auth.getSession(), 8000, 'Anmeldung');
   if (expectingReturn() && new URLSearchParams(location.search).has('code')) { localStorage.removeItem('vvOnlineReturn'); history.replaceState(null, '', location.pathname + (location.hash || '#/account')); }
   online.session = data.session; online.user = data.session?.user || null;
@@ -238,7 +243,7 @@ export async function reauthenticate() { const { error } = await (await client()
 export async function updatePassword(password, nonce) {
   const { error } = await (await client()).auth.updateUser(nonce ? { password, nonce } : { password });
   if (error) { if (/reauth|nonce/i.test(error.message)) return 'reauth'; throw error; }
-  online.recovery = false; return 'ok';
+  online.recovery = false; online.invited = false; try { sessionStorage.removeItem('vvSetPw'); } catch (e) { } return 'ok';
 }
 export async function updateEmail(email) { mark(); const { error } = await (await client()).auth.updateUser({ email }, { emailRedirectTo: back() }); if (error) throw error; }
 

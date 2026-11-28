@@ -432,6 +432,9 @@ export async function pushOpen(href) {
   (await import('./call.js')).joinCall(m[1], peer);
 }
 async function init() {
+  // Einladung: Freundescode aus dem Link merken; Rückkehr aus der Einladungs-Mail (#access_token=…) vor dem Router abfangen
+  try { if (/[#&]access_token=/.test(location.hash)) { sessionStorage.setItem('vvHashTok', location.hash.slice(1)); history.replaceState(null, '', location.pathname + location.search + '#/account'); } } catch (e) { }
+  (await import('./invite.js')).captureRef();
   { const I = await import('./i18n.js'); await I.initI18n(); if (!I.langChosen() && !/^#\/(watch\/|tv\b)/.test(location.hash) && await I.pickLanguage()) return; } // Sprache wählen (erstes Öffnen)
   netIndicator();
   await loadState(); await loadClickMap(); await loadPlan();
@@ -488,6 +491,7 @@ async function init() {
       else if (d.kind === 'missed') { bus.emit('callsignal', { kind: 'callend', uid: d.from, name: d.name }); toast(`📵 Verpasster Anruf von ${d.name || 'Freund'}`, 6000); import('./notilog.js').then(N => N.addNote({ icon: '📵', title: `Verpasster Anruf von ${d.name || 'Freund'}`, act: { t: 'chat', uid: d.from } })); bus.emit('inbox'); } }
   });
   bus.on('online', ev => { if (ev === 'SIGNED_IN' || ev === 'init') import('./push.js').then(m => m.refreshPush()).catch(() => { }); });
+  bus.on('online', ev => { if (['SIGNED_IN', 'init', 'code', 'mfa', 'refresh'].includes(ev)) setTimeout(() => import('./invite.js').then(m => m.applyRef()).catch(() => { }), 1500); }); // Einladung annehmen: Freundschaftsanfrage an den Einladenden
   reconnectKnown().catch(() => { });
   // Barrierefreiheit: Sprunglink zum Inhalt (ohne den Hash-Router zu stören), Tastenkürzel-Übersicht mit ?
   const sk = document.getElementById('skipLink'); if (sk) sk.onclick = e => { e.preventDefault(); document.getElementById('view')?.focus(); };

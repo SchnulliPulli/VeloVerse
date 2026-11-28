@@ -225,8 +225,9 @@ function sent(el, mail, what) {
 
 /* ---------- Nach "Passwort vergessen": neues Passwort setzen ---------- */
 function renderNewPassword(el) {
-  el.innerHTML = `<section class="pagehead"><h1>Neues Passwort</h1></section>
-  <section class="card form authcard"><p class="muted">Du kommst über den Link zum Zurücksetzen. Lege jetzt ein neues Passwort fest.</p>
+  const inv = O.online.invited;
+  el.innerHTML = `<section class="pagehead"><h1>${inv ? '👋 Willkommen bei IndooRado' : 'Neues Passwort'}</h1></section>
+  <section class="card form authcard"><p class="muted">${inv ? 'Du wurdest eingeladen. Lege jetzt dein Passwort fest – danach bist du angemeldet und dein Freund bekommt automatisch eine Freundschaftsanfrage von dir.' : 'Du kommst über den Link zum Zurücksetzen. Lege jetzt ein neues Passwort fest.'}</p>
     ${pwField('nPass', 'Neues Passwort', 'new-password')}${meter()}${pwField('nPass2', 'Wiederholen', 'new-password')}
     <div class="row end"><button class="btn pri" id="nGo" disabled>Passwort speichern</button></div></section>`;
   wirePw(el);

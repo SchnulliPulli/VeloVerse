@@ -1599,3 +1599,6 @@ html.pwa .fsbtn, html.pwa #tFull { display: none !important; }
 .homedlg .hlist { display: flex; flex-direction: column; gap: 4px; margin: 10px 0 14px; }
 .homedlg .hrow { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 10px; background: var(--panel2); }
 .homedlg .hrow .chk { margin: 0; }
+/* Freunde einladen */
+.invitecard .invmail, .invitecard .invlink { gap: 8px; flex-wrap: nowrap; } .invitecard .invmail .inp, .invitecard .invlink .inp { flex: 1; min-width: 0; }
+.invitecard .invshare { gap: 6px; flex-wrap: wrap; }
