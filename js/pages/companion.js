@@ -34,7 +34,7 @@ export async function render(el) {
       ${OC.loggedIn() ? `<div class="seg lvtabs" id="lvTabs" role="tablist"><button data-lt="live" aria-pressed="${!sessionStorage.getItem('vvLvTab') || sessionStorage.getItem('vvLvTab') === 'live'}">📊 Live</button><button data-lt="remote" aria-pressed="${sessionStorage.getItem('vvLvTab') === 'remote'}">🎮 Fernbedienung</button></div>` : ''}
       <div id="cLive"></div>
       ${OC.loggedIn() ? `<div id="cRemote" class="remote" hidden>
-        <div class="rmhead"><span class="small muted" id="rmSt">Steuert die Fahrt auf deinem anderen Gerät</span><button class="btn sm ghost rmx" id="rmFull" title="Fernbedienung schließen (Vollbild beenden, Bildschirm darf wieder ausgehen)" aria-label="Fernbedienung schließen">✕</button></div>
+        <div class="rmhead"><span class="small muted" id="rmSt">Steuert die Fahrt auf deinem anderen Gerät</span><button class="btn sm rmx" id="rmFull">⛶ Vollbild</button></div>
         <button class="btn rmpause" data-rm="pause" id="rmPause"><b>⏯️</b> Pause / Weiter</button>
         <div class="rmgrid">${[['down', '➖', 'Leichter'], ['up', '➕', 'Schwerer'], ['rideon', '👍', 'Ride On'], ['cam', '🎥', 'Kamera'], ['left', '⬅️', 'Spur links'], ['right', '➡️', 'Spur rechts'], ['photo', '📷', 'Foto'], ['music', '🎵', 'Musik']].map(([c, i, l]) => `<button class="btn rmb" data-rm="${c}"><b>${i}</b><span>${l}</span></button>`).join('')}</div>
         <div id="rmWo"><div class="rmsub">🏋️ Workout</div><div class="rmgrid three">${[['prev', '⏮️', 'Zurück'], ['restart', '↺', 'Neu'], ['next', '⏭️', 'Weiter']].map(([c, i, l]) => `<button class="btn rmb" data-rm="${c}"><b>${i}</b><span>${l}</span></button>`).join('')}</div></div>
@@ -77,7 +77,7 @@ export async function render(el) {
   if ($('#lvTabs', el)) lvTab(sessionStorage.getItem('vvLvTab') || 'live');
   el.onclick = async e => {
     const lt = e.target.closest('[data-lt]'); if (lt) { lvTab(lt.dataset.lt); return; }
-    if (e.target.closest('#rmFull')) { lvTab('live'); return; } // schließen: zurück zur normalen Ansicht
+    if (e.target.closest('#rmFull')) { rmFull(el, !$('#cRemote', el).classList.contains('rmfull')); return; } // ✕ im Vollbild: normale Ansicht, sonst Vollbild öffnen
     const rm = e.target.closest('[data-rm]');
     if (rm) {
       let c = rm.dataset.rm;
@@ -132,9 +132,10 @@ async function rmFull(el, on) {
   const r = $('#cRemote', el); if (!r) return;
   if (r.classList.contains('rmfull') === on && !!document.fullscreenElement === on) return;
   r.classList.toggle('rmfull', on); document.body.classList.toggle('rmfullon', on);
+  const b = $('#rmFull', el); if (b) { b.textContent = on ? '✕' : '⛶ Vollbild'; b.title = on ? 'Vollbild schließen (Bildschirm darf wieder ausgehen)' : 'Fernbedienung bildschirmfüllend, Bildschirm bleibt an'; b.setAttribute('aria-label', on ? 'Vollbild schließen' : 'Vollbild'); b.classList.toggle('ghost', on); b.classList.toggle('only', on); }
   try { if (on && !document.fullscreenElement) await document.documentElement.requestFullscreen?.({ navigationUI: 'hide' }); else if (!on && document.fullscreenElement) await document.exitFullscreen(); } catch (e) { } // iPhone: kein echtes Vollbild, die Ansicht füllt trotzdem das Fenster
   rmWake(on);
   // Vollbild über die Zurück-Geste verlassen: Fernbedienung ebenfalls schließen
-  const off = () => { document.removeEventListener('fullscreenchange', off); if (!document.fullscreenElement && r.classList.contains('rmfull')) el.querySelector('#lvTabs [data-lt="live"]')?.click(); };
+  const off = () => { document.removeEventListener('fullscreenchange', off); if (!document.fullscreenElement && r.classList.contains('rmfull')) rmFull(el, false); };
   if (on) setTimeout(() => document.addEventListener('fullscreenchange', off), 300);
 }

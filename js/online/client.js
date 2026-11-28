@@ -92,7 +92,7 @@ export async function forgetAccount(uid) {
     let ep = null; try { ep = (await (await navigator.serviceWorker?.getRegistration())?.pushManager.getSubscription())?.endpoint || null; } catch (e) { }
     await Promise.race([withAccount(uid, async sb => { if (ep) await sb.rpc('push_unsubscribe', { p_endpoint: ep }); await sb.auth.signOut({ scope: 'local' }); }), new Promise(r => setTimeout(r, 6000))]);
   } catch (e) { }
-  setAccounts(accounts().filter(x => x.uid !== uid)); try { localStorage.removeItem('vvPushAcc:' + uid); } catch (e) { }
+  setAccounts(accounts().filter(x => x.uid !== uid)); try { localStorage.removeItem('vvPushAcc:' + uid); localStorage.removeItem('vvProf:' + uid); } catch (e) { }
   acctCache();
 }
 // Mit einem anderen gespeicherten Konto kurz etwas erledigen (z. B. Push für alle Konten anmelden), ohne zu wechseln.
@@ -150,10 +150,23 @@ export async function initOnline() {
   if (expectingReturn() && new URLSearchParams(location.search).has('code')) { localStorage.removeItem('vvOnlineReturn'); history.replaceState(null, '', location.pathname + (location.hash || '#/account')); }
   online.session = data.session; online.user = data.session?.user || null;
   if (online.user && ensureDb(online.user.id)) return new Promise(() => { }); // lädt gleich mit der richtigen Datenbank neu
+  // Schneller Start: zuletzt bekanntes Profil sofort verwenden (2FA-Stufe kommt lokal aus dem Anmeldeschlüssel),
+  // das frische Profil vom Server kommt im Hintergrund nach. Ohne gespeichertes Profil wie bisher auf den Server warten.
+  const cached = online.user && profCache(online.user.id);
+  if (cached) {
+    online.profile = cached;
+    try { online.aal = (await withTimeout(sb.auth.mfa.getAuthenticatorAssuranceLevel(), 3000, '2FA-Status')).data; } catch (e) { }
+    online.ready = true; rememberAccount(); bus.emit('online', 'init');
+    const key = p => JSON.stringify([p?.role, p?.approved, p?.trial_until, p?.banned]);
+    refresh().then(() => { bus.emit('profile'); if (key(online.profile) !== key(cached)) bus.emit('online', 'refresh'); }).catch(() => { });
+    return online.user;
+  }
   await refresh(); online.ready = true; rememberAccount(); bus.emit('online', 'init');
   return online.user;
 }
 export const refreshProfile = () => refresh();
+// Zuletzt bekanntes Profil dieses Kontos (nur auf diesem Gerät, für einen schnellen Start)
+function profCache(uid) { try { const p = JSON.parse(localStorage.getItem('vvProf:' + uid) || 'null'); return p?.id === uid ? p : null; } catch (e) { return null; } }
 // Nichts darf die Oberfläche ewig blockieren: Serveraufrufe mit Zeitlimit
 export const withTimeout = (p, ms = 8000, what = 'Server') => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error(what + ' antwortet nicht (Zeitüberschreitung)')), ms))]);
 async function refresh() {
@@ -163,7 +176,7 @@ async function refresh() {
   let p = prof.data;
   // Kein Profil (Konto älter als die Datenbank-Einrichtung): einmal anlegen lassen
   if (!p) { await sb.rpc('ensure_profile'); ({ data: p } = await sb.from('profiles').select('*').eq('id', online.user.id).maybeSingle()); }
-  online.profile = p;
+  online.profile = p; if (p) try { localStorage.setItem('vvProf:' + online.user.id, JSON.stringify(p)); } catch (e) { }
   if (p && (!p.last_seen || Date.now() - new Date(p.last_seen) > 5 * 60e3)) sb.from('profiles').update({ last_seen: new Date().toISOString() }).eq('id', online.user.id).then(() => { });
 }
 export const loggedIn = () => !!online.user;
@@ -214,7 +227,7 @@ export async function mfaVerify(factorId, code) { dropFactorCache();
 export async function mfaRemove(factorId) { dropFactorCache(); const { error } = await (await client()).auth.mfa.unenroll({ factorId }); if (error) throw error; await refresh(); }
 
 export async function updateProfile(patch) {
-  const { data, error } = await (await client()).from('profiles').update(patch).eq('id', online.user.id).select().single(); if (error) throw error; online.profile = data; return data;
+  const { data, error } = await (await client()).from('profiles').update(patch).eq('id', online.user.id).select().single(); if (error) throw error; online.profile = data; try { localStorage.setItem('vvProf:' + data.id, JSON.stringify(data)); } catch (e) { } return data;
 }
 
 /* ---------- Konto verwalten ---------- */

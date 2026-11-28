@@ -2393,3 +2393,7 @@ Das Display dieses Geräts geht nicht aus, solange die Fernbedienung offen ist	T
 Dieser Browser kann das Display nicht anlassen – bitte in den Geräte-Einstellungen die Bildschirmzeit verlängern	This browser can't keep the display on – please extend the screen timeout in your device settings
 Fernbedienung schließen	Close remote control
 Fernbedienung schließen (Vollbild beenden, Bildschirm darf wieder ausgehen)	Close remote control (exit full screen, screen may turn off again)
+Vollbild schließen	Close full screen
+Vollbild schließen (Bildschirm darf wieder ausgehen)	Close full screen (screen may turn off again)
+Fernbedienung bildschirmfüllend, Bildschirm bleibt an	Remote control full screen, screen stays on
+Vollbild	Full screen

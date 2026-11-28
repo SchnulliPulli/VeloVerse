@@ -91,8 +91,8 @@ function nav() {
     const O = await import('./online/client.js'); lb.__O = O;
     if (!O.configured()) { lb.hidden = true; return; }
     lb.hidden = false;
-    if (O.loggedIn()) {
-      const n = O.online.profile?.display_name || 'Konto', mfa = O.needsMfa();
+    if (O.loggedIn() || (!O.online.ready && O.hasStoredSession())) { // gespeicherte Anmeldung: gleich den Avatar zeigen, kein kurzes „Anmelden“
+      const n = O.online.profile?.display_name || profile.name || 'Konto', mfa = O.loggedIn() && O.needsMfa();
       lb.className = 'loginbtn in'; lb.title = 'Angemeldet als ' + n + (mfa ? ' (2FA-Code fehlt noch)' : ''); lb.removeAttribute('href'); lb.setAttribute('role', 'button'); lb.tabIndex = 0;
       lb.innerHTML = `${avatarSvg(profile, 34)}${mfa ? '<i class="lbdot" title="2FA-Code fehlt"></i>' : ''}`;
     } else { lb.className = 'btn sm loginbtn'; lb.title = 'Anmelden oder registrieren'; lb.href = '#/account'; lb.removeAttribute('role'); lb.innerHTML = ICON.profile + '<span>Anmelden</span>'; }
