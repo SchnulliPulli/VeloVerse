@@ -17,6 +17,8 @@ export const suggested = () => { for (const l of navigator.languages || [navigat
 export function setLang(l, reload = true) { try { localStorage.setItem('vvLang', l); } catch (e) { } if (reload) location.reload(); }
 
 let D = null, FB = null; // Wörterbuch der Sprache und Englisch als Rückfall
+// Prüfhilfe für Übersetzungen: fehlende Texte sammeln (nur wenn localStorage „vvI18nMiss“ = 1, sonst aus)
+const MISS = (() => { try { return localStorage.getItem('vvI18nMiss') === '1' ? (window.__i18nMiss = Object.assign(new Set(), { fb: new Set() })) : null; } catch (e) { return null; } })();
 const cache = new Map();
 async function loadTsv(l) {
   try {
@@ -28,7 +30,7 @@ const num = /\d+(?:[.,]\d+)?/g;
 const LEAD = /^[^\p{L}\d#(„"]+/u, TRAIL = /[^\p{L}\d#)“"!?.…]+$/u;
 function look(s) {
   const nums = []; const k = s.replace(num, m => { nums.push(m); return '#'; });
-  let v = D.get(k) ?? FB?.get(k); if (v == null) return null;
+  let v = D.get(k); if (v == null) { v = FB?.get(k); if (v != null) MISS?.fb?.add(k); } if (v == null) return null;
   let i = 0; return v.replace(/#/g, () => nums[i++] ?? '#');
 }
 function core(s) {
@@ -43,8 +45,9 @@ export function tr(s) {
   let v = core(t);
   if (v == null && t.length < 400) { // Teile einzeln übersetzen
     const parts = t.split(/( · | – | — |: |, | \/ | \| |\(|\)|\n)/); let hit = false;
-    if (parts.length > 1) { v = parts.map(p => { if (!/\p{L}{2}/u.test(p)) return p; const x = core(p.trim()); if (x == null) return p; hit = true; return p.replace(p.trim(), x); }).join(''); if (!hit) v = null; }
+    if (parts.length > 1) { v = parts.map(p => { if (!/\p{L}{2}/u.test(p)) return p; const x = core(p.trim()); if (x == null) { MISS?.add(p.trim()); return p; } hit = true; return p.replace(p.trim(), x); }).join(''); if (!hit) v = null; }
   }
+  if (v == null) MISS?.add(t);
   v ??= t; if (cache.size > 5000) cache.clear(); cache.set(t, v);
   return v === t ? s : s.replace(t, v);
 }

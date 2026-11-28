@@ -966,3 +966,422 @@ zusammen	juntos
 Runde #	Vuelta #
 Die ausführliche Anleitung gibt es derzeit nur auf Deutsch. Einzelne Teile sind übersetzt.	La guía completa por ahora solo está en alemán. Algunas partes están traducidas.
 Rechtliche Texte gelten in der deutschen Fassung.	Los textos legales son válidos en su versión alemana.
+# BPM	# BPM
+# Minuten Zone # mit kurzen Tempospitzen gegen Langeweile.	# minutos en zona # con breves arranques de tempo contra el aburrimiento.
+# Minuten ruhig in Zone #. Fördert den Fettstoffwechsel und erholt aktiv.	# minutos suaves en zona #. Activa el metabolismo de grasas y la recuperación activa.
+# min	# min
+(die werden nie im Konto gespeichert). Die App zeigt beides zusammen an.	acaban aquí (nunca se guardan en la cuenta). La app muestra ambos juntos.
+(dieses Gerät)	(este dispositivo)
+(erscheint in Synology Drive unter „Meine Dateien“) oder einen freigegebenen Ordner wie	(aparece en Synology Drive en «Mis archivos») o una carpeta compartida como
+(immer sichtbar)	(siempre visible)
+(z. B. kopierte Wochenübersicht einer Workout-Sammlung)	(p. ej. una vista semanal copiada de una colección de entrenamientos)
+, Port	, puerto
+. Mit	. Con
+Ab # Minuten alle # Minuten, mit Mengen je nach Härte	A partir de # minutos cada # minutos, cantidad según la intensidad
+Abmelden	Cerrar sesión
+Abzeichen: einmal die ganze Strecke fahren (+# XP)	Insignia: recorre la ruta completa una vez (+# XP)
+Acht Wochen Vorbereitung auf eine lange Radmarathon-Ausfahrt: viel Grundlage, Sweet Spot für die Anstiege und lange Wochenendfahrten bis zur Simulation am Ende.	Ocho semanas de preparación para una gran fondo larga: mucha resistencia, sweet spot para las subidas y salidas largas de fin de semana hasta una simulación al final.
+Acht kurze Sprints mit voller Erholung. Im Sprint frei fahren.	Ocho sprints cortos con recuperación completa. Rodaje libre durante el sprint.
+Adaptiv	Adaptativo
+Alle # km einsammeln, mit U oder Antippen einsetzen: Feder, Aero, Windschatten-Magnet	Recoge cada # km, úsalo con U o tocando: pluma, aero, imán de rebufo
+Alle Knöpfe sind per Tastatur erreichbar (Tab, Enter). Mit	Todos los botones son accesibles con el teclado (Tab, Enter). Con
+Alles, was du während der Fahrt siehst und wie sie sich anfühlt. Änderungen gelten sofort und auch für die nächste Fahrt. Einzelne Anzeigen verschiebst und vergrößerst du in der Fahrt mit „Anordnen“.	Todo lo que ves durante la salida y cómo se siente. Los cambios se aplican al momento y también a la próxima salida. Mueve y redimensiona cada indicador durante la salida con «Organizar».
+Als Datei speichern: .fit für Garmin/Wahoo oder .zwo	Guardar como archivo: .fit para Garmin/Wahoo o .zwo
+Als PDF / Drucken	PDF / Imprimir
+Am Ende	Al final
+Am besten ein eigenes DSM-Konto nur mit Zugriff auf diesen Ordner und auf File Station verwenden.	Lo ideal es una cuenta DSM aparte con acceso solo a esta carpeta y a File Station.
+Andere Trainings-Apps schließen – viele Trainer nehmen nur eine Verbindung gleichzeitig an.	Cierra otras apps de entrenamiento: muchos rodillos solo aceptan una conexión a la vez.
+Anderes Gerät	Otro dispositivo
+Anmeldung wie in DSM, Synology Drive oder Photos, mit deinem DSM-Konto und, falls aktiviert, dem #FA-Code aus der Authenticator-App.	Inicia sesión como en DSM, Synology Drive o Photos, con tu cuenta DSM y, si está activado, el código #FA de la app de autenticación.
+Antippen hängt den Baustein ans Ende (oder hinter den gewählten).	Toca para añadir la pieza al final (o tras la seleccionada).
+Auch bei geschlossener App (Push)	También con la app cerrada (push)
+Auf Android braucht Chrome die Berechtigung „Geräte in der Nähe“.	En Android, Chrome necesita el permiso «Dispositivos cercanos».
+Auf Fernseher streamen	Transmitir a la TV
+Auf diesem Gerät gespeichert, bis du dich abmeldest. Ohne Haken endet die Anmeldung beim Schließen des Browsers.	Guardado en este dispositivo hasta cerrar sesión. Sin la marca, la sesión termina al cerrar el navegador.
+Aufbau	Estructura
+Aus (Standard): Bei Workouts gibt es keine Power-ups und Werkstatt-Teile, damit Tempo, Strecke und Strava-Daten echt bleiben. An: alles wie bei freien Fahrten.	Desactivado (predeterminado): sin power-ups ni piezas de taller en los entrenamientos, así velocidad, distancia y datos de Strava son reales. Activado: todo como en las salidas libres.
+Aus Link	Desde enlace
+Automatisch (beginnt nach Uhrzeit, wechselt alle # bis # min)	Automático (empieza según la hora, cambia cada # a # min)
+Bausteine antippen	Toca los bloques
+Begrüßung	Saludo
+Bei Supabase (Datenbank und Login) im Rechenzentrum der Projektregion; die Website liegt bei GitHub Pages. Deine Abgleichsdaten sind privat, auch der Betreiber sieht sie in der App nicht. Andere sehen nur deinen Anzeigenamen, bei Live-Fahrten Position, Tempo, W/kg und Avatar, in Bestenlisten Strecke und Zeit (abschaltbar).	En Supabase (base de datos e inicio de sesión) en el centro de datos de la región del proyecto; la web se aloja en GitHub Pages. Tus datos de sincronización son privados; ni el operador los ve en la app. Los demás solo ven tu nombre visible, en salidas en directo tu posición, velocidad, W/kg y avatar, y en clasificaciones ruta y tiempo (desactivable).
+Benachrichtigungen	Notificaciones
+Benachrichtigungen & Privatsphäre	Notificaciones y privacidad
+Bestwerte	Mejores marcas
+Bildschirmrand leuchtet in der Farbe deiner Leistungszone	El borde de la pantalla brilla con el color de tu zona de potencia
+Bluetooth-Lüfter, der dem Tempo oder Puls folgt (experimentell)	Ventilador Bluetooth que sigue la velocidad o el pulso (experimental)
+Brustgurte senden oft erst, wenn sie leicht angefeuchtet anliegen.	Las bandas de pecho a menudo solo transmiten algo humedecidas y puestas.
+Client-ID und Client-Secret hier eintragen und „Mit Strava verbinden“ tippen.	Introduce aquí el client ID y el client secret y toca «Conectar con Strava».
+Code per E-Mail	Código por correo
+Danach jede gespeicherte Fahrt automatisch hochladen	Después subir automáticamente cada salida guardada
+Das NAS braucht HTTPS mit gültigem Zertifikat (Systemsteuerung → Sicherheit → Zertifikat, z. B. Let’s Encrypt für deine Domain).	El NAS necesita HTTPS con un certificado válido (Panel de control → Seguridad → Certificado, p. ej. Let's Encrypt para tu dominio).
+Datenschutzerklärung	Política de privacidad
+Datum	Fecha
+Deine Leistung	Tu rendimiento
+Demo-Geräten	dispositivos demo
+Demo-Modus: diese Fahrt wird nicht gespeichert	Modo demo: esta salida no se guardará
+Demo-Steuerung	Controles demo
+Der Browser zeigt nur Dienste, die vorher genannt wurden. Alle Standard-Dienste sind schon dabei. Fehlt etwas, die UUID aus der Herstellerdoku oder einer App wie nRF Connect eintragen.	El navegador solo muestra servicios indicados previamente. Todos los servicios estándar ya están incluidos. Si falta algo, introduce el UUID de la documentación del fabricante o de una app como nRF Connect.
+Der Klassiker: drei Mal zehn Minuten bei # bis # % FTP.	El clásico: tres veces diez minutos al # a # % del FTP.
+Die Einrichtung dauert etwa zwei Minuten. Alles lässt sich später unter Einstellungen ändern.	La configuración dura unos dos minutos. Puedes cambiarlo todo después en Ajustes.
+Die Kopfzeile dann im Proxy auf dem VPS setzen statt in DSM, die NAS-Adresse ist die öffentliche Subdomain (Port #).	Luego configura la cabecera en el proxy del VPS en lugar de en DSM; la dirección del NAS es el subdominio público (puerto #).
+Die erzeugte Musik passt sich deiner Intensität an: Bei harten Intervallen kommen Hi-Hats und Arpeggios dazu, in Pausen wird sie leiser. „Eigene Musikdateien“ spielt deine Dateien in zufälliger Reihenfolge, sie bleiben nur in diesem Browser.	La música generada se adapta a tu intensidad: los intervalos duros añaden hi-hats y arpegios, en las pausas baja. «Tus propios archivos de música» reproduce tus archivos en orden aleatorio; solo se quedan en este navegador.
+Die kompakte Ansicht zeigt nächste Fahrt, Woche, Missionen und eine laufende Fahrt, gut lesbar auf dem Handy. Dieses Gerät wird gerade als	La vista compacta muestra la próxima salida, la semana, las misiones y una salida en curso, fácil de leer en el móvil. Este dispositivo se detecta ahora como
+Dienst-UUIDs (mehrere mit Komma)	UUID de servicio (varios separados por comas)
+Diese Übersicht	Esta vista general
+Dieser Browser bietet kein Web Bluetooth. Nutze Chrome oder Edge auf Android, Windows, macOS oder ChromeOS. Samsung Internet, Firefox und Safari können es nicht.	Este navegador no tiene Web Bluetooth. Usa Chrome o Edge en Android, Windows, macOS o ChromeOS. Samsung Internet, Firefox y Safari no pueden.
+Drei Blöcke im Tempobereich, gut für die Grundlagenausdauer mit Biss.	Tres bloques en zona de tempo, buenos para la resistencia con algo de mordiente.
+Du bestimmst, was hochgeladen wird (z. B. ohne Puls)	Tú decides qué se sube (p. ej. sin pulso)
+Du kannst jederzeit festlegen, was hochgeladen wird, deine Online-Daten löschen und das Konto vollständig löschen (unten im Konto). Sichere wichtige Daten zusätzlich selbst (Einstellungen › App › Sicherung herunterladen).	Puedes decidir en cualquier momento qué se sube, borrar tus datos en línea y eliminar tu cuenta por completo (al final de la página de cuenta). Haz también copias de seguridad de tus datos importantes (Ajustes › App › Descargar copia de seguridad).
+Echte Gebäude	Edificios reales
+Echte Straßenbilder	Imágenes reales de calles
+Echte Straßenbilder (Mapillary)	Imágenes reales de calles (Mapillary)
+Eigene Aufnahme	Grabación propia
+Eigene Aufnahme (GoPro, Handy) mit GPX: das Video läuft passend zu deinem Tempo	Tu propia grabación (GoPro, móvil) con GPX: el vídeo avanza según tu velocidad
+Ein neu verbundenes Gerät holt zuerst den Stand aus dem Speicher und überschreibt dort nichts. Danach gewinnt bei jeder Einstellung die zuletzt geänderte Seite; Fahrten, Fotos und eigene Pläne werden nur ergänzt, gelöschte Fahrten, Workouts, Strecken und Pläne verschwinden überall.	Un dispositivo recién conectado primero obtiene el estado del almacenamiento y no sobrescribe nada allí. Después, en cada ajuste gana el lado modificado más recientemente; salidas, fotos y tus propios planes solo se añaden, y las salidas, entrenamientos, rutas y planes borrados desaparecen en todas partes.
+Ein weicher Bogen führt am Ende zurück zum Start	Un arco suave lleva de vuelta a la salida al final
+Eine Stimme sagt Intervalle, Anstiege, Bestleistungen und Zwischenstände an – praktisch, wenn du nicht auf den Bildschirm schauen willst. Läuft über die Sprachausgabe deines Geräts.	Una voz anuncia intervalos, subidas, récords personales y parciales: práctico si no quieres mirar la pantalla. Usa la voz de tu dispositivo.
+Eingehender Anruf	Llamada entrante
+Einladungen zu Gruppenfahrten	Invitaciones a salidas en grupo
+Einstellungen durchsuchen	Buscar ajustes
+Einstellungen durchsuchen …	Buscar ajustes …
+Einstellungen › App & Daten	Ajustes › App y datos
+Einstellungen › Benachrichtigungen	Ajustes › Notificaciones
+Einstellungen › Fahrt & Ton	Ajustes › Salida y sonido
+Einstellungen › Konto	Ajustes › Cuenta
+Einstellungen › Profil	Ajustes › Perfil
+Erinnerungen und Hinweise des Geräts, solange IndooRado geöffnet ist (auch im Hintergrund). Was genau, wählst du darunter.	Recordatorios y notificaciones del dispositivo mientras IndooRado está abierto (también en segundo plano). Elige abajo qué exactamente.
+Erreiche Stufe # für den Saison-Pokal und den Gold-Lack.	Alcanza el nivel # para el trofeo de temporada y la pintura dorada.
+Erstellt mit IndooRado	Creado con IndooRado
+Events und Teams	Eventos y equipos
+FTP-Schätzung	Estimación de FTP
+Fahransicht und Ton einstellen, ohne die Fahrt zu verlassen	Ajustar vista de la salida y sonido sin salir de la salida
+Fahre ein paar Einheiten mit vollen Antritten und längeren harten Abschnitten (oder einen FTP-Test), dann zeigt die App hier deine Stärken und Schwächen.	Haz algunas salidas con sprints a tope y esfuerzos duros largos (o un test de FTP) y la app te mostrará aquí tus puntos fuertes y débiles.
+Fahrgefühl, automatische Pause, Fotos und Hinweise stellst du unter	Sensación de marcha, pausa automática, fotos y avisos se ajustan en
+Fahrt auf dem Fernseher anzeigen	Mostrar la salida en la TV
+Fahrten, Einstellungen und Fortschritt auf allen Geräten, ohne Konflikte zusammengeführt	Salidas, ajustes y progreso en todos tus dispositivos, combinados sin conflictos
+Fanfaren	Fanfarrias
+Farbe ##c#c#	Color ##c#c#
+Farbe #f#c#	Color #f#c#
+Fernseher mit Browser	TV con navegador
+Fitness ist der #-Tage-Schnitt deiner Trainingsbelastung (TSS), Ermüdung der #-Tage-Schnitt. Frische ist die Differenz vom Vortag.	La forma física es la media de # días de tu carga de entrenamiento (TSS), la fatiga la media de # días. La frescura es la diferencia del día anterior.
+Foto	Foto
+Foto speichern	Guardar foto
+Fotos	Fotos
+Fotos nimmt die Strava-Schnittstelle nicht an. Übersichtsbild und Fahrtfoto speichert die App beim Upload mit, du kannst sie in der Strava-App zur Aktivität hinzufügen.	La interfaz de Strava no acepta fotos. La app guarda la imagen resumen y la foto de la salida al subir; puedes añadirlas a la actividad en la app de Strava.
+Freund fährt gerade	Un amigo está rodando
+Freunde und Chat	Amigos y chat
+Freunde-Geister	Fantasmas de amigos
+Freundschaftsanfragen	Solicitudes de amistad
+Funktionen, die Daten an einen fremden Dienst schicken, fragen vor der ersten Nutzung. Hier siehst du den Stand, kannst Zustimmungen widerrufen oder abgelehnte nachträglich erteilen.	Las funciones que envían datos a un servicio externo preguntan antes del primer uso. Aquí ves el estado, puedes revocar consentimientos o dar después los rechazados.
+Fährt immer ein bisschen stärker als du, wartet und kontert wie ein echter Trainingspartner	Siempre va un poco más fuerte que tú, espera y contraataca como un compañero real
+Für Fortgeschrittene: zusätzliche Dienst-UUIDs	Avanzado: UUID de servicio adicionales
+Für das Konto: E-Mail-Adresse, Passwort (nur als verschlüsselter Hash), Anzeigename, Zeitpunkt der letzten Anmeldung. Nur wenn du den Abgleich nutzt: deine App-Daten (Einstellungen, Fahrten, Trainingspläne). Welche Fahrtwerte (z. B. Herzfrequenz, Leistung, GPS-Spur) hochgeladen werden, legst du im Konto selbst fest. Fotos der Fahrten werden nie im Konto gespeichert. Herzfrequenz ist ein Gesundheitswert: lade sie nur hoch, wenn du das möchtest.	Para la cuenta: correo, contraseña (solo como hash cifrado), nombre visible, hora del último inicio de sesión. Solo si usas la sincronización: tus datos de la app (ajustes, salidas, planes). Tú decides en tu cuenta qué valores de la salida (p. ej. pulso, potencia, traza GPS) se suben. Las fotos nunca se guardan en la cuenta. El pulso es un dato de salud: súbelo solo si quieres.
+Für den direkten Upload brauchst du eine eigene Strava-API-App. Client-ID und Client-Secret bleiben nur in diesem Browser, sie landen weder in der Sicherungsdatei noch auf dem NAS.	Para subir directamente necesitas tu propia app de la API de Strava. Client ID y client secret se quedan solo en este navegador; no van ni a la copia de seguridad ni al NAS.
+Für eine Schätzung braucht es eine Fahrt mit mindestens # Minuten harter Leistung, zum Beispiel den FTP-Test.	Una estimación necesita una salida con al menos # minutos de esfuerzo duro, por ejemplo el test de FTP.
+Gedrückt halten: aufhören zu treten und bremsen	Mantener: dejar de pedalear y frenar
+Gegen meine Bestfahrt auf dieser Strecke fahren (Geist)	Correr contra mi mejor salida en esta ruta (fantasma)
+Gegen- und Rückenwind mit Böen, je Fahrt neu. Windschatten wird wichtiger. Nicht bei Workouts (außer Spiel-Extras an) und nicht in Gruppenfahrten.	Viento de cara y de cola con ráfagas, nuevo en cada salida. El rebufo gana importancia. No en entrenamientos (salvo con extras de juego) ni en salidas en grupo.
+Geist	Fantasma
+Gelände wird erzeugt …	Generando terreno …
+Gerät nach links oder rechts kippen wechselt die Spur, z. B. in den Windschatten. Am Computer: Pfeiltasten	Inclinar el dispositivo a izquierda o derecha cambia de carril, p. ej. al rebufo. En el ordenador: teclas de flecha
+Geräusche	Sonidos
+Gespeichert werden Profil, Einstellungen, gekoppelte Geräte und Tastenbelegung, Fahrten mit Fotos, Level, Abzeichen, Missionen, Bestzeiten, Trainingsplan-Fortschritt sowie eigene Strecken, Pläne und Workouts. Die Sicherung enthält alles davon in einer Datei, aber keine Passwörter oder Schlüssel.	Se guardan perfil, ajustes, dispositivos emparejados y asignación de botones, salidas con fotos, nivel, insignias, misiones, mejores tiempos, progreso del plan y tus propias rutas, planes y entrenamientos. La copia de seguridad lo contiene todo en un archivo, pero sin contraseñas ni claves.
+Geste an deine Mitfahrer (online)	Gesto a tus compañeros (en línea)
+Gilt für Freunde, Anrufe und Nachrichten und braucht ein IndooRado-Konto.	Se aplica a amigos, llamadas y mensajes y requiere una cuenta de IndooRado.
+Gilt für Menüs und Seiten. Die Anzeige während der Fahrt hat einen eigenen Stil unter	Se aplica a menús y páginas. La pantalla durante la salida tiene su propio estilo en
+Gipfelzeiten	Tiempos de cima
+Google Drive oder Dropbox	Google Drive o Dropbox
+Grafikqualität, App-Thema und Datensicherung findest du unter	La calidad gráfica, el tema de la app y la copia de seguridad están en
+Große Schrift, Bedienung mit den Pfeiltasten der Fernbedienung (Enter = auswählen, Zurück = zurück). Gamepads gehen immer: Steuerkreuz, A, B, Start = Pause, LB/RB = Gang, X = Kamera, Y = Ride On. Handy als Fernbedienung: in der Handy-Ansicht mit demselben Konto.	Texto grande, control con las flechas del mando (Enter = elegir, Atrás = volver). Los mandos de juego siempre funcionan: cruceta, A, B, Start = pausa, LB/RB = marcha, X = cámara, Y = Ride On. Móvil como mando: en la vista móvil con la misma cuenta.
+Gruppe mit festem Tempo zum Mitfahren	Grupo a ritmo fijo para rodar juntos
+Gruppenanruf	Llamada en grupo
+Gänge	Marchas
+Handy	Móvil
+Hier siehst du deine Watt. Die Farbe zeigt die Trainingszone, der Ring füllt sich bis zu deiner FTP.	Aquí ves tus vatios. El color indica la zona de entrenamiento y el anillo se llena hasta tu FTP.
+Hochschalten	Subir marcha
+Hochschalten (schwerer)	Subir marcha (más duro)
+Häkchen: anzeigen. Pfeile: Reihenfolge. Begrüßung und wichtige Hinweise bleiben immer oben.	Marca: mostrar. Flechas: orden. El saludo y los avisos importantes siempre quedan arriba.
+Häufig	Frecuentes
+Häuser	Casas
+Im selben Eintrag unter „Benutzerdefinierte Kopfzeile“ hinzufügen	En la misma entrada, en «Custom Header», añade
+In der Fahrt	Durante la salida
+In der Zusammenfassung lädt „Zu Strava“ die FIT-Datei und die Bilder herunter, kopiert Titel und Beschreibung und öffnet die Upload-Seite von Strava. Die direkte Verbindung braucht eine eigene Strava-API-App; Strava bietet das inzwischen nur noch mit Abo an.	En el resumen, «A Strava» descarga el archivo FIT y las imágenes, copia título y descripción y abre la página de subida de Strava. Una conexión directa necesita tu propia app de la API de Strava; Strava ya solo la ofrece con suscripción.
+In diesem Zeitraum gibt es keine Fahrten.	No hay salidas en este periodo.
+IndooRado Online befindet sich im Aufbau und wird privat und ohne Gewinnabsicht betrieben. Die Nutzung erfolgt freiwillig und auf eigene Verantwortung, ohne Gewähr für Verfügbarkeit, Fehlerfreiheit oder dauerhaften Erhalt der Daten. Funktionen können sich jederzeit ändern oder eingestellt werden.	IndooRado Online está en desarrollo y se gestiona de forma privada y sin ánimo de lucro. El uso es voluntario y bajo tu responsabilidad, sin garantía de disponibilidad, exactitud ni conservación permanente de los datos. Las funciones pueden cambiar o desaparecer en cualquier momento.
+IndooRado · Trainingsbericht	IndooRado · Informe de entrenamiento
+Indoor-Radtraining direkt im Browser: eine #D-Welt mit Mitfahrern, Workouts und Trainingsplänen, Steuerung deines Smart-Trainers, Level und Missionen.	Ciclismo indoor en el navegador: un mundo #D con otros ciclistas, entrenamientos y planes, control del rodillo inteligente, niveles y misiones.
+Intensität	Intensidad
+Jede Fahrt zählt: alle XP dieser Saison (Fahrt, Missionen, Gipfel, Sprints, Multiplayer) bringen dich Stufe um Stufe weiter. Belohnungen bleiben dir für immer.	Cada salida cuenta: todos los XP de esta temporada (salidas, misiones, cimas, sprints, multijugador) te suben nivel a nivel. Las recompensas son tuyas para siempre.
+Jede Minute +# % FTP bis zur Erschöpfung. Neue FTP = # % der besten Minute.	+# % FTP cada minuto hasta el agotamiento. Nuevo FTP = # % del mejor minuto.
+Jede Woche # Fahrer auf deinem Niveau: die besten # steigen auf. Punkte sind deine Erfahrungspunkte. Dafür brauchst du ein	Cada semana # ciclistas de tu nivel: los # mejores suben. Los puntos son tus puntos de experiencia. Para ello necesitas una
+Jede dritte Saison-Stufe bringt einen Teile-Gutschein. Die nächste Ausbaustufe kostet so viele Gutscheine, wie ihre Nummer ist (#, #, #). Die Teile machen dich in der virtuellen Welt etwas schneller – wie ein echtes Upgrade.	Cada tercer nivel de temporada da un vale de piezas. El siguiente nivel de mejora cuesta tantos vales como su número (#, #, #). Las piezas te hacen un poco más rápido en el mundo virtual, como una mejora real.
+Jeder Regler wirkt zusätzlich zur Gesamtlautstärke und zum Regler „Umgebung“ bzw. „Effekte“. # schaltet das Geräusch ganz ab. ▶ spielt es zur Probe.	Cada control actúa además del volumen general y del control «Entorno» o «Efectos». # apaga el sonido por completo. ▶ reproduce un ejemplo.
+Jetzt	Ahora
+Kamera-Ansicht	Vista de cámara
+Karte und Beamen (K)	Mapa y teletransporte (K)
+Karte und Menüs schließen	Cerrar mapa y menús
+Karte öffnen (K)	Abrir mapa (K)
+Karte öffnen / schließen (beamen)	Abrir / cerrar mapa (teletransporte)
+Kein Plan aktiv. Ein Plan führt dich Woche für Woche durch passende Workouts, zum Beispiel zur Vorbereitung auf einen Gran Fondo.	Ningún plan activo. Un plan te guía semana a semana con entrenamientos adecuados, por ejemplo para preparar una gran fondo.
+Kerntemperatur-Sensor (experimentell)	Sensor de temperatura corporal (experimental)
+Kette	Cadena
+Klassischer Test. Neue FTP = # % der #-Minuten-Leistung.	Test clásico. Nuevo FTP = # % de la potencia de # minutos.
+Konto wird geladen …	Cargando cuenta …
+Konto › Tresor	Cuenta › Caja fuerte
+Konto-Menü	Menú de la cuenta
+Kraft am Berg: niedrige Kadenz, lange Anstiege bei Sweet Spot und Über-Unter-Wechsel wie bei Attacken.	Fuerza en las subidas: cadencia baja, subidas largas en sweet spot y cambios over-under como ataques.
+Kräftigere Schrift, deutlichere Ränder und Fokusrahmen	Texto más marcado, bordes y marcos de foco más claros
+Körpertemperatur	Temperatura corporal
+Lautstärken, Musik und jedes einzelne Geräusch. In der Fahrt schaltet Taste M den Ton stumm.	Volumen, música y cada sonido. Durante la salida la tecla M silencia el sonido.
+Leertaste	Barra espaciadora
+Leistung, Trittfrequenz, Pedal-Balance	Potencia, cadencia, equilibrio de pedaleo
+Lenkertasten	Botones del manillar
+Live-Ansicht	Vista en directo
+Locker wieder anfangen: vier Wochen Grundlage, Kadenzgefühl und erste kurze Tempoblöcke.	Volver con calma: cuatro semanas de resistencia, sensación de cadencia y primeros bloques cortos de tempo.
+Löscht alle Daten der App auf diesem Gerät (Werkseinstellungen). Was in deinem Konto online gespeichert ist, bleibt erhalten.	Borra todos los datos de la app en este dispositivo (restablecer). Lo guardado en línea en tu cuenta se conserva.
+Lüfter	Ventilador
+Lüfter folgt	El ventilador sigue
+Manche Extras gibt es erst mit höherem Level, andere nur für Entdecker 🥚.	Algunos extras solo se desbloquean en niveles altos, otros solo para exploradores 🥚.
+Markiere auf der Seite des Plans alle Wochen samt Workouts, kopiere sie und füge sie hier ein. Erkannt werden Wochen, Workout-Namen und Schritte wie „#min @ #W“, „#min from # to #W“, „#min @ #rpm, #W“, „#min free ride“ und Wiederholungen wie „#x #min @ #W,“. Watt werden über die angegebene FTP in Prozent umgerechnet, damit sich alles an deine FTP anpasst. Der Plan bleibt nur in deinem Browser.	En la web del plan, selecciona todas las semanas con sus entrenamientos, cópialas y pégalas aquí. Se reconocen: semanas, nombres de entrenamientos y pasos como «#min @ #W», «#min from # to #W», «#min @ #rpm, #W», «#min free ride» y repeticiones como «#x #min @ #W,». Los vatios se convierten en porcentaje con el FTP indicado para que todo se adapte a tu FTP. El plan se queda solo en tu navegador.
+Mehrere Personen auf diesem Gerät: Jedes Profil hat eigene Fahrten, Einstellungen, Level und Pläne. Kinderprofile haben einen sanften Widerstand, kurze bunte Fahrten und keinen Online-Bereich.	Varias personas en este dispositivo: cada perfil tiene sus propias salidas, ajustes, nivel y planes. Los perfiles infantiles tienen resistencia suave, salidas cortas y coloridas y sin zona en línea.
+Mehrere Workout-Dateien (.zwo, .erg, .mrc) oder ein ZIP-Archiv damit wählen: daraus wird ein Plan, Reihenfolge nach Dateiname (am besten nummeriert: #_…, #_…). Plan-Dateien (IndooRado-Plan	Elige varios archivos de entrenamiento (.zwo, .erg, .mrc) o un ZIP con ellos: forman un plan, ordenado por nombre de archivo (mejor numerado: #_…, #_…). Archivos de plan (plan de IndooRado
+Melde dich an, um zu sehen, wer gerade online ist, Gruppenfahrten zu starten und live mit anderen zu fahren.	Inicia sesión para ver quién está en línea, empezar salidas en grupo y rodar en directo con otros.
+Menü	Menú
+Mit IndooRado-Konto angemeldet: Fahrten und Einstellungen gleicht das Konto ab, hier landen dann nur die	Con una cuenta de IndooRado iniciada: la cuenta sincroniza salidas y ajustes, por lo que solo las
+Mitfahren	Rodar juntos
+Mitfahrer	Ciclistas
+Mitfahrer (Bots) an/aus	Ciclistas (bots) sí/no
+Mitfahrer (N)	Ciclistas (N)
+Mitfahrer auf der Strecke (Windschatten, Überholen)	Ciclistas en la ruta (rebufo, adelantar)
+Mitfahrer, Sprints und Gipfel, Zieltore, ein Geist deiner Bestfahrt, XP, Missionen, Abzeichen.	Otros ciclistas, sprints y cimas, puertas objetivo, un fantasma de tu mejor salida, XP, misiones, insignias.
+Monat	Mes
+Monatsbericht	Informe mensual
+Müde, Beine schwer oder wenig Zeit: das Workout passt sich an	Cansado, piernas pesadas o poco tiempo: el entrenamiento se adapta
+Nachrichten und Anrufe kommen auch an, wenn IndooRado nicht läuft; tippen öffnet Chat bzw. Anruf. Braucht ein Konto. Die kurze Meldung (ohne Nachrichteninhalt) läuft verschlüsselt über den Push-Dienst deines Geräts (Google, Apple, Mozilla). iPhone/iPad: nur als App vom Home-Bildschirm.	Mensajes y llamadas llegan aunque IndooRado no esté abierto; al tocar se abre el chat o la llamada. Requiere cuenta. El breve aviso (sin el contenido del mensaje) va cifrado por el servicio push de tu dispositivo (Google, Apple, Mozilla). iPhone/iPad: solo como app desde la pantalla de inicio.
+Nachrichten und Freundschaftsanfragen	Mensajes y solicitudes de amistad
+Natur	Naturaleza
+Noch keine Einträge.	Aún no hay entradas.
+Noch keine Fahrten gespeichert. Die erste Fahrt wartet.	Aún no hay salidas guardadas. Tu primera salida te espera.
+Noch keine Fahrten. Starte auf der Startseite deine erste Fahrt.	Aún no hay salidas. Empieza tu primera salida en la página de inicio.
+Nächste Kamera	Siguiente cámara
+Nächstes Musikstück	Siguiente pista
+Nächstes Musikstück (Taste T)	Siguiente pista (tecla T)
+Nächstes Stück	Siguiente pista
+Ohne Cloud-Abgleich siehst du hier nur die Daten dieses Geräts. Unter Einstellungen › Verbindungen einen Cloud-Speicher verbinden (NAS, OneDrive, Google Drive, Dropbox), dann zeigt das Handy deine Fahrten, Pläne und die laufende Fahrt vom PC.	Sin sincronización en la nube aquí solo ves los datos de este dispositivo. Conecta un almacenamiento en Ajustes › Conexiones (NAS, OneDrive, Google Drive, Dropbox) y el móvil mostrará tus salidas, planes y la salida en curso del PC.
+Ohne Geräte kannst du alles im Demo-Modus ausprobieren.	Sin dispositivos puedes probarlo todo en modo demo.
+Ohne Konto bleibt	Sin cuenta
+Ohne Konto bleibt alles wie bisher lokal in diesem Browser.	Sin cuenta todo se queda en local en este navegador, como antes.
+Ohne Passwort: Du bekommst einen #-stelligen Code, den du hier eingibst. Das klappt auch, wenn du die Mail auf dem Handy liest.	Sin contraseña: recibes un código de # cifras que introduces aquí. También funciona si lees el correo en el móvil.
+Online › Events	En línea › Eventos
+Online › Freunde	En línea › Amigos
+Online-Abgleich	Sincronización en línea
+Power-up benutzen	Usar power-up
+Power-up einsetzen (U)	Usar power-up (U)
+Powermeter	Medidor de potencia
+Privatsphäre	Privacidad
+Prüft, ob der Trainer Befehle annimmt. Vorher treten.	Comprueba si el rodillo acepta órdenes. Pedalea antes.
+Puls und Herzratenvariabilität (HRV)	Pulso y variabilidad del pulso (HRV)
+Puls und Kadenz	Pulso y cadencia
+Pulsgurt	Banda de pulso
+Pulszonen	Zonas de pulso
+Rad- oder Kurbelsensor	Sensor de rueda o de biela
+Raumklima	Clima de la sala
+Reduzieren (keine Wackler, weniger Kamerafahrten)	Reducir (sin vaivenes, menos movimientos de cámara)
+Reifen	Neumáticos
+Ride On an den nächsten Fahrer (R)	Ride On al ciclista más cercano (R)
+Ride On geben	Dar Ride On
+Routen-Abzeichen	Insignias de ruta
+Ruckelt die Fahrt, senkt die App die Auflösung automatisch. Auf schwachen Geräten hilft zusätzlich „Mittel“ oder „Niedrig“.	Si la salida va a tirones, la app baja la resolución automáticamente. En dispositivos débiles también ayuda «Media» o «Baja».
+Runterschalten	Bajar marcha
+Runterschalten (leichter)	Bajar marcha (más fácil)
+Räder	Ruedas
+Saison	Temporada
+Schalt-Controller	Mando de cambio
+Schalt-Controller und Bluetooth-Tasten am Lenker. Manche Modelle müssen regelmäßig in der App des Herstellers verbunden werden, sonst bleiben sie gesperrt. Falls + und − vertauscht sind oder nichts passiert: Taste anlernen.	Mandos de cambio y botones Bluetooth en el manillar. Algunos modelos deben conectarse con regularidad en la app del fabricante o se bloquean. Si + y − están invertidos o no pasa nada: aprende el botón.
+Schließen	Cerrar
+Sechs Wochen für eine höhere Schwelle. Startet und endet mit einem FTP-Test, die Ziele wachsen mit deiner neuen FTP.	Seis semanas para un umbral más alto. Empieza y termina con un test de FTP; los objetivos crecen con tu nuevo FTP.
+Sensoren an Kurbel oder Rad kurz bewegen, damit sie aufwachen.	Mueve brevemente los sensores de la biela o la rueda para despertarlos.
+Serie in Gefahr	Racha en peligro
+Serien	Rachas
+Serien-Schutz überbrückt automatisch einen Tag ohne Fahrt, damit deine Serie (und der XP-Bonus bis +# %) nicht reißt. Du bekommst einen für jede Woche mit mindestens # Fahrtagen, höchstens # auf Vorrat.	Un congelador de racha cubre automáticamente un día sin salida para que tu racha (y el bonus de XP de hasta +# %) no se rompa. Recibes uno por cada semana con al menos # días de salida, hasta # en reserva.
+Serpentinen	Curvas de herradura
+Sichtfeld weitet sich bei hohem Tempo, Tempolinien bei schnellen Abfahrten	El campo de visión se amplía a alta velocidad, líneas de velocidad en descensos rápidos
+Sofort losfahren: zuletzt gewählte Strecke und Einstellungen	Salir ya: última ruta y ajustes
+Sonntag um #:#, wenn noch Missionen offen sind	Domingo a las #:# si aún quedan misiones abiertas
+Spieler suchen	Buscar jugadores
+Spitze	Cabeza
+Spracherkennung des Browsers	el reconocimiento de voz del navegador
+Sprachsteuerung	Control por voz
+Sprinter: # Gänge, sehr großer Widerstand für hohe Wattzahlen	Sprinter: # marchas, resistencia muy alta para muchos vatios
+Sprints und Gipfel	Sprints y cimas
+Spur links	Carril izquierdo
+Spur rechts	Carril derecho
+Spur wechseln, überholen	Cambiar de carril, adelantar
+Stand	Estado
+Startseite anpassen	Personalizar inicio
+Steigung und Gewicht bestimmen die Leistung	La pendiente y el peso determinan la potencia
+Strava, Cloud-Speicher und NAS, mit einem Passwort verschlüsselt. So bist du nach dem Einspielen sofort wieder angemeldet.	Strava, almacenamiento en la nube y NAS, cifrados con una contraseña. Así vuelves a estar conectado justo después de restaurar.
+Strecke wählen, treten, die Fahrt startet von selbst. Virtuelle Gänge, Steigung, ERG oder Puls-Ziel.	Elige una ruta, pedalea, la salida empieza sola. Marchas virtuales, pendiente, ERG u objetivo de pulso.
+Suche	Buscar
+Tagesform	Forma del día
+Tagesherausforderung · für alle gleich, morgen neu	Reto diario · igual para todos, nuevo mañana
+Tageszeit und Wetter	Hora del día y tiempo
+Tageszeit und Wetter (W)	Hora del día y tiempo (W)
+Taste	Tecla
+Taste ?	Tecla ?
+Taste U	Tecla U
+Tastenkürzel	Atajos de teclado
+Temperatur und Luftfeuchte im Raum	Temperatura y humedad de la sala
+Tempo / Trittfrequenz	Velocidad / cadencia
+Test-Benachrichtigung	Notificación de prueba
+Test-Push	Push de prueba
+Tipp: alle # bis # Wochen eine leichtere Erholungswoche einplanen. Workouts baust du im	Consejo: planifica una semana de recuperación más suave cada # a # semanas. Los entrenamientos se crean en el
+Tippe auf die Strecke oder ins Höhenprofil, um ein Ziel zu wählen.	Toca la ruta o el perfil de altitud para elegir un destino.
+Ton an/aus	Sonido sí/no
+Training des Tages	Entrenamiento de hoy
+Trainingsbericht	Informe de entrenamiento
+Trainingsbuddy	Compañero de entrenamiento
+Tresor	Caja fuerte
+Trikotmuster, Helm, Brille, Bart, Socken, Schuhe und Extras im #D-Designer.	Diseño del maillot, casco, gafas, barba, calcetines, zapatillas y extras en el diseñador #D.
+Tritt in die Pedale, die Fahrt startet automatisch.	Empieza a pedalear y la salida arranca sola.
+Trittfrequenz-Sensor	Sensor de cadencia
+Uhrzeit für das Training des Tages	Hora del entrenamiento de hoy
+Verbindungsprotokoll	Registro de conexión
+Verlauf aller Fahrten	Historial de todas las salidas
+Vier Wochen mit wenig Zeit, aber hoher Intensität. Jede Einheit dauert höchstens eine Stunde.	Cuatro semanas con poco tiempo pero mucha intensidad. Ninguna sesión dura más de una hora.
+Vorschau wird gerendert …	Generando vista previa …
+Was möchtest du verbinden? Die Auswahl zeigt dann nur passende Geräte. Standards werden automatisch gelesen; bei unbekannten Geräten ordnest du die Rohdaten selbst zu.	¿Qué quieres conectar? La selección mostrará solo dispositivos adecuados. Los estándares se leen automáticamente; en dispositivos desconocidos asignas tú los datos.
+Wechsel zwischen # und # % FTP. Lehrt, Laktat abzubauen.	Alternando entre # y # % FTP. Enseña a eliminar el lactato.
+Weitere	Más
+Weitere Räder und Tiere gibt es mit höherem Level, ein paar nur für Entdecker.	Más bicis y animales se desbloquean en niveles altos, algunos solo para exploradores.
+Weiterleiten muss der Proxy dabei mindestens den Pfad	El proxy debe reenviar al menos la ruta
+Welliger Rundkurs durch Wiesen, Wälder und Dörfer.	Circuito ondulado por prados, bosques y pueblos.
+Welt wird aufgebaut …	Construyendo el mundo …
+Werkstatt-Teile	Piezas de taller
+Werte, Workout und Fahrerliste wachsen und schrumpfen mit dem Fenster, z. B. am großen Fernseher	Valores, entrenamiento y lista de ciclistas crecen y se encogen con la ventana, p. ej. en una TV grande
+Wetter und Tageszeit	Tiempo y hora del día
+Widerstand senken bei Kadenzeinbruch, Intensität senken bei Puls am Anschlag	Menos resistencia si cae la cadencia, menos intensidad si el pulso va al límite
+Wie draußen schalten	Cambiar como en exterior
+Wie hart war's?	¿Qué tan duro fue?
+Wird geladen …	Cargando …
+Wischen	Deslizar
+Wochenbericht	Informe semanal
+Wolkenschatten, Wind in Bäumen und Gras, Gegenlicht, Laub, Pollen und Staub, jubelnde Zuschauer am Gipfel, glänzende nasse Straße. Auf Grafik „Niedrig“ immer aus.	Sombras de nubes, viento en árboles y hierba, contraluz, hojas, polen y polvo, público animando en la cima, carretera mojada brillante. Siempre desactivado con gráficos «Baja».
+Workout, Plan oder ZIP über eine Internetadresse laden (z. B. GitHub)	Cargar entrenamiento, plan o ZIP desde una dirección web (p. ej. GitHub)
+Workout-Dateien (.zwo, .erg, .mrc, .json) und Plan-Dateien (.json, .zip, .txt)	Archivos de entrenamiento (.zwo, .erg, .mrc, .json) y de plan (.json, .zip, .txt)
+Workouts adaptiv an Kadenz, Puls und Trainer anpassen	Adaptar entrenamientos a cadencia, pulso y rodillo
+Workouts und mehrwöchige Pläne passen sich an deine FTP, Kadenz und deinen Puls an.	Entrenamientos y planes de varias semanas se adaptan a tu FTP, cadencia y pulso.
+Zehn Minuten Aufwärmen, danach frei mit virtuellen Gängen.	Diez minutos de calentamiento, luego rodaje libre con marchas virtuales.
+Zeitraum danach	Periodo siguiente
+Zeitraum davor	Periodo anterior
+Ziehen zum Drehen · Mausrad oder zwei Finger zum Zoomen	Arrastra para girar · rueda del ratón o dos dedos para hacer zoom
+Zieltore	Puertas objetivo
+Zum Menü	Al menú
+Zum Testen, z. B. des Strava-Uploads. Solche Fahrten zählen dann wie echte Fahrten (XP, Rekorde, Trainingsplan) und sind in der Zusammenfassung als Demo markiert. Danach am besten wieder ausschalten.	Para probar, p. ej. la subida a Strava. Esas salidas cuentan como reales (XP, récords, plan) y aparecen como demo en el resumen. Mejor desactivarlo después.
+Zuschauer-Link	Enlace para espectadores
+Zuschauer-Link: Freunde sehen live zu und feuern an	Enlace para espectadores: los amigos miran en directo y animan
+Zustimmen	Aceptar
+Zusätzlich zum Browser landen alle Daten in einem Ordner auf deinem NAS oder in deiner Cloud (immer nur ein Speicher gleichzeitig)	Además del navegador, todos los datos van a una carpeta de tu NAS o tu nube (solo un almacenamiento a la vez)
+Zwei Sätze mit je zehn Mal # Sekunden hart, # Sekunden locker.	Dos series de diez veces # segundos fuerte, # segundos suave.
+Zwei-Faktor	Dos factores
+Zweiter Pulsmesser	Segundo pulsómetro
+Zwischengespeicherte App-Dateien verwerfen und neu laden, Daten bleiben erhalten	Descartar archivos de la app en caché y recargar; los datos se conservan
+alle Geräte in der Nähe, Werte selbst zuordnen	todos los dispositivos cercanos, asignar valores tú mismo
+auch ohne Konto	incluso sin cuenta
+auch während der Fahrt	también durante la salida
+aus	desactivado
+aus nur ansprechen, wenn das NAS das erlaubt. Die DSM-Anmeldeseite selbst lässt sich aus Sicherheitsgründen nicht in fremde Seiten einbetten, darum meldet sich die App direkt über die DSM-Schnittstelle an, mit denselben Zugangsdaten und #FA.	si el NAS lo permite. Por seguridad, la página de inicio de sesión de DSM no se puede incrustar en otras páginas, así que la app inicia sesión directamente por la interfaz de DSM, con los mismos datos y #FA.
+aus.	desactivado.
+beamen	teletransportarse
+bleiben im Browser, auf Wunsch auch auf deinem NAS oder in OneDrive, Google Drive oder Dropbox, Fahrten gehen auf Wunsch zu Strava.	se queda en tu navegador, opcionalmente también en tu NAS o en OneDrive, Google Drive o Dropbox; las salidas pueden ir a Strava si quieres.
+chatten	chatear
+dein	tu
+dem Puls	pulso
+dem Tempo	velocidad
+der Trainer stellt sie im ERG-Modus ein. Ideal mit Trainern ohne Schaltung und Lenkertasten.	el rodillo la ajusta en modo ERG. Ideal para rodillos sin cambios ni botones en el manillar.
+die Anzeigen	los indicadores
+dreimal schnell = Intervall vor/zurück	tres veces rápido = intervalo adelante/atrás
+eigene Workouts aus Bausteinen	entrenamientos propios con bloques
+eine App anlegen (Name z. B. „IndooRado“, Website beliebig).	crea una app (nombre p. ej. «IndooRado», cualquier web).
+einen Cloud-Speicher ein (NAS, OneDrive, Google Drive, Dropbox).	(NAS, OneDrive, Google Drive, Dropbox).
+eingebaute Pläne lassen sich unter „Pläne“ als Vorlage öffnen.	los planes incluidos pueden abrirse como plantilla en «Planes».
+empfohlen	recomendado
+fahr mit	rueda con
+feste Watt	vatios fijos
+fester Stufe	nivel fijo
+frei.	libre.
+freiwillig	voluntario
+für alle gleich	igual para todos
+gelten für alle gleiche Bedingungen.	rigen las mismas condiciones para todos.
+gespeichert. Unter einer anderen Adresse siehst du andere Daten. Sichere regelmäßig oder richte unter	. En otra dirección verás otros datos. Haz copias de seguridad con regularidad o configura un almacenamiento en la nube en
+große Schrift	texto grande
+hoher Kontrast	alto contraste
+kurze bunte Fahrten und keinen Online-Bereich.	salidas cortas y coloridas y sin zona en línea.
+langsamer treten	pedalear más lento
+leichter	más fácil
+mehr Watt	más vatios
+mit Anmeldung	con inicio de sesión
+mit Böen	con ráfagas
+mit Einstellungen und Fortschritt, jede Fahrt als eigene Datei, Fotos als JPG.	con ajustes y progreso, cada salida como archivo propio, fotos como JPG.
+mit Konto	con cuenta
+nach oben	arriba
+nach unten	abajo
+neue Nachricht oder Anfrage (nur angemeldet)	nuevo mensaje o solicitud (solo con sesión iniciada)
+noch	aún
+noch # Tage · danach startet eine neue Saison mit neuen Farben	quedan # días · luego empieza una nueva temporada con nuevos colores
+nächstes Intervall …	siguiente intervalo …
+oder eine Textdatei mit kopierter Plan-Übersicht) werden direkt als Plan übernommen, auch oben über „Plan-Datei importieren“. Die Ziele werden aus deiner FTP berechnet.	o un archivo de texto con un resumen de plan copiado) se adoptan directamente como plan, también con «Importar archivo de plan» arriba. Los objetivos se calculan a partir de tu FTP.
+schneller treten	pedalear más rápido
+schwerer	más duro
+sieh	ver
+siehst du alle Tastenkürzel. Sprachansagen für die Fahrt findest du unter	verás todos los atajos de teclado. Los anuncios de voz para la salida están en
+simulierte Rolle	rodillo simulado
+steigt ab.	se baja.
+um #:#, wenn deine Serie heute endet	a las #:# si tu racha termina hoy
+und	y
+und die	y la
+unter Workouts	en Entrenamientos
+verbinden	conectar
+vergrößerst	amplías
+verschiebst	mueves
+virtuelle Gänge	marchas virtuales
+weiter	continuar
+weniger Bewegung	menos movimiento
+weniger Watt	menos vatios
+wenn dich ein Freund anruft (nur angemeldet)	cuando un amigo te llama (solo con sesión iniciada)
+wenn dich ein Freund zu einer Gruppenfahrt oder zum Mitfahren einlädt	cuando un amigo te invita a una salida en grupo o a rodar juntos
+wenn dir jemand eine Anfrage schickt (nur angemeldet)	cuando alguien te envía una solicitud (solo con sesión iniciada)
+wenn ein Freund eine Fahrt startet (nur angemeldet)	cuando un amigo empieza una salida (solo con sesión iniciada)
+wie Apps auf dem Handy	como las apps del móvil
+wie du trittst	según pedaleas
+wird bei der Nutzung gefragt	se pregunta al usarlo
+z. B. #fff#-#-#-#-#f#b#fb	p. ej. #fff#-#-#-#-#f#b#fb
+z. B. auf dem Handy	p. ej. en el móvil
+zoomen	zoom
+zum Aufwecken eine Taste drücken	pulsa un botón para despertarlo
+zur eingestellten Uhrzeit, wenn du heute noch nicht gefahren bist	a la hora fijada si hoy no has rodado
+Öffentlicher Client-Schlüssel von mapillary.com › Developers (kostenlos). Ohne Eintrag gilt der Schlüssel des Betreibers, falls vorhanden.	Clave pública de cliente de mapillary.com › Developers (gratis). Sin entrada se usa la clave del operador, si existe.
+Ø Leistung, NP, kJ, kcal und XP unter den Hauptwerten	Potencia media, NP, kJ, kcal y XP bajo los valores principales
+Über den NAS-Ordner alle # Sekunden, so siehst du die Fahrt auf dem Handy	Por la carpeta del NAS cada # segundos, para ver la salida en el móvil
+Überholen	Adelantar
+Überholen ab und zu, manchmal ziemlich knapp. Nur auf asphaltierten Strecken.	Adelantan de vez en cuando, a veces bastante cerca. Solo en rutas asfaltadas.
+Übernommene Fahrten zählen für Fitness, Form, Leistungskurve und Summen, bringen aber keine XP.	Las salidas importadas cuentan para forma física, forma, curva de potencia y totales, pero no dan XP.
+✏️ Startseite anpassen	✏️ Personalizar inicio
+🎙️ Sprachsteuerung	🎙️ Control por voz
+🎯 Wochenmissionen	🎯 Misiones semanales
+👁 Fahransicht	👁 Vista de la salida
+💡 Empfehlung für heute	💡 Recomendación de hoy
+📅 Trainingsplan	📅 Plan de entrenamiento
+📊 Diese Woche	📊 Esta semana
+🔊 Ton	🔊 Sonido
+🔌 Geräte	🔌 Dispositivos
+🔐 Tresor	🔐 Caja fuerte
+🔔 Benachrichtigungen	🔔 Notificaciones
+🔔 Benachrichtigungen und Push stellst du unter	🔔 Las notificaciones y el push se ajustan en
+🕘 Letzte Fahrten	🕘 Últimas salidas
+🗓️ Tagesherausforderung	🗓️ Reto diario
+🗺️ Gewählte Strecke	🗺️ Ruta elegida
+🚀 Sprint	🚀 Sprint
+🚴 Fahrt einrichten	🚴 Preparar salida
+🤝 Buddy	🤝 Compañero
