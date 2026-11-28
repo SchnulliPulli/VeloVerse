@@ -601,7 +601,7 @@ export class World {
       rock: mk(rockGeo(), this.vcMat, 1500), tuft: mk(tuftGeo(), this.vegMat || this.vcMat, 24000, false),
       palm: mk(palmGeo(), this.vegMat || this.vcMat, Math.round(cap / 3)), cactus: mk(cactusGeo(), this.vcMat, Math.round(cap / 4)),
       wall: mk(new THREE.BoxGeometry(1, 1, 1).translate(0, .5, 0), new THREE.MeshLambertMaterial({ map: windowTex() }), 2000),
-      roof: mk(new THREE.CylinderGeometry(.62, .62, 1, 3, 1).rotateZ(Math.PI / 2).rotateX(Math.PI / 2).scale(1, .5, 1).translate(0, .25, 0), new THREE.MeshLambertMaterial({ color: 0xffffff }), 2000),
+      roof: mk((() => { const g = new THREE.CylinderGeometry(.62, .62, 1, 3, 1).rotateZ(Math.PI / 2).rotateX(-Math.PI / 2).scale(1, .5, 1).translate(0, .155, 0).toNonIndexed(); g.computeVertexNormals(); return g; })(), new THREE.MeshLambertMaterial({ color: 0xffffff }), 2000), // Satteldach: First oben, Traufe auf der Wand (vorher stand das Dreieck auf der Spitze); flache Dachflächen ohne dunkle Verläufe
     };
     for (const k of ['wall', 'roof', 'leafy', 'conifer', 'palm', 'cactus']) this.inst[k].instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(this.inst[k].instanceMatrix.count * 3).fill(1), 3);
   }
