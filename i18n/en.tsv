@@ -2391,3 +2391,5 @@ Anrufe sind in deinen Einstellungen ausgeschaltet – einschalten unter Freunde 
 Fernbedienung bildschirmfüllend	Remote control full screen
 Das Display dieses Geräts geht nicht aus, solange die Fernbedienung offen ist	This device's display stays on while the remote control is open
 Dieser Browser kann das Display nicht anlassen – bitte in den Geräte-Einstellungen die Bildschirmzeit verlängern	This browser can't keep the display on – please extend the screen timeout in your device settings
+Fernbedienung schließen	Close remote control
+Fernbedienung schließen (Vollbild beenden, Bildschirm darf wieder ausgehen)	Close remote control (exit full screen, screen may turn off again)

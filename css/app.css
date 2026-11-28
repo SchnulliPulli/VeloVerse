@@ -1486,4 +1486,5 @@ body.watchtv .tvprof { height: 15vh; }
 .remote.rmfull .rmgrid .rmb { height: clamp(72px, 13dvh, 120px); }
 .remote.rmfull .rmb b { font-size: clamp(26px, 4.5dvh, 40px); }
 .remote.rmfull .rmpause { min-height: clamp(56px, 10dvh, 96px); font-size: 18px; }
-body.rmfullon { overflow: hidden; }
+body:has(.livewrap:not([hidden]) .remote.rmfull:not([hidden])) { overflow: hidden; }
+.remote .rmx { font-size: 18px; width: 40px; height: 40px; padding: 0; flex: none; }
