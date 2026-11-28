@@ -1,6 +1,7 @@
 // Konto: IndooRado Online (Supabase). Registrierung Schritt für Schritt, Anmelden, Passwort zurücksetzen, 2FA,
 // welche Daten online landen, Abgleich zwischen Geräten, Sicherheit und Konto löschen.
 import { $, esc, toast, dialog, bus } from '../util.js';
+import { avatarSvg } from '../components.js';
 import { profile, progress, levelOf, saveProfile } from '../state.js';
 import * as O from '../online/client.js';
 
@@ -276,19 +277,32 @@ async function renderAccount(el) {
   const aal2 = O.online.aal?.currentLevel === 'aal2';
   const opt = (k, l, hint) => `<label class="switch"><input type="checkbox" data-pref="${k}" ${P[k] ? 'checked' : ''}><span></span> <div class="swt">${l}${hint ? `<small class="muted">${hint}</small>` : ''}</div></label>`;
   el.innerHTML = `
-  <section class="pagehead"><h1>Konto</h1><span class="row">${O.isAdmin() ? '<a class="btn sm" href="#/admin">Admin-Konsole</a>' : ''}<button class="btn sm ghost" id="aOut">Abmelden</button></span></section>
+  <section class="pagehead"><h1>Konto</h1></section>
+  <section class="card acchero">
+    <div class="acchead">${avatarSvg(profile, 64)}<div class="accwho"><b>${esc(p.display_name || profile.name || 'Fahrer')}</b><small class="muted">${esc(u.email || u.id)}</small>
+      <div class="accchips">${p.role === 'admin' ? '<span class="prtag">Admin</span>' : ''}<span class="accchip ${verified.length ? 'ok' : 'warn'}">${verified.length ? '🔐 2FA an' : '⚠️ 2FA aus'}</span><span class="accchip" id="accVaultChip">🔒 Tresor …</span><span class="accchip ${S.sync.error ? 'warn' : 'ok'}">${S.sync.error ? '⚠️ Abgleich gestört' : '↻ ' + (S.sync.last ? new Date(S.sync.last).toLocaleString(document.documentElement.lang, { dateStyle: 'short', timeStyle: 'short' }) : 'noch nie abgeglichen')}</span></div></div></div>
+    <div class="row accact">${O.isAdmin() ? '<a class="btn sm" href="#/admin">🛠️ Admin-Konsole</a>' : ''}<button class="btn sm ghost" id="aOut">↩︎ Abmelden</button></div>
+  </section>
+  <nav class="accnav" aria-label="Bereiche des Kontos">${[['accProfile', '👤 Profil'], ['accData', '☁️ Daten & Tresor'], ['accSec', '🛡️ Sicherheit'], ['accDiag', '📶 Verbindung'], ['accDel', '🗑️ Löschen']].map(([id, l]) => `<button class="accnavb" data-acc="${id}">${l}</button>`).join('')}</nav>
   ${(() => { const A = O.access(); if (A.banned) return '<section class="card accbox bad"><b>⛔ Dein Online-Zugang ist gesperrt.</b><p class="small muted">Abgleich und Live-Fahrten sind aus. Deine Daten auf diesem Gerät bleiben unberührt. Du kannst dein Konto unten löschen.</p></section>';
     if (A.trial && A.ok) return `<section class="card accbox"><b>🧪 Testphase: noch ${A.daysLeft} ${A.daysLeft === 1 ? 'Tag' : 'Tage'}</b> <span class="small muted">(bis ${new Date(A.until).toLocaleDateString(document.documentElement.lang)})</span><p class="small muted">Alles funktioniert schon. Damit dein Online-Zugang danach bestehen bleibt, muss ein Admin dein Konto freischalten. Deine Daten auf diesem Gerät bleiben in jedem Fall erhalten.</p></section>`;
     if (A.trial && !A.ok) return '<section class="card accbox bad"><b>⏳ Testphase abgelaufen, Freischaltung ausstehend.</b><p class="small muted">Bis ein Admin dein Konto freischaltet, sind Online-Abgleich und Live-Fahrten pausiert. Die App funktioniert lokal ganz normal weiter, und nichts geht verloren.</p></section>';
     return ''; })()}
+  <h2 class="accsec" id="accProfile">👤 Profil</h2>
   <section class="grid2">
-    <div class="card form"><h2>Profil</h2>
-      <p class="small muted">Angemeldet als <b>${esc(u.email || u.id)}</b>${p.role === 'admin' ? ' · <span class="prtag">Admin</span>' : ''}</p>
+    <div class="card form"><h2>Wie andere dich sehen</h2>
       <label class="f">Anzeigename (für andere sichtbar)<input class="inp" id="pName" maxlength="30" value="${esc(p.display_name || profile.name)}"></label>
       <label class="switch"><input type="checkbox" id="pPub" ${p.public_profile !== false ? 'checked' : ''}><span></span> <div class="swt">Für andere sichtbar<small class="muted">In Bestenlisten und als Live-Mitfahrer. Aus = du fährst unsichtbar.</small></div></label>
       <label class="f">Avatar für andere<select class="inp" id="pAvMode"><option value="random" ${profile.onlineAvatar !== 'own' ? 'selected' : ''}>Zufällig zusammengestellt (neu je Sitzung)</option><option value="own" ${profile.onlineAvatar === 'own' ? 'selected' : ''}>Mein eigener Avatar</option></select></label>
-      <div class="row"><button class="btn sm pri" id="pSave">Speichern</button><a class="btn sm ghost" href="#/avatar">Avatar gestalten</a></div>
+      <div class="row"><button class="btn sm pri" id="pSave">Speichern</button><a class="btn sm ghost" href="#/avatar">🎨 Avatar gestalten</a></div>
     </div>
+    <div class="card form"><h2>Freunde & Erreichbarkeit</h2>
+      <p class="small muted">Wer dich finden, anrufen und dir schreiben darf und ob Freunde deine Fahrten sehen, stellst du bei den Freunden ein.</p>
+      <div class="row"><a class="btn sm" href="#/friends">👥 Freunde › Privatsphäre</a><a class="btn sm ghost" href="#/profile">🔔 Benachrichtigungen</a></div>
+    </div>
+  </section>
+  <h2 class="accsec" id="accData">☁️ Daten & Tresor</h2>
+  <section class="grid2">
     <div class="card form"><h2>Abgleich zwischen Geräten</h2>
       <p class="small muted">Solange du angemeldet bist, gleicht die App automatisch über dein Konto ab${S.nasPaused() ? ' und der Abgleich mit ' + esc(S.providerName(S.sync.cfg.mode)) + ' pausiert (bis auf die Fotos)' : ''}. Einstellungen: die neuere Änderung gewinnt. Fahrten: werden nur ergänzt. Gelöschtes verschwindet überall.</p>
       <p class="small">📷 Fotos der Fahrten: ${S.photoTarget() ? `werden nur in <b>${esc(S.photoTarget())}</b> gespeichert und zu den Fahrten aus dem Konto nachgeladen${S.sync.extError ? ` · <span style="color:var(--hr)">${esc(S.sync.extError)}</span>` : S.sync.extNeedLogin ? ' · <span style="color:var(--hr)">Anmeldung dort nötig (Einstellungen › App &amp; Daten)</span>' : ''}` : 'bleiben nur auf diesem Gerät. Sie werden nie im Konto gespeichert. Verbinde unter Einstellungen › App &amp; Daten ein NAS, OneDrive, Google Drive oder Dropbox, damit sie auf deinen anderen Geräten erscheinen.'}</p>
@@ -296,8 +310,8 @@ async function renderAccount(el) {
       ${devs.length ? `<div class="small devlist">${devs.map(([id, d]) => `<div class="row between"><span>${id === S.sync.device?.id ? '📍 ' : '💻 '}${esc(d.name)}${id === S.sync.device?.id ? ' <span class="muted">(dieses Gerät)</span>' : ''}</span><span class="row" style="gap:8px"><span class="muted">${d.last ? new Date(d.last).toLocaleDateString(document.documentElement.lang) : ''}</span>${id === S.sync.device?.id ? '' : `<button class="btn xs ghost danger" data-devrm="${esc(id)}" data-devname="${esc(d.name)}" title="Gerät entfernen und dort abmelden">✕</button>`}</span></div>`).join('')}</div>` : ''}
       <div class="row"><button class="btn sm pri" id="sNow">↻ Jetzt abgleichen</button><button class="btn sm ghost" id="sPull" title="Bei Abweichungen gewinnt der Stand im Konto">Alles aus dem Konto übernehmen</button></div>
     </div>
+    <section class="card form vaultcard" id="vaultCard"><h2>🔐 Tresor-Verschlüsselung <span class="prtag">empfohlen</span></h2><div id="vaultBody"><div class="small muted">Wird geprüft …</div></div></section>
   </section>
-  <section class="card form vaultcard" id="vaultCard"><h2>🔐 Tresor-Verschlüsselung <span class="prtag">empfohlen</span></h2><div id="vaultBody"><div class="small muted">Wird geprüft …</div></div></section>
   <section class="card form"><h2>Was online gespeichert wird</h2>
     <p class="small muted">Dein Speicher im Konto ist privat: Nur du kommst an diese Daten, auch Admins nicht. Für Bestenlisten wird nur eine Zusammenfassung geteilt (Name, Strecke, Zeit).</p>
     <div class="grid2 tight">
@@ -307,7 +321,8 @@ async function renderAccount(el) {
     ${opt('leaderboard', 'An Bestenlisten teilnehmen', 'Zusammenfassung je Fahrt: Strecke, Distanz, Zeit, Höhenmeter' + (P.power ? ', Ø Watt' : '') + '. Aus = vorhandene Einträge werden entfernt.')}
     <p class="small muted">Gilt ab jetzt für neu hochgeladene Fahrten. Bereits hochgeladene bleiben, bis du unten die Online-Daten löschst.</p>
   </section>
-  <section class="card form"><h2>Sicherheit</h2>
+  <h2 class="accsec" id="accSec">🛡️ Sicherheit</h2>
+  <section class="card form"><h2>Anmeldung</h2>
     <div class="secgrid">
       <div class="form"><h3 class="sub">Passwort ändern</h3><p class="small muted">Altes Passwort vergessen? <button class="linkbtn" id="cMail">Link zum Zurücksetzen an ${esc(u.email || '')} senden</button></p>${pwField('cOld', 'Aktuelles Passwort', 'current-password')}${pwField('cNew', 'Neues Passwort', 'new-password')}${meter()}<div class="row"><button class="btn sm" id="cGo" disabled>Passwort ändern</button></div></div>
       <div class="form"><h3 class="sub">E-Mail ändern</h3><label class="f">Neue E-Mail<input class="inp" id="eNew" type="email" autocomplete="email"></label><div class="row"><button class="btn sm" id="eGo">Ändern</button></div><p class="small muted">Wird erst nach Bestätigung per Link wirksam.</p>
@@ -318,17 +333,21 @@ async function renderAccount(el) {
     ${verified.length === 1 ? '<p class="small warn">💡 Ersatz einrichten: Füge einen zweiten Authenticator hinzu (z. B. auf einem Tablet oder in einem Passwortmanager). Geht das Handy verloren, kommst du damit weiter ins Konto. Sonst hilft nur noch der Admin.</p>' : ''}
     <div class="row"><button class="btn sm ${verified.length ? 'ghost' : 'pri'}" id="mOn">${verified.length ? '+ Weitere App hinzufügen' : '2FA einrichten'}</button></div><div id="mWant"></div><div id="mBox"></div>
   </section>
+  <h2 class="accsec" id="accDiag">📶 Verbindung</h2>
   <section class="card form"><div class="row between"><h2>Verbindungstest</h2><button class="btn sm" id="dgGo">Test starten</button></div><p class="small muted">Prüft Schritt für Schritt Anmeldung, Profil, Zugang, Admin, Speicher und Live-Kanäle mit Dauer und genauer Fehlermeldung.</p><div id="dgOut" class="dglist small"></div></section>
   <section class="card form" id="clCard"><div class="row between"><h2>📶 Verbindungsprotokoll</h2><span class="row"><select class="inp sm" id="clMin"><option value="10">10 min</option><option value="30" selected>30 min</option><option value="60">60 min</option><option value="120">2 h</option></select><button class="btn sm pri" id="clGo">Langzeittest starten</button></span></div>
     <p class="small muted">Läuft immer im Hintergrund mit (auch während der Fahrt) und hält jeden Abriss mit Uhrzeit und Grund fest. Der Langzeittest fragt zusätzlich alle 10 Sekunden beim Server an und misst die Antwortzeit. Alles bleibt nur auf diesem Gerät.</p>
     <div class="kpis" id="clKpi"></div><div class="cllog" id="clLog"></div>
     <div class="row"><button class="btn sm" id="clCopy">📋 Protokoll kopieren</button><button class="btn sm ghost" id="clClear">Leeren</button></div></section>
+  <h2 class="accsec" id="accDel">🗑️ Datenschutz & Löschen</h2>
   <section class="card"><details><summary><b>Hinweis zu Datenschutz und Nutzung</b></summary>${NOTICE}</details></section>
   <section class="card form dangerzone"><h2>Daten und Konto löschen</h2>
     <div class="row"><button class="btn sm ghost danger" id="dData">Online-Daten löschen</button><button class="btn sm danger" id="dAcc">Konto löschen</button></div>
     <p class="small muted">„Online-Daten löschen“ entfernt alles im Konto, die Daten auf diesem Gerät bleiben. „Konto löschen“ entfernt zusätzlich Login und Profil endgültig.</p>
   </section>`;
   wirePw(el);
+  // Sprungleiste: zum Abschnitt scrollen
+  el.querySelector('.accnav').onclick = e => { const b = e.target.closest('[data-acc]'); if (b) el.querySelector('#' + b.dataset.acc)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
   $('#aOut', el).onclick = async () => { await O.signOut(); window.__loginUpd?.(); render(el); };
   $('#pSave', el).onclick = async () => { try { await O.updateProfile({ display_name: $('#pName', el).value.trim().slice(0, 30) || 'Fahrer', public_profile: $('#pPub', el).checked, avatar: { jersey: profile.jersey, helmet: profile.helmet, bikeColor: profile.bikeColor, skin: profile.skin, av: profile.av }, level: lv }); toast('Gespeichert'); window.__loginUpd?.(); } catch (e) { toast(e.message, 4000); } };
   vaultUi(el, S);
@@ -410,6 +429,7 @@ async function vaultUi(el, S) {
   const box = $('#vaultBody', el); if (!box) return;
   let info; try { info = await S.vaultInfo(); } catch (e) { box.innerHTML = `<p class="small" style="color:var(--hr)">Status nicht abrufbar: ${esc(e.message)}</p>`; return; }
   if (!document.body.contains(box)) return;
+  { const c = $('#accVaultChip', el); if (c) { c.textContent = { on: '🔒 Tresor an', locked: '🔐 Tresor gesperrt', off: '🔓 Tresor aus' }[info.status] || '🔒 Tresor'; c.className = 'accchip ' + (info.status === 'on' ? 'ok' : 'warn'); } }
   const intro = '<p class="small muted">Verschlüsselt alles, was dein Konto zum Abgleich speichert (Fahrten mit Puls und Leistung, Einstellungen, Pläne, Live-Fahrt), schon in deinem Browser. Supabase sieht nur unlesbare Daten. Nicht verschlüsselt werden können: E-Mail und Login, dein Anzeigename und Avatar, Bestenlisten-Einträge (abschaltbar) und das Live-Fahren mit anderen.</p>';
   const prog = (n, t) => { const p = $('#vProg', el); if (p) p.textContent = `${n} von ${t} Dateien …`; };
   if (info.status === 'off') {

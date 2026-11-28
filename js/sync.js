@@ -22,7 +22,7 @@ let ON = null; // { sb, uid }
 const META = () => ON ? 'syncMetaOnline' : 'syncMeta';
 export async function setOnlineBackend(o) {
   const was = !!ON; ON = o && o.uid ? o : null; vault.status = 'unknown'; vault.key = null; vault.meta = null; sync.online = !!ON; sync.dirsOk = false; sync.needLogin = false; sync.error = null;
-  if (was !== !!ON) { const m = await kv.get(META(), {}); sync.last = m.at || null; sync.rev = m.rev ?? null; sync.devices = m.devices || {}; }
+  if (was !== !!ON) { const m = await kv.get(META(), {}); sync.last = m.at || null; sync.rev = m.rev ?? null; sync.revAt = m.revAt || null; sync.devices = m.devices || {}; }
   bus.emit('sync');
 }
 export const nasPaused = () => !!ON && !!(sync.cfg && (sync.cfg.host || sync.cfg.url || sync.cfg.clientId));
@@ -45,7 +45,9 @@ const SBK = {
     await vaultReady();
     const b = await SBK.getRaw(rel); if (!b) return null;
     const u8 = new Uint8Array(await b.arrayBuffer());
-    if (!isEncrypted(u8)) return new Blob([u8], { type: typeOf(rel) });
+    // Tresor an, aber Datei unverschlüsselt (z. B. von einem Gerät geschrieben, das den Tresor noch nicht kannte): annehmen
+    // und gleich verschlüsselt neu ablegen, damit nichts unverschlüsselt online bleibt
+    if (!isEncrypted(u8)) { if (vault.status === 'on' && rel !== 'vault.json') encrypt(u8).then(c => SBK.putRaw(rel, new Blob([c]), 'application/octet-stream')).catch(() => { }); return new Blob([u8], { type: typeOf(rel) }); }
     return new Blob([await decrypt(u8)], { type: typeOf(rel) });
   },
   async delRaw(rel) { await ON.sb.storage.from('vault').remove([SBK.p(rel)]); },
@@ -93,7 +95,7 @@ async function filterRide(r) {
 
 export async function loadSync() {
   sync.cfg = await kv.get('sync', null);
-  const m = await kv.get(META(), {}); sync.last = m.at || null; sync.rev = m.rev ?? null; sync.devices = m.devices || {};
+  const m = await kv.get(META(), {}); sync.last = m.at || null; sync.rev = m.rev ?? null; sync.revAt = m.revAt || null; sync.devices = m.devices || {};
   sync.device = await kv.get('device', null);
   if (!sync.device) { sync.device = { id: Math.random().toString(36).slice(2, 10), name: deviceName() }; await kv.set('device', sync.device); }
   kvT = await kv.get('kvTimes', {});
@@ -327,27 +329,32 @@ async function pushFiles() {
 // Ein neu verbundenes Gerät übernimmt zuerst alles vom NAS und überschreibt dort nichts.
 export async function syncAll({ preferRemote = false } = {}) {
   await prep();
+  // Tresor-Zustand bei jedem Abgleich frisch lesen: Hat ein anderes Gerät den Tresor inzwischen ein- oder ausgeschaltet,
+  // lädt dieses Gerät nichts mehr unverschlüsselt hoch bzw. verschlüsselt nicht mehr mit einem alten Schlüssel
+  if (ON) await loadVault(SBK);
   if (!sync.dirsOk) { await B().mkdir(''); await B().mkdir('rides'); await B().mkdir('shots'); sync.dirsOk = true; }
   let st = await readState(), pulled = null;
   if (st) {
     const rRev = st.rev || 0, first = sync.rev == null && !sync.last;
     const legacyLocalWins = sync.rev == null && sync.last && st.savedAt <= sync.last; // älterer Stand ohne Versionsnummer, NAS seitdem unverändert
     if (preferRemote || first) { pulled = await applyRemote(st, 'remote'); sync.info = first ? `Erstes Verbinden: Daten von „${st.by?.name || 'einem anderen Gerät'}“ übernommen, auf dem NAS wurde nichts überschrieben.` : ''; }
-    else if (rRev !== sync.rev && !legacyLocalWins) pulled = await applyRemote(st, 'merge');
+    // Neuer Stand eines anderen Geräts? Versionsnummer allein reicht nicht: schreiben zwei Geräte fast gleichzeitig, haben
+    // beide dieselbe Nummer – dann unterscheidet sie der Zeitstempel, und es wird zusammengeführt statt überschrieben
+    else if ((rRev !== sync.rev || (sync.revAt && st.savedAt && st.savedAt !== sync.revAt)) && !legacyLocalWins) pulled = await applyRemote(st, 'merge');
     sync.devices = st.devices || {};
     // Kurz vor dem Schreiben erneut prüfen, ob inzwischen ein anderes Gerät geschrieben hat
     const again = await readState();
-    if (again && (again.rev || 0) !== rRev) { const p2 = await applyRemote(again, 'merge'); pulled = { rides: (pulled?.rides || 0) + p2.rides, changed: (pulled?.changed || 0) + p2.changed }; st = again; sync.devices = again.devices || {}; }
+    if (again && ((again.rev || 0) !== rRev || again.savedAt !== st.savedAt)) { const p2 = await applyRemote(again, 'merge'); pulled = { rides: (pulled?.rides || 0) + p2.rides, changed: (pulled?.changed || 0) + p2.changed }; st = again; sync.devices = again.devices || {}; }
   }
   const files = await pushFiles();
   if (ON) { const ph = await photoSync(); if (ph) { files.shots = ph.up; files.shotsDown = ph.down; } }
   const rev = (st?.rev || 0) + 1, mine = await stateObj(rev);
   await B().put('state.json', JSON.stringify(mine), 'application/json');
-  sync.rev = rev; sync.devices = mine.devices;
+  sync.rev = rev; sync.revAt = mine.savedAt; sync.devices = mine.devices;
   return { pulled: pulled && pulled.changed ? pulled : null, rides: pulled?.rides || 0, up: files, savedAt: mine.savedAt };
 }
 
-async function mark() { sync.last = new Date().toISOString(); sync.error = null; await kv.set(META(), { at: sync.last, rev: sync.rev, devices: sync.devices }); bus.emit('sync'); }
+async function mark() { sync.last = new Date().toISOString(); sync.error = null; await kv.set(META(), { at: sync.last, rev: sync.rev, revAt: sync.revAt, devices: sync.devices }); bus.emit('sync'); }
 async function guarded(fn) {
   if (!configured() || sync.busy) return null;
   sync.busy = true; bus.emit('sync');

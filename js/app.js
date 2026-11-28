@@ -112,8 +112,11 @@ function nav() {
     const n = (O.online.profile?.display_name || 'Fahrer').replace(/</g, '&lt;'), mail = (O.online.user?.email || '').replace(/</g, '&lt;');
     // Weitere angemeldete Konten auf diesem Gerät: Antippen wechselt (lädt neu, jedes Konto hat seine eigenen Daten)
     const others = O.accounts().filter(a => a.uid !== O.online.user?.id), e2 = t => String(t ?? '').replace(/</g, '&lt;');
-    const accHtml = `<div class="umacc">${others.map(a => `<button class="umsw" data-sw="${e2(a.uid)}">${avatarSvg(a.look || {}, 30)}<span><b>${e2(a.name)}</b><small>${e2(a.email)}</small></span><i class="umx" data-forget="${e2(a.uid)}" title="Von diesem Gerät entfernen">✕</i></button>`).join('')}<button data-um-add>➕ Weiteres Konto hinzufügen</button></div>`;
-    um.innerHTML = `<div class="umhead">${avatarSvg(profile, 44)}<div><b>${n}</b><small>${mail}</small></div></div>${accHtml}<a href="#/account">👤 Konto und Datenschutz</a><a href="#/avatar">🎨 Avatar gestalten</a>${O.isAdmin() ? '<a href="#/admin">🛠️ Admin-Konsole</a>' : ''}<button data-um-out>↩︎ Abmelden</button>`;
+    const accHtml = `<div class="umlbl">Weitere Konten auf diesem Gerät</div><div class="umacc">${others.map(a => `<button class="umsw" data-sw="${e2(a.uid)}" title="Zu diesem Konto wechseln">${avatarSvg(a.look || {}, 30)}<span><b>${e2(a.name)}</b><small>${e2(a.email)}</small></span><i class="umx" data-forget="${e2(a.uid)}" title="Von diesem Gerät entfernen" role="button" aria-label="Konto entfernen">✕</i></button>`).join('')}<button class="umadd" data-um-add>➕ Konto hinzufügen</button></div>`;
+    const mfa = O.needsMfa(), adm = O.isAdmin();
+    um.innerHTML = `<div class="umhead">${avatarSvg(profile, 48)}<div><b>${n}</b><small>${mail}</small>${adm || mfa ? `<span class="umtags">${adm ? '<span class="prtag">Admin</span>' : ''}${mfa ? '<span class="prtag warn">2FA-Code fehlt</span>' : ''}</span>` : ''}</div></div>
+      <div class="umgrid"><a href="#/account">👤<span>Konto</span></a><a href="#/friends">👥<span>Freunde</span></a><a href="#/avatar">🎨<span>Avatar</span></a><a href="#/profile">⚙️<span>Einstellungen</span></a>${adm ? '<a href="#/admin" class="umwide">🛠️<span>Admin-Konsole</span></a>' : ''}</div>
+      ${accHtml}<button class="umout" data-um-out>↩︎ Abmelden</button>`;
     const r = lb.getBoundingClientRect(); um.style.top = (r.bottom + 8) + 'px'; um.style.right = Math.max(8, innerWidth - r.right) + 'px'; um.hidden = false;
   });
   um.addEventListener('click', async e => {

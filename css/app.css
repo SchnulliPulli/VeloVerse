@@ -1514,3 +1514,37 @@ body:has(.livewrap:not([hidden]) .remote.rmfull:not([hidden])) { overflow: hidde
 .remote, .remote * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
 .remote button { touch-action: manipulation; }
 html.pwa .fsbtn, html.pwa #tFull { display: none !important; }
+/* Konto-Menü oben rechts: Kopf, Schnellzugriff als Kacheln, weitere Konten, Abmelden */
+.usermenu { width: min(300px, calc(100vw - 16px)); padding: 8px; gap: 4px; }
+.usermenu .umhead { padding: 6px 6px 10px; margin-bottom: 2px; }
+.usermenu .umhead svg.avsvg { width: 48px; height: 48px; }
+.usermenu .umhead > div { min-width: 0; }
+.usermenu .umtags { display: flex; gap: 4px; margin-top: 4px; flex-wrap: wrap; }
+.prtag.warn { background: color-mix(in srgb, var(--hr, #e5484d) 22%, transparent); color: var(--ink); }
+.usermenu .umgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 4px 0 8px; border-bottom: 1px solid var(--line); }
+.usermenu .umgrid a { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 6px; border-radius: 12px; background: var(--panel2); font-size: 20px; text-align: center; }
+.usermenu .umgrid a span { font-size: 12px; font-weight: 600; color: var(--soft); }
+.usermenu .umgrid a:hover { background: color-mix(in srgb, var(--acc) 18%, var(--panel2)); }
+.usermenu .umgrid a:hover span { color: var(--ink); }
+.usermenu .umgrid .umwide { grid-column: 1 / -1; flex-direction: row; justify-content: center; gap: 8px; padding: 8px; font-size: 16px; }
+.usermenu .umlbl { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--soft); padding: 8px 6px 2px; }
+.usermenu .umacc { display: flex; flex-direction: column; }
+.usermenu .umadd { color: var(--acc) !important; font-weight: 600; font-size: 13px; }
+.usermenu .umout { margin-top: 4px; border-top: 1px solid var(--line) !important; border-radius: 0 0 9px 9px !important; padding-top: 11px !important; color: var(--hr, #e5484d) !important; font-weight: 600; }
+/* Konto-Seite: Kopfkarte, Sprungleiste, Abschnitte */
+.acchero { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
+.acchead { display: flex; gap: 14px; align-items: center; min-width: 0; }
+.acchead svg.avsvg { width: 64px; height: 64px; flex: none; }
+.accwho { display: flex; flex-direction: column; min-width: 0; }
+.accwho b { font-size: 20px; } .accwho small { word-break: break-all; }
+.accchips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.accchip { font-size: 12px; padding: 3px 9px; border-radius: 999px; background: var(--panel2); border: 1px solid var(--line); white-space: nowrap; }
+.accchip.ok { border-color: color-mix(in srgb, #2fbf71 55%, var(--line)); }
+.accchip.warn { border-color: color-mix(in srgb, #f5a524 65%, var(--line)); }
+.accact { gap: 8px; }
+.accnav { position: sticky; top: var(--headh, 58px); z-index: 5; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 8px 2px; margin: 4px 0 0; background: var(--bg); }
+.accnav::-webkit-scrollbar { display: none; }
+.accnavb { flex: none; cursor: pointer; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 999px; padding: 7px 13px; font: inherit; font-size: 13px; font-weight: 600; }
+.accnavb:hover { background: var(--panel2); border-color: var(--acc); }
+.accsec { font-size: 15px; font-weight: 800; letter-spacing: .02em; color: var(--soft); margin: 22px 2px 8px; scroll-margin-top: calc(var(--headh, 58px) + 56px); }
+.accchips .prtag { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 999px; font-size: 12px; line-height: 1.2; }
